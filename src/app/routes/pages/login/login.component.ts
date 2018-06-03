@@ -17,10 +17,10 @@ import { debug } from 'util';
 export class LoginComponent implements OnInit {
 
     // valForm: FormGroup;
-    // username:string;
+    username:string;
     // tipoUsuario:string;
     // cambia:boolean;
-    // password:string;
+    password:string;
 
     loginForm: FormGroup;
     loading = false;
@@ -50,6 +50,26 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
     get f() { return this.loginForm.controls; }
+
+    selectAdmin(){
+        this.username = "fnodar@gmail.com";
+        this.password = "123456";
+    }
+
+    selectEnc(){
+        this.username = "encargado@encargado.com";
+        this.password = "123456";
+    }
+
+    selectClient(){
+        this.username = "ciente@ciente.com";
+        this.password = "123456";
+    }
+
+    selectEmp(){
+        this.username = "empleado@empleado.com";
+        this.password = "123456";
+    }
 
     onSubmit() {
         this.submitted = true;

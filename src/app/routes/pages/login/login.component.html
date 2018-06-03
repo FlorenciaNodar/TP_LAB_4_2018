@@ -37,20 +37,20 @@
                     </div>
                     <div class="clearfix">
                         <div class="checkbox c-checkbox float-left mt0">
-                            <!-- <label>
-                                <input type="checkbox" value="" name="account_remember" />
-                                <span class="fa fa-check"></span>Remember Me</label> -->
-                        <!-- </div>
-                        <div class="float-right">
-                            <a class="text-muted" [routerLink]="'/recover'">Forgot your password?</a>-->
                         </div> 
                     </div>
+                    <p class="text-center py-2">O ingresa como:</p>
+                    <div class="btn-group">
+                        <button class="mb-1 btn btn-outline-danger" type="button" (click)="selectAdmin()">Admin.</button>
+                        <button class="mb-1 btn btn-outline-info" type="button" (click)="selectEmp()">Empl.</button>
+                        <button class="mb-1 btn btn-outline-warning" type="button" (click)="selectClient()">Cliente</button>
+                        <button class="mb-1 btn btn-outline-green" type="button" (click)="selectEnc()">Encarg.</button>
+                    </div>
+                  
                     <button class="btn btn-block btn-primary mt-3"   [disabled]="loading" type="submit">Ingresar</button>
                         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                     
                 </form>
-                <!-- <div class="alert alert-danger text-center" ></div> -->
-                <!-- <p class="pt-3 text-center">Need to Signup?</p> -->
                 <a class="btn btn-block btn-secondary" [routerLink]="'/register'">Registrarse</a>
             </div>
         </div>
