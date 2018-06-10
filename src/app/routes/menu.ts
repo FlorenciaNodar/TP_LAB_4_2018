@@ -8,11 +8,10 @@ const Home = {
 
 
 const headingMain = {
-    text: 'Main Navigation',
+    text: 'Lista',
     heading: true
 };
 
 export const menu = [
-    headingMain,
     Home
 ];

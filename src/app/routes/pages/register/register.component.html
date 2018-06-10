@@ -10,10 +10,21 @@
             <div class="card-body">
                 <p class="text-center py-2">CREAR CUENTA</p>
                 <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="registerForm" novalidate="" (submit)="submitForm($event, valForm.value)">
+                    
                     <div class="form-group">
+                        <label class="text-muted mb-1">Nombre</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar nombre" autocomplete="off" formControlName="nombre" [(ngModel)]="nombre" required="" />
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="valForm.controls['nombre'].hasError('required') && (valForm.controls['nombre'].dirty || valForm.controls['nombre'].touched)">* Campo requerido</div>
+                        <!-- <div class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field must be a valid email address</div> -->
+                    </div><div class="form-group">
                         <label class="text-muted mb-1">Usuario</label>
                         <div class="input-group with-focus">
-                            <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar usuario" autocomplete="off" formControlName="email" required="" />
+                            <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar usuario" autocomplete="off" formControlName="email" [(ngModel)]="correo" required="" />
                             <div class="input-group-append">
                                 <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
                             </div>
@@ -25,7 +36,7 @@
                         <div class="form-group">
                             <label class="text-muted mb-1">Clave</label>
                             <div class="input-group with-focus">
-                                <input class="form-control border-right-0" id="id-password" type="password" name="password" formControlName="password" [formControl]="valForm.get('passwordGroup.password')" />
+                                <input class="form-control border-right-0" id="id-password" type="password" name="password" formControlName="password" [(ngModel)]="password" [formControl]="valForm.get('passwordGroup.password')" />
                                 <div class="input-group-append">
                                     <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
                                 </div>
@@ -36,7 +47,7 @@
                         <div class="form-group">
                             <label class="text-muted mb-1">Repetir Clave</label>
                             <div class="input-group with-focus">
-                                <input class="form-control border-right-0" type="password" name="confirmPassword" formControlName="confirmPassword" [formControl]="valForm.get('passwordGroup.confirmPassword')" />
+                                <input class="form-control border-right-0" type="password" name="confirmPassword" formControlName="confirmPassword" [(ngModel)]="repetpassword" [formControl]="valForm.get('passwordGroup.confirmPassword')" />
                                 <div class="input-group-append">
                                     <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
                                 </div>
@@ -55,7 +66,7 @@
                         </div>
                     </div> -->
                     <!-- <span class="text-danger" *ngIf="valForm.controls['accountagreed'].hasError('required') && (valForm.controls['accountagreed'].dirty || valForm.controls['accountagreed'].touched)">You must agree the terms</span> -->
-                    <button class="btn btn-block btn-primary mt-3" type="submit">Registrarme</button>
+                    <button class="btn btn-block btn-primary mt-3" type="button" (click)="registrar()">Registrarme</button>
                 </form>
                 <!-- <div class="alert alert-danger text-center"></div> -->
                 <p class="pt-3 text-center">Ya tiene cuenta?</p>

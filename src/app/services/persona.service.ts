@@ -12,10 +12,14 @@ export class PersonaService {
       this.AP.APIPostJWT("ingreso/",username,password, token => { 
       callback(token);
     });
-   
-   
+  }
 
-    // .then(jwt=>jwt)
-    // .catch(e=>e);
+  Registrar(unUser:Usuario, callback: (mensaje: string) => void)
+  {
+    debugger;
+      this.AP.APIRegistrar("Usuario/",unUser, mensaje => { 
+      callback(mensaje);
+    });
+   
   }
 }

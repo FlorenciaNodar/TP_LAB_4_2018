@@ -54,4 +54,24 @@ export class MiHttpService {
         return error;
   }
 
+  PostRegistrar(url:string,unUser:Usuario, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('usuario',unUser.Usuario);
+   data.append('clave', unUser.Clave);
+   data.append('nombre', unUser.Nombre);
+   data.append('tipo', "Cliente");
+   data.append('email', unUser.Email) ;
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+ 
+
 }

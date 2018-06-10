@@ -23,4 +23,13 @@ export class ArchivoPersonaService {
       callback(token);
     }); 
   }
+
+  public  APIRegistrar(Ruta:string,unUser:Usuario, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.PostRegistrar(path + Ruta ,unUser, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
 }
