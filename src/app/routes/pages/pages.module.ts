@@ -9,6 +9,8 @@ import { LockComponent } from './lock/lock.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { Error404Component } from './error404/error404.component';
 import { Error500Component } from './error500/error500.component';
+import { RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha/recaptcha/recaptcha-settings';
+import { RecaptchaModule } from 'ng-recaptcha/recaptcha/recaptcha.module';
 
 /* Use this routes definition in case you want to make them lazy-loaded */
 /*const routes: Routes = [
@@ -24,8 +26,14 @@ import { Error500Component } from './error500/error500.component';
 @NgModule({
     imports: [
         SharedModule,
+        RecaptchaModule.forRoot(),
+        
         // RouterModule.forChild(routes)
     ],
+    providers:[{ 
+        provide: RECAPTCHA_SETTINGS,
+        useValue: { siteKey: '6LfmD18UAAAAACVytHDmoc7WHmiTkPAAv9OOJ1dZ'} as RecaptchaSettings 
+    }],
     declarations: [
         LoginComponent,
         RegisterComponent,

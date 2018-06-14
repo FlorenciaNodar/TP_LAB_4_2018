@@ -8,10 +8,18 @@ import {PersonaService} from '../../../services/persona.service';
 import { AuthenticationService } from '../../../_services';
 import { first } from 'rxjs/operators';
 import { debug } from 'util';
+import { ReCaptchaService } from '../../../../app/services/captcha-service';
+import { ViewChild } from '@angular/core';
+import { Input } from '@angular/core';
+import { Output } from '@angular/core';
+import { ElementRef ,  EventEmitter, NgZone} from '@angular/core';
+import { ReCaptchaComponent } from 'angular2-recaptcha';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
+    
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
@@ -28,7 +36,10 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     error = '';
  
-    constructor(public settings: SettingsService, private route: ActivatedRoute, private fb: FormBuilder, public router: Router,private authenticationService: AuthenticationService, public PersonaS: PersonaService) {
+
+   
+    constructor(public settings: SettingsService, private _zone: NgZone,
+        private _captchaService: ReCaptchaService,private route: ActivatedRoute, private fb: FormBuilder, public router: Router,private authenticationService: AuthenticationService, public PersonaS: PersonaService) {
 
         // this.valForm = fb.group({
         //     'email': [null, Validators.compose([Validators.required, CustomValidators.email])],
@@ -38,6 +49,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+       
         this.loginForm = this.fb.group({
             'username': [null, Validators.required],
             'password': [null, Validators.required]
@@ -92,5 +104,7 @@ export class LoginComponent implements OnInit {
                       });
                 }
     }
+
+
 
 }

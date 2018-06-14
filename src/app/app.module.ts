@@ -19,6 +19,10 @@ import {ArchivoPersonaService} from './services/archivo-persona.service';
 import { AuthGuard } from './_guards';
 import { JwtInterceptor, fakeBackendProvider } from './_helpers';
 import { AuthenticationService, UserService } from './_services';
+import { ReCaptchaService } from './services/captcha-service';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { NgxCaptchaModule } from 'ngx-captcha';
+
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
         CoreModule,
         HttpModule,
         LayoutModule,
+        RecaptchaModule.forRoot(),
         SharedModule.forRoot(),
         RoutesModule,
         TranslateModule.forRoot({
@@ -45,11 +50,15 @@ export function createTranslateLoader(http: HttpClient) {
         })
     ],
     providers: [AuthGuard,PersonaService, MiHttpService, ArchivoPersonaService, AuthenticationService,
-        UserService,
+        UserService,ReCaptchaService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
             multi: true
+        },
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: { siteKey: '6LfmD18UAAAAACVytHDmoc7WHmiTkPAAv9OOJ1dZ'} as RecaptchaSettings 
         },
  
         // provider used to create fake backend

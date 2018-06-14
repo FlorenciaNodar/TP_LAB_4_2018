@@ -1,3 +1,5 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <div class="wrapper">
     <div class="block-center mt-4 wd-xl">
         <!-- START card-->
@@ -56,23 +58,17 @@
                             <div class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('equalTo')">No coinciden las claves</div>
                         </div>
                     </div>
-                    <!-- <div class="clearfix">
-                        <div class="checkbox c-checkbox float-left mt0">
-                            <label>
-                                <input type="checkbox" required="" name="account_agreed" formControlName="accountagreed" />
-                                <span class="fa fa-check"></span>I agree with the
-                                <a href="#">terms</a>
-                            </label>
-                        </div>
-                    </div> -->
-                    <!-- <span class="text-danger" *ngIf="valForm.controls['accountagreed'].hasError('required') && (valForm.controls['accountagreed'].dirty || valForm.controls['accountagreed'].touched)">You must agree the terms</span> -->
-                    <button class="btn btn-block btn-primary mt-3" type="button" (click)="registrar()">Registrarme</button>
+                
+                    <re-captcha (resolved)="resolvedCaptcha($event)" siteKey="6LfmD18UAAAAACVytHDmoc7WHmiTkPAAv9OOJ1dZ"></re-captcha>
+                   
+                    <button class="btn btn-block btn-primary mt-3" type="button" (click)="registrar()" [disabled]="!result">Registrarme</button>
                 </form>
-                <!-- <div class="alert alert-danger text-center"></div> -->
+                
                 <p class="pt-3 text-center">Ya tiene cuenta?</p>
                 <a class="btn btn-block btn-secondary" [routerLink]="'/login'">Iniciar Sesión</a>
             </div>
         </div>
+        
         <!-- END card-->
         <div class="p-3 text-center">
             <span>&copy;</span>

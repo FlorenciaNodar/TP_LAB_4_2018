@@ -21,6 +21,8 @@ export class RegisterComponent implements OnInit {
     password:string;
     repetpassword:string;
     nombre:string;
+    result:boolean;
+
     constructor(private PersonaS:PersonaService,public settings: SettingsService, fb: FormBuilder) {
 
         let password = new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9]{6,10}$')]));
@@ -42,7 +44,9 @@ export class RegisterComponent implements OnInit {
         this.unUsuario= new Usuario();
         
     }
-
+    resolvedCaptcha(result){
+       this.result = true;
+    }
     cambiar()
     {
       if(this.cambia)
