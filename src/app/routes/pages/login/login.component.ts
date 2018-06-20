@@ -78,8 +78,8 @@ export class LoginComponent implements OnInit {
         this.password = "123456";
     }
 
-    selectEmp(){
-        this.username = "empleado@empleado.com";
+    selectRemisero(){
+        this.username = "remisero@remisero.com";
         this.password = "123456";
     }
 

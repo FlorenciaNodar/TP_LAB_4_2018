@@ -1,0 +1,110 @@
+<div class="content-heading">
+    <div>Viajes
+        <small>Administra tus viajes</small>
+    </div>
+</div>
+
+
+<div class="col-xl-12">
+        <button  (click)="classicModal.show()" class="btn btn-labeled btn-info mb-2" type="button">
+                <span class="btn-label"><i class="fa fa-plus"></i>
+            </span>Cargar Viaje</button>
+            <div class="modal fade" bsModal #classicModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Viaje</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="classicModal.hide()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <form novalidate="">
+                                            <!-- START card-->
+                                            <div class="card card-default">
+                                                <div class="card-body">
+                                                    <fieldset class="b0">
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>
+                                                            <div class="col-lg-10">
+                                                                <input class="form-control" type="text"  />
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-2 col-form-label text-lg-right">Origen:</label>
+                                                                <div class="col-lg-10">
+                                                                    <input class="form-control" type="text" />
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    <fieldset>
+
+                                                            <fieldset>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-lg-2 col-form-label text-lg-right">Destino:</label>
+                                                                        <div class="col-lg-10">
+                                                                            <input class="form-control" type="text"  />
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-2 col-form-label text-lg-right">Medio de pago</label>
+                                                            <div class="col-lg-10">
+                                                                <select class="form-control"  >
+                                                                    <option value="1">Efectivo</option>
+                                                                    <option value="2">Débito</option>
+                                                                    <option value="3">Crédito</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <small class="text-muted"></small>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                               
+                            
+                                                </div>
+                                                <div class="card-footer text-center">
+                                                    <button class="btn btn-info" type="submit">Aceptar</button>
+                                                </div>
+                                            </div>
+                                            <!-- END card-->
+                                        </form>                            </div>
+                        </div>
+                    </div>
+                </div>
+    <div class="card card-default">
+       <div class="card-header"></div>
+       <div class="card-body">
+          <div class="table-responsive">
+             <table class="table">
+                <thead>
+                   <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Username</th>
+                      <th>Acciones</th>
+                    
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr class="table-secondary">
+                      <td>1</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                      <td><button class="mb-1 btn btn-info btn-sm" type="button">Editar</button>
+                   <button class="mb-1 btn btn-info btn-sm" type="button">Eliminar</button></td>
+                </tr>
+                
+                </tbody>
+             </table>
+          </div>
+       </div>
+    </div>
+ </div>

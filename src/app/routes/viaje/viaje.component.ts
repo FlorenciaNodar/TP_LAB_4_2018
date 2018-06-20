@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    selector: 'app-viaje',
+    templateUrl: './viaje.component.html',
+    styleUrls: ['./viaje.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class ViajeComponent implements OnInit {
 
     lat: number = 51.678418;
     lng: number = 7.809007;

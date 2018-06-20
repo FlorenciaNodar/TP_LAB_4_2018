@@ -1,0 +1,21 @@
+<div class="content-heading">
+    <div>Gráficos
+        <small>Estadísticas</small>
+    </div>
+</div>
+
+<div class="col-xl-12 col-lg-12">
+        <div class="col-xl-6 col-lg-6">
+        <h4>Line Chart</h4>
+        <div>
+        <canvas baseChart [chartType]="'line'" [options]="lineOptions" [datasets]="lineData.datasets" [colors]="lineColors" [labels]="lineData.labels" [legend]="false" height="120"></canvas>
+        </div>
+        </div>
+        <div class="col-xl-6 col-lg-6">
+        <h4>Bar Chart</h4>
+        <div>
+            <canvas baseChart [chartType]="'bar'" [options]="barOptions" [datasets]="barData.datasets" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="120"></canvas>
+        </div>
+        </div>
+</div>
+     

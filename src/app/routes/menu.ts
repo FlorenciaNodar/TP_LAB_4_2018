@@ -1,10 +1,21 @@
 
 const Home = {
-    text: 'Home',
+    text: 'Inicio',
     link: '/home',
     icon: 'icon-home'
 };
 
+const Viaje = {
+    text: 'Viaje',
+    link: '/viaje',
+    icon: 'icon-location-pin'
+};
+
+const Graficos = {
+    text: 'Graficos',
+    link: '/graficos',
+    icon: 'icon-graph'
+};
 
 
 const headingMain = {
@@ -13,5 +24,7 @@ const headingMain = {
 };
 
 export const menu = [
-    Home
+    Home,
+    Viaje,
+    Graficos
 ];

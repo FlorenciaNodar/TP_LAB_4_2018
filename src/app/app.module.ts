@@ -22,6 +22,10 @@ import { AuthenticationService, UserService } from './_services';
 import { ReCaptchaService } from './services/captcha-service';
 import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { ViajeComponent } from './routes/viaje/viaje.component';
+import { GraficosComponent } from './routes/graficos/graficos.component';
+import { ChartsModule as Ng2ChartsModule } from 'ng2-charts/ng2-charts';
+
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
@@ -30,7 +34,9 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        ViajeComponent,
+        GraficosComponent
     ],
     imports: [
         HttpClientModule,
@@ -41,6 +47,7 @@ export function createTranslateLoader(http: HttpClient) {
         RecaptchaModule.forRoot(),
         SharedModule.forRoot(),
         RoutesModule,
+        Ng2ChartsModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

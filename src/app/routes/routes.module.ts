@@ -13,7 +13,8 @@ import { ElementsModule } from './elements/elements.module';
     imports: [
         SharedModule,
         RouterModule.forRoot(routes),
-        PagesModule
+        PagesModule,
+        
     ],
     declarations: [],
     exports: [
