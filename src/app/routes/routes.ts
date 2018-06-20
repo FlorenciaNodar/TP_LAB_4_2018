@@ -4,7 +4,7 @@ import { AuthGuard } from '../_guards';
 import { RegisterComponent } from './pages/register/register.component';
 import { ViajeComponent } from './viaje/viaje.component';
 import { GraficosComponent } from './graficos/graficos.component';
-
+import { MisViajesComponent } from './misViajes/misviajes.component';
 export const routes = [
 
     { path: 'login', component: LoginComponent },
@@ -16,7 +16,8 @@ export const routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },            
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
             { path: 'viaje', component: ViajeComponent },            
-            { path: 'graficos', component: GraficosComponent }            
+            { path: 'graficos', component: GraficosComponent },            
+            { path: 'misViajes', component: MisViajesComponent }          
         ]
     },
     { path: 'register', component: RegisterComponent },

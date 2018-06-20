@@ -6,7 +6,7 @@ const Home = {
 };
 
 const Viaje = {
-    text: 'Viaje',
+    text: 'Solicitar Viaje',
     link: '/viaje',
     icon: 'icon-location-pin'
 };
@@ -17,6 +17,11 @@ const Graficos = {
     icon: 'icon-graph'
 };
 
+const MisViajes = {
+    text: 'Mis Viajes',
+    link: '/misViajes',
+    icon: 'icon-plane'
+};
 
 const headingMain = {
     text: 'Lista',
@@ -26,5 +31,6 @@ const headingMain = {
 export const menu = [
     Home,
     Viaje,
-    Graficos
+    Graficos,
+    MisViajes
 ];

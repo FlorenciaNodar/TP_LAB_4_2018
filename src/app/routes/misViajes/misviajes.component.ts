@@ -89,12 +89,12 @@ export class Viaje {
 }
 
 @Component({
-  selector: 'app-viaje',
-  templateUrl: './viaje.component.html',
-  styleUrls: ['./viaje.component.scss'],
+  selector: 'app-misviajes',
+  templateUrl: './misviajes.component.html',
+  styleUrls: ['./misviajes.component.scss'],
   providers : [ GoogleMapsAPIWrapper ]
 })
-export class ViajeComponent implements OnInit {
+export class MisViajesComponent implements OnInit {
 
     public latitude: number;
     public longitude: number;

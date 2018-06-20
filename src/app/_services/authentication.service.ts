@@ -15,13 +15,13 @@ export class AuthenticationService {
                 // login successful if there's a jwt token in the response
                 if (res && res.token) {
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username, token: res.token }));
+                    localStorage.setItem('cliente', JSON.stringify({ username, token: res.token }));
                 }
             }));
     }
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('cliente');
     }
 }

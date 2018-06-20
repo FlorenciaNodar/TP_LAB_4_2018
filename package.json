@@ -35,6 +35,7 @@
     "@ngx-translate/core": "10.0.1",
     "@ngx-translate/http-loader": "3.0.1",
     "@swimlane/ngx-datatable": "12.0.0",
+    "@types/googlemaps": "^3.30.10",
     "ag-grid": "17.1.1",
     "ag-grid-angular": "17.1.0",
     "angular-google-recaptcha": "^1.0.3",
