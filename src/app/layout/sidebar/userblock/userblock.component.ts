@@ -9,11 +9,15 @@ import { UserblockService } from './userblock.service';
 })
 export class UserblockComponent implements OnInit {
     user: any;
+    login: any;
+    
     constructor(public userblockService: UserblockService) {
 
         this.user = {
             picture: 'assets/img/user/01.jpg'
         };
+        this.login = localStorage.getItem('cliente');
+        
     }
 
     ngOnInit() {

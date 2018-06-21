@@ -84,6 +84,7 @@ export class Viaje {
   public fechayhora: any;
   public tipo_pago: any;
   public token: any;
+  public prestaciones: any;
 
   constructor() { }
 }
@@ -107,6 +108,7 @@ export class ViajeComponent implements OnInit {
     public estimatedDistance: any;
     public startDate: any;
     public fechaViaje: any;
+    public prestaciones: any;
     public metodoPago: any;
     private origenLat: any;
     private origenLng: any;
@@ -263,9 +265,16 @@ export class ViajeComponent implements OnInit {
            this.objViaje.lng_o = this.origenLng;
            this.objViaje.lat_d = this.destinoLat;
            this.objViaje.lng_d = this.destinoLng;
-           this.objViaje.tipo_pago = this.metodoPago;
+           if(this.metodoPago == "1"){
+            this.objViaje.tipo_pago = "Efectivo";            
+           }else if(this.metodoPago == "2"){
+            this.objViaje.tipo_pago = "Debito";                        
+           }else{
+            this.objViaje.tipo_pago = "Credito";                        
+           }
            this.objViaje.fechayhora = this.fechaViaje;
-           this.objViaje.token = localStorage.getItem('token');
+           this.objViaje.prestaciones = this.prestaciones;
+           this.objViaje.token = localStorage.getItem('cliente');
 
             // console.log(this.objViaje);
         //    this.ws.postViaje( this.objViaje, '/viaje/' )

@@ -17,9 +17,9 @@
                                                     </fieldset>
                                                     <fieldset>
                                                             <div class="form-group row">
-                                                                <label class="col-lg-2 col-form-label text-lg-right">Día</label>
+                                                                <label class="col-lg-2 col-form-label text-lg-right">Día y Hora</label>
                                                                 <div class="col-lg-6">
-                                                                    <input class="form-control" type="date"  />
+                                                                    <input [(ngModel)]="fechaViaje" class="form-control" type="datetime-local" min="startDate" [ngModelOptions]="{standalone: true}"  required />
                                                                 </div>
                                                             </div>
                                                         </fieldset>
@@ -27,7 +27,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>
                                                             <div class="col-lg-10">
-                                                                <input class="form-control" type="text"  />
+                                                                <input [(ngModel)]="prestaciones" class="form-control" type="text"  [ngModelOptions]="{standalone: true}" required/>
                                                             </div>
                                                         </div>
                                                     </fieldset>
@@ -52,7 +52,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-lg-2 col-form-label text-lg-right">Medio de pago</label>
                                                             <div class="col-lg-10">
-                                                                <select class="form-control"  >
+                                                                <select [(ngModel)]="metodoPago" [ngModelOptions]="{standalone: true}" class="form-control" required >
                                                                     <option value="1">Efectivo</option>
                                                                     <option value="2">Débito</option>
                                                                     <option value="3">Crédito</option>
