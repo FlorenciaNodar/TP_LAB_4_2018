@@ -12,61 +12,102 @@
 
 <div class="row" *ngIf= "encargado">
       
-         <div class="col-lg-12">
+<div class="col-lg-6">
                 
          <div class="form-group">
-<form [formGroup]="valForm" class="form-validate mb-3" role="form" name="registerForm" novalidate="" (submit)="submitForm($event, valForm.value)">
-    
-    <div class="form-group">
-        <label class="text-muted mb-1">Nombre</label>
-        <div class="input-group with-focus">
-            <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar nombre" autocomplete="off" formControlName="nombre" [(ngModel)]="nombre" required="" />
-            <div class="input-group-append">
-                <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
-            </div>
-        </div>
-        <div class="text-danger" *ngIf="valForm.controls['nombre'].hasError('required') && (valForm.controls['nombre'].dirty || valForm.controls['nombre'].touched)">* Campo requerido</div>
-        <!-- <div class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field must be a valid email address</div> -->
-    </div><div class="form-group">
-        <label class="text-muted mb-1">Usuario</label>
-        <div class="input-group with-focus">
-            <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar usuario" autocomplete="off" formControlName="email" [(ngModel)]="correo" required="" />
-            <div class="input-group-append">
-                <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
-            </div>
-        </div>
-        <div class="text-danger" *ngIf="valForm.controls['email'].hasError('required') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">* Campo requerido</div>
-        <!-- <div class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field must be a valid email address</div> -->
-    </div>
-    <div formGroupName="passwordGroup">
-        <div class="form-group">
-            <label class="text-muted mb-1">Clave</label>
-            <div class="input-group with-focus">
-                <input class="form-control border-right-0" id="id-password" type="password" name="password" formControlName="password" [(ngModel)]="password" [formControl]="valForm.get('passwordGroup.password')" />
-                <div class="input-group-append">
-                    <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+            <form [formGroup]="valForm" class="form-validate mb-3" role="form" name="registerForm" novalidate="" (submit)="submitForm($event, valForm.value)">
+                <div class="form-group">
+                    <label class="text-muted mb-1">Rol</label>
+                    <div class="col-lg-12">
+                        <select formControlName="roles" [(ngModel)]="roles" placeholder="--Seleccione una opción--"  class="form-control" required >
+                            <option value="1">Encargado</option>
+                            <option value="2">Remisero</option>
+                        </select>
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('required') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">* Campo requerido</div>
-            <!-- <div class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('pattern') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">Input should match 'a-zA-Z0-9' and 6-10 length</div> -->
-        </div>
-        <div class="form-group">
-            <label class="text-muted mb-1">Repetir Clave</label>
-            <div class="input-group with-focus">
-                <input class="form-control border-right-0" type="password" name="confirmPassword" formControlName="confirmPassword" [(ngModel)]="repetpassword" [formControl]="valForm.get('passwordGroup.confirmPassword')" />
-                <div class="input-group-append">
-                    <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+                <div class="text-danger" *ngIf="valForm.controls['roles'].hasError('required') && (valForm.controls['roles'].dirty || valForm.controls['roles'].touched)">* Campo requerido</div>
+                
+                <div class="form-group">
+                    <label class="text-muted mb-1">Nombre</label>
+                    <div class="input-group with-focus">
+                        <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar nombre" autocomplete="off" formControlName="nombre" [(ngModel)]="nombre" required="" />
+                        <div class="input-group-append">
+                            <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
+                        </div>
+                    </div>
+                    <div class="text-danger" *ngIf="valForm.controls['nombre'].hasError('required') && (valForm.controls['nombre'].dirty || valForm.controls['nombre'].touched)">* Campo requerido</div>
+                    <!-- <div class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field must be a valid email address</div> -->
+                </div><div class="form-group">
+                    <label class="text-muted mb-1">Usuario</label>
+                    <div class="input-group with-focus">
+                        <input class="form-control border-right-0" type="text" name="account_email" placeholder="Ingresar usuario" autocomplete="off" formControlName="email" [(ngModel)]="correo" required="" />
+                        <div class="input-group-append">
+                            <span class="input-group-text fa fa-envelope text-muted bg-transparent border-left-0"></span>
+                        </div>
+                    </div>
+                    <div class="text-danger" *ngIf="valForm.controls['email'].hasError('required') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">* Campo requerido</div>
+                    <!-- <div class="text-danger" *ngIf="valForm.controls['email'].hasError('email') && (valForm.controls['email'].dirty || valForm.controls['email'].touched)">This field must be a valid email address</div> -->
                 </div>
-            </div>
-            <div class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('required') && (valForm.get('passwordGroup.confirmPassword').dirty || valForm.get('passwordGroup.confirmPassword').touched)">* Campo requerido</div>
-            <div class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('equalTo')">No coinciden las claves</div>
-        </div>
-    </div>
+                <div formGroupName="passwordGroup">
+                    <div class="form-group">
+                        <label class="text-muted mb-1">Clave</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" id="id-password" type="password" name="password" formControlName="password" [(ngModel)]="password" [formControl]="valForm.get('passwordGroup.password')" />
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('required') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">* Campo requerido</div>
+                        <!-- <div class="text-danger" *ngIf="valForm.get('passwordGroup.password').hasError('pattern') && (valForm.get('passwordGroup.password').dirty || valForm.get('passwordGroup.password').touched)">Input should match 'a-zA-Z0-9' and 6-10 length</div> -->
+                    </div>
+                    <div class="form-group">
+                        <label class="text-muted mb-1">Repetir Clave</label>
+                        <div class="input-group with-focus">
+                            <input class="form-control border-right-0" type="password" name="confirmPassword" formControlName="confirmPassword" [(ngModel)]="repetpassword" [formControl]="valForm.get('passwordGroup.confirmPassword')" />
+                            <div class="input-group-append">
+                                <span class="input-group-text fa fa-lock text-muted bg-transparent border-left-0"></span>
+                            </div>
+                        </div>
+                        <div class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('required') && (valForm.get('passwordGroup.confirmPassword').dirty || valForm.get('passwordGroup.confirmPassword').touched)">* Campo requerido</div>
+                        <div class="text-danger" *ngIf="valForm.get('passwordGroup.confirmPassword').hasError('equalTo')">No coinciden las claves</div>
+                    </div>
+                </div>
 
-    <re-captcha (resolved)="resolvedCaptcha($event)" siteKey="6LfmD18UAAAAACVytHDmoc7WHmiTkPAAv9OOJ1dZ"></re-captcha>
-   
-    <button class="btn btn-block btn-primary mt-3" type="button" (click)="registrar()" [disabled]="!result">Registrarme</button>
-</form>   
-   </div>
+                <re-captcha (resolved)="resolvedCaptcha($event)" siteKey="6LfmD18UAAAAACVytHDmoc7WHmiTkPAAv9OOJ1dZ"></re-captcha>
+            
+                <button class="btn btn-block btn-primary mt-3" type="button" (click)="registrar()" [disabled]="!result">Registrar</button>
+            </form> 
+        </div>
+        
+</div>
+<div class="col-lg-6">    
+<div class="card card-default">
+    <div class="card-header"></div>
+    <div class="card-body">
+    <div class="table-responsive">
+        <table class="table" *ngIf="encargado">
+            <thead>
+                <tr>
+                <th>Usuario</th>
+                <th>Clave</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+                
+                </tr>
+            </thead>
+            <tbody >
+                
+                <tr  *ngFor="let user of unarray" class="table-secondary">
+                <td>{{user.usuario}}</td>
+                <td>{{user.clave}}</td>
+                <td>{{user.rol}}</td>
+                <td><button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(user)" type="button">Eliminar</button></td>
+            </tr>
+            
+            </tbody>
+        </table>  
+    </div>
+</div>
 </div>
 </div>

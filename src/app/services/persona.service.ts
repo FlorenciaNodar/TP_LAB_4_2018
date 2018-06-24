@@ -24,6 +24,16 @@ export class PersonaService {
       callback(mensaje);
     });
  }
+
+ RegistrarEncargadoRemisero(unUser:Usuario, callback: (mensaje: string) => void)
+ {
+   debugger;
+     this.AP.ApiRegistrarEncargadoRemisero("Usuario/",unUser, mensaje => { 
+     callback(mensaje);
+   });
+}
+
+ 
     CargarViaje(unUser:Viaje, callback: (mensaje: string) => void)
     {
       debugger;
@@ -39,6 +49,16 @@ export class PersonaService {
     {
       debugger;
         this.AP.BorrarViaje("BorrarViaje/",id, mensaje => { 
+        callback(mensaje);
+        
+      });
+      
+    
+    }
+    EliminarUsuario(id:any, callback: (mensaje: string) => void)
+    {
+      debugger;
+        this.AP.EliminarUsuario("EliminarUnUsuario/",id, mensaje => { 
         callback(mensaje);
         
       });
@@ -71,6 +91,14 @@ export class PersonaService {
   TraerTodosLosViajes (callback: (data: any) => void){
     debugger;
     this.AP.TraerTodosLosViajes("ViajesTodos/", data => { 
+    callback(data);
+    
+  });
+  }
+
+  TraerUsuarios(callback: (data: any) => void){
+    debugger;
+    this.AP.TraerUsuarios("TraerUsuarios/", data => { 
     callback(data);
     
   });

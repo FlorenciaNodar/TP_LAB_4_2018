@@ -73,6 +73,25 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
+
+  PostRegistrarEncargadoRemisero(url:string,unUser:Usuario, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('usuario',unUser.Usuario);
+   data.append('clave', unUser.Clave);
+   data.append('nombre', unUser.Nombre);
+   data.append('tipo', unUser.Rol);
+   data.append('email', unUser.Email) ;
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
   CargarViaje(url:string,unUser:Viaje, callback: (r: Response) => void)
   {
     debugger;
@@ -111,7 +130,21 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
-
+  BorrarUsuario(url:string,id:any, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
+  
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
 
   TraerViajesPorUsuarios(url:string,usuario:string, callback: (r: Response) => void)
   {
@@ -155,5 +188,16 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
-
+  TraerUsuarios(url:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
 }

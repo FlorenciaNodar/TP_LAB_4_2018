@@ -3,4 +3,5 @@ export class Usuario {
     Nombre: string="";
     Email:string="";
     Clave:string="";
+    Rol:string="";
 }

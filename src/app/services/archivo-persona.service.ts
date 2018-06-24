@@ -33,6 +33,15 @@ export class ArchivoPersonaService {
       callback(mensaje);
     }); 
   }
+  public ApiRegistrarEncargadoRemisero(Ruta:string,unUser:Usuario, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.PostRegistrarEncargadoRemisero(path + Ruta ,unUser, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+  
 
   public CargarViaje(Ruta:string,unUser:Viaje, callback: (mensaje: string) => void) 
   { 
@@ -51,6 +60,16 @@ export class ArchivoPersonaService {
       callback(mensaje);
     }); 
   }
+
+  EliminarUsuario(Ruta:string,id:any, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.BorrarUsuario(path + Ruta ,id, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+
   public TraeViaje(Ruta:string,usuario:string, callback: (data: any) => void) 
   { 
     debugger;
@@ -70,6 +89,14 @@ export class ArchivoPersonaService {
   public TraerTodosLosViajes(Ruta:string, callback: (data: any) => void){
     debugger;
     var rta =  this.mihttp.TraerTodosLosViajes(path + Ruta, data => { 
+     var datos =JSON.parse(data.text());
+     callback(datos);
+     }); 
+  }
+
+  public TraerUsuarios(Ruta:string, callback: (data: any) => void){
+    debugger;
+    var rta =  this.mihttp.TraerUsuarios(path + Ruta, data => { 
      var datos =JSON.parse(data.text());
      callback(datos);
      }); 

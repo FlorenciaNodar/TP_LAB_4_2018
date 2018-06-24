@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import { PersonaService } from '../../services/persona.service';
+import swal from'sweetalert2';
 
 
 @Component({
@@ -26,6 +27,9 @@ import { PersonaService } from '../../services/persona.service';
     result:boolean;
     encargado: boolean;
     rol:string;
+    roles:string;
+    private unarray =[];
+    
     constructor(fb: FormBuilder, private PersonaS: PersonaService){
       let password = new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9]{6,10}$')]));
       let certainPassword = new FormControl('', [Validators.required, CustomValidators.equalTo(password)]);
@@ -38,6 +42,7 @@ import { PersonaService } from '../../services/persona.service';
       this.valForm = fb.group({
           'email': [null, Validators.compose([Validators.required, CustomValidators.email])],
           'nombre': [null, Validators.required],
+          'roles': [null, Validators.required],
           'accountagreed': [null, Validators.required],
           'passwordGroup': this.passwordForm
       });
@@ -57,10 +62,100 @@ import { PersonaService } from '../../services/persona.service';
       this.encargado = true;   
       
     }
+
+    var respuesta=  this.PersonaS.TraerUsuarios(data => { 
+      data.forEach(element => {
+
+      this.unarray.push(element);
+
+      console.log(  this.unarray);
+      });
+   });
   });
 }
+
+
 
     resolvedCaptcha(result){
       this.result = true;
    }
-  }
+
+
+
+   registrar(){
+    if(this.nombre==null || this.password==null || this.repetpassword==null || this.correo==null ||
+      this.nombre=="" || this.password=="" || this.repetpassword=="" || this.correo=="")
+      {
+        swal('Error!', 'Complete todos los campos', 'error');
+      }
+      else if(this.password != this.repetpassword)
+        {
+          swal('Error', 'Las claves no coinciden','error');
+          
+        }
+        else if (this.password.length<6)
+          {
+            swal('Error', 'La clave debe ser de por lo menos 6 caracteres', 'error');
+          }
+      else
+        {
+                  debugger;
+                  this.unUsuario.Email=this.correo;
+                  this.unUsuario.Nombre=this.nombre;
+                  this.unUsuario.Clave=this.password;
+                  this.unUsuario.Usuario=this.correo;
+                  
+                  this.unUsuario.Rol=this.rol;
+                  
+              var respuesta=  this.PersonaS.RegistrarEncargadoRemisero(this.unUsuario, mensaje => { 
+                swal('OK!',mensaje,'success');
+                this.cambiar();
+              });
+              
+      }
+      this.correo="";
+      this.nombre="";
+      this.password="";
+      this.correo="";
+      this.rol="";
+   }
+
+   cambiar()
+   {
+     if(this.cambia)
+       {
+         this.cambia=false;
+       }
+       else
+         this.cambia=true;
+   }
+
+         
+   sweetalertDemo4(user) {
+    debugger;
+    swal({
+      title: 'Eliminar',
+      text: "¿Seguro que desea eliminar el viaje?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      CancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar!'
+    }).then((result) => {
+      if (result.value) {
+        var respuesta=  this.PersonaS.EliminarUsuario(user.id , mensaje => { 
+          swal(
+            'Eliminado!',
+            mensaje,
+            'success'
+          )            
+          console.log(mensaje);      
+
+        });
+        window.location.reload();
+        
+      }
+    });
+    
+    }
+}
