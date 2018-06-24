@@ -9,7 +9,7 @@
          <div class="card-header"></div>
          <div class="card-body">
             <div class="table-responsive">
-               <table class="table">
+               <table class="table" *ngIf="cliente">
                   <thead>
                      <tr>
                         <th>Usuario</th>
@@ -22,9 +22,9 @@
                       
                      </tr>
                   </thead>
-                  <tbody>
+                  <tbody >
                        
-                     <tr *ngFor="let viaje of unarray" class="table-secondary">
+                     <tr  *ngFor="let viaje of unarray" class="table-secondary">
                         <td>{{viaje.usuario}}</td>
                         <td>{{viaje.prestaciones}}</td>
                         <td>{{viaje.dia}}</td>
@@ -38,7 +38,63 @@
                   </tbody>
                </table>
               
-
+               <table class="table" *ngIf="remisero">
+                <thead>
+                   <tr>
+                      <th>Usuario</th>
+                      <th>Prestaciones</th>
+                      <th>Día y Hora</th>
+                      <th>Pago</th>
+                      <th>Estado</th>
+                      <th>Costo</th>
+                      <th>Acciones</th>
+                    
+                   </tr>
+                </thead>
+                <tbody >
+                     
+                   <tr  *ngFor="let viaje of unarray" class="table-secondary">
+                      <td>{{viaje.usuario}}</td>
+                      <td>{{viaje.prestaciones}}</td>
+                      <td>{{viaje.dia}}</td>
+                      <td>{{viaje.pago}}</td>
+                      <td><strong><h4>{{viaje.estado}}</h4></strong></td>
+                      <td><strong><h4>{{viaje.costo}}</h4></strong></td>
+                      <td><button class="mb-1 btn btn-info btn-sm" type="button">Cargar pago</button>
+                    <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Modificar Estado</button></td>
+                </tr>
+                
+                </tbody>
+             </table>
+             <table class="table" *ngIf="encargado">
+                <thead>
+                   <tr>
+                      <th>Usuario</th>
+                      <th>Prestaciones</th>
+                      <th>Día y Hora</th>
+                      <th>Pago</th>
+                      <th>Estado</th>
+                      <th>Costo</th>
+                      <th>Remisero</th>
+                      <th>Acciones</th>
+                    
+                   </tr>
+                </thead>
+                <tbody >
+                     
+                   <tr  *ngFor="let viaje of unarray" class="table-secondary">
+                      <td>{{viaje.usuario}}</td>
+                      <td>{{viaje.prestaciones}}</td>
+                      <td>{{viaje.dia}}</td>
+                      <td>{{viaje.pago}}</td>
+                      <td><strong><h4>{{viaje.estado}}</h4></strong></td>
+                      <td><strong><h4>{{viaje.costo}}</h4></strong></td>
+                      <td><strong><h4>{{viaje.remisero}}</h4></strong></td>
+                      <td><button class="mb-1 btn btn-info btn-sm" type="button">Cargar Remisero</button>
+                </tr>
+                
+                </tbody>
+             </table>
       
             </div>
          </div>

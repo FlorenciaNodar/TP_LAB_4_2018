@@ -16,6 +16,7 @@ export class PersonaService {
     });
   }
 
+
   Registrar(unUser:Usuario, callback: (mensaje: string) => void)
   {
     debugger;
@@ -56,4 +57,22 @@ export class PersonaService {
       
     
     }
+
+
+    
+  obtenerRol(usuario:string, callback: (data: any) => void){
+    debugger;
+    this.AP.obtenerRol("obtenerRol/",usuario, data => { 
+    callback(data);
+    
+  });
+  }
+
+  TraerTodosLosViajes (callback: (data: any) => void){
+    debugger;
+    this.AP.TraerTodosLosViajes("ViajesTodos/", data => { 
+    callback(data);
+    
+  });
+  }
 }

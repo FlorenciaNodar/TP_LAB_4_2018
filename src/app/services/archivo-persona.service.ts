@@ -59,4 +59,21 @@ export class ArchivoPersonaService {
     callback(datos);
     }); 
   }
+
+  public obtenerRol(Ruta:string,usuario:string, callback: (data: any) => void){
+    debugger;
+    var rta =  this.mihttp.obtenerRol(path + Ruta ,usuario, data => { 
+     var datos =JSON.parse(data.text());
+     callback(datos);
+     }); 
+  }
+  public TraerTodosLosViajes(Ruta:string, callback: (data: any) => void){
+    debugger;
+    var rta =  this.mihttp.TraerTodosLosViajes(path + Ruta, data => { 
+     var datos =JSON.parse(data.text());
+     callback(datos);
+     }); 
+  }
+
+  
 }

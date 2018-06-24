@@ -1,10 +1,18 @@
-<div class="content-heading">
+
+      <div class="text-center mb-4"  *ngIf= "!cliente">
+        <div class="text-lg mb-3">401</div>
+        <p class="lead m0">No posee permisos</p>
+        <p>no posee los permisos necesarios para ingresar a esta secci&oacute;n.</p>
+    </div>
+    
+   
+<div class="content-heading"  *ngIf= "cliente">
     <div>Viajes
         <small>Solicita tus viajes</small>
     </div>
 </div>
 
-<div class="row">
+<div class="row"  *ngIf= "cliente">
       
          <div class="col-lg-12">
                 

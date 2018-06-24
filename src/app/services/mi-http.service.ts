@@ -128,4 +128,32 @@ export class MiHttpService {
         });
   }
 
+  obtenerRol(url:string,usuario:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('usuario',usuario);
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
+  TraerTodosLosViajes(url:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
 }

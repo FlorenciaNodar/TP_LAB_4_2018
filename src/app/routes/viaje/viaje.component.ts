@@ -52,7 +52,8 @@ export class ViajeComponent implements OnInit {
     private destinoLat: any;
     private destinoLng: any;
     private objViaje: Viaje;
-
+  private rol: string;
+  private cliente:boolean;
        @ViewChild('pickupInput') pickupInputElementRef: ElementRef;
 
        @ViewChild('pickupOutput') pickupOutputElementRef: ElementRef;
@@ -83,7 +84,17 @@ export class ViajeComponent implements OnInit {
 
        ngOnInit() {
         debugger;
+        var token = localStorage.getItem('cliente');
         
+        var resp = this.PersonaS.obtenerRol(token,data => {
+          
+        this.rol = data.rol
+
+        if(this.rol == "Cliente" || this.rol =="Encargado"){
+          this.cliente = true;   
+          
+        }
+      });
            this.objViaje = new Viaje();
          // set google maps defaults
          this.zoom = 4;

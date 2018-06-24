@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { ColorsService } from '../../shared/colors/colors.service';
-
+import { PersonaService } from '../../services/persona.service';
 @Component({
     selector: 'app-graficos',
     templateUrl: './graficos.component.html',
@@ -10,12 +10,26 @@ import { ColorsService } from '../../shared/colors/colors.service';
 })
 export class GraficosComponent implements OnInit {
 
-    constructor(public colors: ColorsService) { 
+    rol:string;
+    encargado: boolean;
+    constructor(public colors: ColorsService, private PersonaS: PersonaService) { 
     }
   
-    ngOnInit() {
-    }
+    ngOnInit() {  
+        
+        var token = localStorage.getItem('cliente');
+    
+    var resp = this.PersonaS.obtenerRol(token,data => {
+      
+    this.rol = data.rol
 
+    if( this.rol =="Encargado"){
+      this.encargado = true;   
+      
+    }
+  });
+    }
+  
     lineData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
