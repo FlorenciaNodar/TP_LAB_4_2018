@@ -23,6 +23,12 @@ const MisViajes = {
     icon: 'icon-plane'
 };
 
+const Usuarios = {
+    text: 'Usuarios',
+    link: '/usuarios',
+    icon: 'icon-user'
+};
+
 const headingMain = {
     text: 'Lista',
     heading: true
@@ -32,5 +38,6 @@ export const menu = [
     Home,
     Viaje,
     Graficos,
-    MisViajes
+    MisViajes,
+    Usuarios
 ];
