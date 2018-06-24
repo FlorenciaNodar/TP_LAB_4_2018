@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Usuario } from '../Clases/Usuario';
 import swal from'sweetalert2';
+import { Viaje } from '../routes/viaje/viaje.component';
 @Injectable()
 
 export class MiHttpService {
@@ -72,6 +73,59 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
- 
+  CargarViaje(url:string,unUser:Viaje, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('usuario',unUser.token);
+   data.append('pago', unUser.tipo_pago);
+   data.append('dia', unUser.fechayhora);
+   data.append('origenlat', unUser.lat_o);
+   data.append('origenlong', unUser.lng_o) ;
+   data.append('destinolat', unUser.lat_d) ;
+   data.append('destinolong', unUser.lng_d) ;
+   data.append('prestaciones', unUser.prestaciones) ;
+   data.append('estado', unUser.estado) ;
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
+  BorrarViaje(url:string,id:any, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
+  
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
+
+  TraerViajesPorUsuarios(url:string,usuario:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('usuario',usuario);
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
 
 }

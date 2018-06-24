@@ -1,76 +1,12 @@
-// import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from "rxjs/Observable";
-// @Component({
-//     selector: 'app-viaje',
-//     templateUrl: './viaje.component.html',
-//     styleUrls: ['./viaje.component.scss']
-// })
-// export class ViajeComponent implements OnInit {
 
-//     lat: number = 51.678418;
-//     lng: number = 7.809007;
-//     constructor(public http: HttpClient) { 
-//         this.getChartData('assets/server/chart/area.json').subscribe(data => this.areaData = data);
-//     }
-//     getChartData(url): Observable<any> {
-//         return this.http.get(url);
-//     }
-//     ngOnInit() {
-//     }
-
-//     areaData: any;
-//     areaOptions = {
-//         series: {
-//             lines: {
-//                 show: true,
-//                 fill: 0.8
-//             },
-//             points: {
-//                 show: true,
-//                 radius: 4
-//             }
-//         },
-//         grid: {
-//             borderColor: '#eee',
-//             borderWidth: 1,
-//             hoverable: true,
-//             backgroundColor: '#fcfcfc'
-//         },
-//         tooltip: true,
-//         tooltipOpts: {
-//             content: function(label, x, y) { return x + ' : ' + y; }
-//         },
-//         xaxis: {
-//             tickColor: '#fcfcfc',
-//             mode: 'categories'
-//         },
-//         yaxis: {
-//             min: 0,
-//             tickColor: '#eee',
-//             // position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-//             tickFormatter: function(v) {
-//                 return v + ' visitors';
-//             }
-//         },
-//         shadowSize: 0
-//     };
-
-    
-//     ready($event) {
-//         // $event == { plot: PlotObject }
-//         console.log('Ready!');
-//     }
-
-    
-
-// }
 import { Component, NgModule, NgZone, OnInit, ViewChild, ElementRef, Directive, Input  } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AgmCoreModule, MapsAPILoader, GoogleMapsAPIWrapper } from '@agm/core';
 import { DirectionsMapDirective } from '../../google-map.directive';
+import {PersonaService} from '../../services/persona.service';
 import {} from '@types/googlemaps';
+import swal from'sweetalert2';
 
 
 declare var google: any;
@@ -85,6 +21,7 @@ export class Viaje {
   public tipo_pago: any;
   public token: any;
   public prestaciones: any;
+  public estado: any;
 
   constructor() { }
 }
@@ -131,7 +68,8 @@ export class ViajeComponent implements OnInit {
          private mapsAPILoader: MapsAPILoader,
          private ngZone: NgZone,
          private gmapsApi: GoogleMapsAPIWrapper,
-         private _elementRef: ElementRef       ) {
+         private _elementRef: ElementRef,
+        private PersonaS: PersonaService  ) {
            const date = new Date();
            const year = date.getFullYear();
            const month = date.getMonth();
@@ -274,22 +212,42 @@ export class ViajeComponent implements OnInit {
            }
            this.objViaje.fechayhora = this.fechaViaje;
            this.objViaje.prestaciones = this.prestaciones;
+           this.objViaje.estado = "Solicitado";
            this.objViaje.token = localStorage.getItem('cliente');
 
-            // console.log(this.objViaje);
-        //    this.ws.postViaje( this.objViaje, '/viaje/' )
+            console.log(this.objViaje);
+            if(this.objViaje.fechayhora == "" || this.objViaje.prestaciones == "" || this.objViaje.tipo_pago == "" || this.objViaje.fechayhora == undefined|| this.objViaje.lng_d == undefined || this.objViaje.lat_d == undefined  || this.objViaje.prestaciones == undefined|| this.objViaje.tipo_pago == undefined)
+          {
+            swal('ADVERTENCIA!','Debe cargar todos los campos','error');
+            
+          }else{
+             var respuesta=  this.PersonaS.CargarViaje(this.objViaje , mensaje => { 
+              swal('OK!',mensaje,'success');
+              
+              console.log(mensaje);
+              this.origenLat="";
+               this.origenLng="";
+               this.destinoLat="";
+              this.destinoLng="";
+             this.metodoPago = "";
+              this.fechaViaje="";
+              this.prestaciones="";
+            });
+          }
+           
+        //    this.PersonaS.CargarViaje( this.objViaje 
         //    .then( data => {
         //         console.log(data);
-               /*
-                 hacer la logica para que si no existe el mail.
-                 Vaya a registrarase.
-               */
-               // if ( data.token ) {
-               //      localStorage.setItem('token', data.token);
-               //      this.router.navigateByUrl('/bienvenida');
-               // }
+        //        /*
+        //          hacer la logica para que si no existe el mail.
+        //          Vaya a registrarase.
+        //        */
+        //       //  if ( data.token ) {
+        //       //       localStorage.setItem('token', data.token);
+        //       //       this.router.navigateByUrl('/bienvenida');
+        //       //  }
         //    })
-        //    .catch( e => {
+        // //    .catch( e => {
         //        console.log(e);
         //    } );
            // console.log(this.objViaje);

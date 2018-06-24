@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MiHttpService} from './mi-http.service';
 import { Usuario } from '../Clases/Usuario';
+import { Viaje } from '../routes/viaje/viaje.component';
 var path = "http://localhost:8080/index.php/";
 @Injectable()
 export class ArchivoPersonaService {
@@ -24,12 +25,38 @@ export class ArchivoPersonaService {
     }); 
   }
 
-  public  APIRegistrar(Ruta:string,unUser:Usuario, callback: (mensaje: string) => void) 
+  public APIRegistrar(Ruta:string,unUser:Usuario, callback: (mensaje: string) => void) 
   { 
     debugger;
    var rta =  this.mihttp.PostRegistrar(path + Ruta ,unUser, data => { 
       var mensaje = JSON.parse(data.text()).mensaje;
       callback(mensaje);
+    }); 
+  }
+
+  public CargarViaje(Ruta:string,unUser:Viaje, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.CargarViaje(path + Ruta ,unUser, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+
+  BorrarViaje(Ruta:string,id:any, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.BorrarViaje(path + Ruta ,id, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+  public TraeViaje(Ruta:string,usuario:string, callback: (data: any) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.TraerViajesPorUsuarios(path + Ruta ,usuario, data => { 
+    var datos = data.json();
+    callback(datos);
     }); 
   }
 }

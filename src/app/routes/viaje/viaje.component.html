@@ -10,7 +10,7 @@
                 
          <div class="form-group">
                 
-        <form  (ngSubmit)="pedirViaje()" class="form-horizontal" #formViajes="ngForm" ngNativeValidate>
+        <form  class="form-horizontal" #formViajes="ngForm" ngNativeValidate>
                                             <div class="card card-default">
                                                 <div class="card-body">
                                                     <fieldset class="b0">Solicitar Viaje
@@ -27,7 +27,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>
                                                             <div class="col-lg-10">
-                                                                <input [(ngModel)]="prestaciones" class="form-control" type="text"  [ngModelOptions]="{standalone: true}" required/>
+                                                                <input [(ngModel)]="prestaciones" class="form-control" type="text"  [ngModelOptions]="{standalone: true}" placeholder="Prestaciones" required/>
                                                             </div>
                                                         </div>
                                                     </fieldset>
@@ -52,7 +52,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-lg-2 col-form-label text-lg-right">Medio de pago</label>
                                                             <div class="col-lg-10">
-                                                                <select [(ngModel)]="metodoPago" [ngModelOptions]="{standalone: true}" class="form-control" required >
+                                                                <select [(ngModel)]="metodoPago" placeholder="--Seleccione una opción--" [ngModelOptions]="{standalone: true}" class="form-control" required >
                                                                     <option value="1">Efectivo</option>
                                                                     <option value="2">Débito</option>
                                                                     <option value="3">Crédito</option>
@@ -70,7 +70,7 @@
                             
                                                 </div>
                                                 <div class="card-footer text-center">
-                                                    <button class="btn btn-info" type="submit">Aceptar</button>
+                                                    <button class="btn btn-info" (click)="pedirViaje()">Aceptar</button>
                                                 </div>
                                             </div>
                   </form>

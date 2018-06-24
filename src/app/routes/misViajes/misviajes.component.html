@@ -12,26 +12,34 @@
                <table class="table">
                   <thead>
                      <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
+                        <th>Usuario</th>
+                        <th>Prestaciones</th>
+                        <th>Día y Hora</th>
+                        <th>Pago</th>
+                        <th>Estado</th>
+                        <th>Costo</th>
                         <th>Acciones</th>
                       
                      </tr>
                   </thead>
                   <tbody>
-                     <tr class="table-secondary">
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                       
+                     <tr *ngFor="let viaje of unarray" class="table-secondary">
+                        <td>{{viaje.usuario}}</td>
+                        <td>{{viaje.prestaciones}}</td>
+                        <td>{{viaje.dia}}</td>
+                        <td>{{viaje.pago}}</td>
+                        <td><strong><h4>{{viaje.estado}}</h4></strong></td>
+                        <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                         <td><button class="mb-1 btn btn-info btn-sm" type="button">Editar</button>
-                     <button class="mb-1 btn btn-info btn-sm" type="button">Eliminar</button></td>
+                     <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button></td>
                   </tr>
                   
                   </tbody>
                </table>
+              
+
+      
             </div>
          </div>
       </div>

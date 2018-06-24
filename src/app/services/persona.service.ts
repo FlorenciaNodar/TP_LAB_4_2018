@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ArchivoPersonaService} from './archivo-persona.service';
 import { Usuario } from '../Clases/Usuario';
+import { Viaje } from '../routes/viaje/viaje.component';
+
 @Injectable()
 export class PersonaService {
 
@@ -20,6 +22,38 @@ export class PersonaService {
       this.AP.APIRegistrar("Usuario/",unUser, mensaje => { 
       callback(mensaje);
     });
-   
-  }
+ }
+    CargarViaje(unUser:Viaje, callback: (mensaje: string) => void)
+    {
+      debugger;
+        this.AP.CargarViaje("CargarViaje/",unUser, mensaje => { 
+        callback(mensaje);
+        
+      });
+      
+    
+    }
+
+    BorrarViaje(id:any, callback: (mensaje: string) => void)
+    {
+      debugger;
+        this.AP.BorrarViaje("BorrarViaje/",id, mensaje => { 
+        callback(mensaje);
+        
+      });
+      
+    
+    }
+
+
+    TraeViajePorUsuario(usuario:string, callback: (data: any) => void)
+    {
+      debugger;
+        this.AP.TraeViaje("TraeViajesPorUsuario/",usuario, data => { 
+        callback(data);
+        
+      });
+      
+    
+    }
 }

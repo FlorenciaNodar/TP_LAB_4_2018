@@ -31,6 +31,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MisViajesComponent } from './routes/misViajes/misviajes.component';
+import { ModalComponent } from './routes/modal/modal.component';
 
 
 // https://github.com/ocombe/ng2-translate/issues/218
@@ -45,7 +46,8 @@ export function createTranslateLoader(http: HttpClient) {
         ViajeComponent,
         GraficosComponent,
         DirectionsMapDirective,
-        MisViajesComponent
+        MisViajesComponent,
+        
     ],
     imports: [
         HttpClientModule,
