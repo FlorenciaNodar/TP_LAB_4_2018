@@ -161,6 +161,21 @@ export class MiHttpService {
         });
   }
 
+  TraerViajesPorRemisero(url:string,usuario:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('remisero',usuario);
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
   obtenerRol(url:string,usuario:string, callback: (r: Response) => void)
   {
     debugger;

@@ -79,6 +79,15 @@ export class ArchivoPersonaService {
     }); 
   }
 
+  TraeViajePorRemisero(Ruta:string,usuario:string, callback: (data: any) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.TraerViajesPorRemisero(path + Ruta ,usuario, data => { 
+    var datos = data.json();
+    callback(datos);
+    }); 
+  }
+
   public obtenerRol(Ruta:string,usuario:string, callback: (data: any) => void){
     debugger;
     var rta =  this.mihttp.obtenerRol(path + Ruta ,usuario, data => { 

@@ -78,6 +78,17 @@ export class PersonaService {
     
     }
 
+    TraerViajesPorRemisero(usuario:string, callback: (data: any) => void)
+    {
+      debugger;
+        this.AP.TraeViajePorRemisero("TraeViajesPorRemisero/",usuario, data => { 
+        callback(data);
+        
+      });
+      
+    
+    }
+
 
     
   obtenerRol(usuario:string, callback: (data: any) => void){
