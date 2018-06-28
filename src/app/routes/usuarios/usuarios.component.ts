@@ -28,7 +28,8 @@ import swal from'sweetalert2';
     encargado: boolean;
     rol:string;
     roles:string;
-    administrador:string;
+    administrador:boolean;
+    uno: boolean;
     private unarray =[];
     
     constructor(fb: FormBuilder, private PersonaS: PersonaService){

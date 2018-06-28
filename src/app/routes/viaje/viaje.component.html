@@ -32,12 +32,45 @@
                                                             </div>
                                                         </fieldset>
                                                     <fieldset>
-                                                        <div class="form-group row">
+                                                             <div class="form-group row">
+                                                                    <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>                                                                    
+                                                                            <div class="checkbox c-checkbox">
+                                                                            <label>
+                                                                            <input type="checkbox" id="myCheck"  value="1" />
+                                                                            <span class="fa fa-check"></span>Con aire acondicionado</label>
+                                                                            </div>
+                                                                            <div class="checkbox c-checkbox">
+                                                                            <label>
+                                                                            <input type="checkbox" id="myCheck2"  value="2" />
+                                                                            <span class="fa fa-check"></span>3 puertas</label>
+                                                                            </div>
+                                                                            <div class="checkbox c-checkbox">
+                                                                            <label>
+                                                                                <input type="checkbox" id="myCheck3"  value="3" />
+                                                                                <span class="fa fa-check"></span>5 puertas</label>
+                                                                            </div>
+                                                                            <div class="checkbox c-checkbox">
+                                                                                <label>
+                                                                                    <input type="checkbox" id="myCheck4"  value="4" />
+                                                                                    <span class="fa fa-check"></span>Auto</label>
+                                                                            </div>
+                                                                            <div class="checkbox c-checkbox">
+                                                                                    <label>
+                                                                                        <input type="checkbox" id="myCheck5"  value="5" />
+                                                                                        <span class="fa fa-check"></span>Camioneta</label>
+                                                                                </div>
+                                                                                <div class="checkbox c-checkbox">
+                                                                                        <label>
+                                                                                            <input type="checkbox" id="myCheck5"  value="5" />
+                                                                                            <span class="fa fa-check"></span>Sin aire acondicionado</label>
+                                                                                    </div>
+                                                            </div>
+                                                        <!-- <div class="form-group row">
                                                             <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>
                                                             <div class="col-lg-10">
                                                                 <input [(ngModel)]="prestaciones" class="form-control" type="text"  [ngModelOptions]="{standalone: true}" placeholder="Prestaciones" required/>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </fieldset>
                                                     <fieldset>
                                                             <div class="form-group row">
@@ -68,6 +101,19 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <small class="text-muted"></small>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+                                                    <fieldset>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-2 col-form-label text-lg-right">Kilómetros:</label>
+                                                            <div class="col-lg-4">
+                                                                <input [(ngModel)]="km" class="form-control" type="text" disabled [ngModelOptions]="{standalone: true}" placeholder="Kilómetros" required/>
+                                                            </div>
+                                                            <label class="col-lg-2 col-form-label text-lg-right">Costo:</label>
+                                                            <div class="col-lg-4">
+                                                                <input [(ngModel)]="costo" class="form-control" type="text" disabled  [ngModelOptions]="{standalone: true}" placeholder="Costo" required/>
                                                             </div>
                                                         </div>
                                                     </fieldset>

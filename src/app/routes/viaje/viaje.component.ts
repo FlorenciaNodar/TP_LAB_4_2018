@@ -22,6 +22,7 @@ export class Viaje {
   public token: any;
   public prestaciones: any;
   public estado: any;
+  
 
   constructor() { }
 }
@@ -52,6 +53,7 @@ export class ViajeComponent implements OnInit {
     private destinoLat: any;
     private destinoLng: any;
     private objViaje: Viaje;
+    
   private rol: string;
   private cliente:boolean;
        @ViewChild('pickupInput') pickupInputElementRef: ElementRef;
@@ -263,4 +265,6 @@ export class ViajeComponent implements OnInit {
         //    } );
            // console.log(this.objViaje);
        }
+
+      
 }
