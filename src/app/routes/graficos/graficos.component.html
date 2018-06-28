@@ -1,6 +1,6 @@
 
       <div class="text-center mb-4"  *ngIf= "!encargado">
-        <div class="text-lg mb-3">401</div>
+        <img class="img-fluid" src="assets/img/candado.png" alt="Candado" />
         <p class="lead m0">No posee permisos</p>
         <p>no posee los permisos necesarios para ingresar a esta secci&oacute;n.</p>
     </div>
@@ -20,7 +20,7 @@
         <div class="col-xl-6 col-lg-6">
         <h4>Bar Chart</h4>
         <div>
-            <canvas baseChart [chartType]="'bar'" [options]="barOptions" [datasets]="barData.datasets" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="120"></canvas>
+            <canvas baseChart [chartType]="'horizontalBar'" [options]="barOptions" [datasets]="barData.datasets" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="120"></canvas>
         </div>
         </div>
 </div>

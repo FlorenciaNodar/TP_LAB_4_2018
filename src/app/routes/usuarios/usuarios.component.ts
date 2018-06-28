@@ -28,6 +28,7 @@ import swal from'sweetalert2';
     encargado: boolean;
     rol:string;
     roles:string;
+    administrador:string;
     private unarray =[];
     
     constructor(fb: FormBuilder, private PersonaS: PersonaService){
@@ -58,8 +59,12 @@ import swal from'sweetalert2';
       
     this.rol = data.rol
 
-    if(this.rol =="Encargado"){
+    if(this.rol =="Encargado" || this.rol == "Administrador"){
       this.encargado = true;   
+      
+    }
+    if(this.rol =="Administrador"){
+      this.administrador = true;   
       
     }
 

@@ -215,4 +215,17 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
+
+  TraeUsuariosClientes(url:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
 }

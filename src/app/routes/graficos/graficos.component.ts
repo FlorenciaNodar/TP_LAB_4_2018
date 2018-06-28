@@ -9,9 +9,13 @@ import { PersonaService } from '../../services/persona.service';
     styleUrls: ['./graficos.component.scss']
 })
 export class GraficosComponent implements OnInit {
-
+    unarray: any;
+    listViajes: any;
+    private unarray1 =[];
+    
     rol:string;
     encargado: boolean;
+    count = 0;
     constructor(public colors: ColorsService, private PersonaS: PersonaService) { 
     }
   
@@ -23,7 +27,7 @@ export class GraficosComponent implements OnInit {
       
     this.rol = data.rol
 
-    if( this.rol =="Encargado"){
+    if( this.rol =="Encargado" || this.rol == "Administrador"){
       this.encargado = true;   
       
     }
@@ -31,14 +35,14 @@ export class GraficosComponent implements OnInit {
     }
   
     lineData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Remiseros', 'Clientes', 'Encargados'],
         datasets: [
             {
                 label: 'My First dataset',
-                data: [this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor()]
+                data: [this.rFactor()]
             }, {
                 label: 'My Second dataset',
-                data: [this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor()]
+                data: [this.rFactor2()]
             }]
     };
 
@@ -69,12 +73,10 @@ export class GraficosComponent implements OnInit {
     // -----------------------------------
 
     barData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Remiseros', 'Encargados', 'Clientes'],
         datasets: [
             {
-                data: [this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor()]
-            }, {
-                data: [this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor(), this.rFactor()]
+                data: [this.rFactor(), this.rFactor2(), this.rFactor3()]
             }]
     };
 
@@ -96,9 +98,52 @@ export class GraficosComponent implements OnInit {
         responsive: true
     };
     rFactor() {
-        return Math.round(Math.random() * 100);
+        
+        var respuesta=  this.PersonaS.TraeUsuariosClientes(data => { 
+            data.forEach(element => {
+               this.unarray1.push(element);
+         });
+        });
+         debugger;
+         console.log(this.unarray1);
+         return this.unarray1.length.toString();
+         
     };
-
-
+    rFactor2() {
+        // var token = localStorage.getItem('cliente');
+        
+        // var respuesta=  this.PersonaS.TraeViajePorUsuario(token , data => { 
+        //     data.forEach(element => {
+  
+        //     this.unarray1.push(element);
+        //     this.unarray1.forEach(element => {
+        //       if(element.costo == null){
+        //           element.costo = "A confirmar por el remisero";
+        //       }
+        //     });
+            
+        //     });
+        //  });
+         return 20;
+         
+    };
+    rFactor3() {
+        // var token = localStorage.getItem('cliente');
+        
+        // var respuesta=  this.PersonaS.TraeViajePorUsuario(token , data => { 
+        //     data.forEach(element => {
+  
+        //     this.unarray1.push(element);
+        //     this.unarray1.forEach(element => {
+        //       if(element.costo == null){
+        //           element.costo = "A confirmar por el remisero";
+        //       }
+        //     });
+            
+        //     });
+        //  });
+         return 20;
+         
+    };
 
 }

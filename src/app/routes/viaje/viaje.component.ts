@@ -90,7 +90,7 @@ export class ViajeComponent implements OnInit {
           
         this.rol = data.rol
 
-        if(this.rol == "Cliente" || this.rol =="Encargado"){
+        if(this.rol == "Cliente" || this.rol =="Encargado" ||  this.rol == "Administrador"){
           this.cliente = true;   
           
         }

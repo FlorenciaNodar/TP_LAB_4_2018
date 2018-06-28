@@ -58,7 +58,7 @@ export class MisViajesComponent implements OnInit {
           });
        });
         }
-        if(this.rol == "Encargado"){
+        if(this.rol == "Encargado" || this.rol == "Administrador"){
           this.encargado = true;
             
           var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 

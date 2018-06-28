@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     selectAdmin(){
-        this.username = "fnodar@gmail.com";
+        this.username = "admin@admin.com";
         this.password = "123456";
     }
 

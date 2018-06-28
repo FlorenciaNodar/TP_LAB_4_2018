@@ -114,4 +114,12 @@ export class PersonaService {
     
   });
   }
+
+  TraeUsuariosClientes(callback: (data: any) => void){
+    debugger;
+    this.AP.TraeUsuariosClientes("TraerUsuariosCliente/", data => { 
+    callback(data);
+    
+  });
+  }
 }

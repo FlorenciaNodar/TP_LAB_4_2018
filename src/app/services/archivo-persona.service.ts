@@ -103,6 +103,15 @@ export class ArchivoPersonaService {
      }); 
   }
 
+  public TraeUsuariosClientes(Ruta:string, callback: (data: any) => void){
+    debugger;
+    var rta =  this.mihttp.TraeUsuariosClientes(path + Ruta, data => { 
+     var datos =data.json();
+     callback(datos);
+     }); 
+  }
+
+
   public TraerUsuarios(Ruta:string, callback: (data: any) => void){
     debugger;
     var rta =  this.mihttp.TraerUsuarios(path + Ruta, data => { 
