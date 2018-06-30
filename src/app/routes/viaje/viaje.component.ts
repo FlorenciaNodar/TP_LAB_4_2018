@@ -7,6 +7,7 @@ import { DirectionsMapDirective } from '../../google-map.directive';
 import {PersonaService} from '../../services/persona.service';
 import {} from '@types/googlemaps';
 import swal from'sweetalert2';
+import { concat } from 'rxjs/internal/operators/concat';
 
 
 declare var google: any;
@@ -53,7 +54,21 @@ export class ViajeComponent implements OnInit {
     private destinoLat: any;
     private destinoLng: any;
     private objViaje: Viaje;
-    
+
+  private CAbool:false;
+  private aireAcondicionado: string;
+  private SACbool: false;
+  private SinAireAcondicionado: string;
+  private tresPbool:false;
+  private tresPuertas: string;
+  private cincoPbool:false;
+  private cincoPuertas: string;
+  private AUbool:false;
+  private auto: string;
+  private CAMbool:false;
+  private camioneta: string;
+
+
   private rol: string;
   private cliente:boolean;
        @ViewChild('pickupInput') pickupInputElementRef: ElementRef;
@@ -64,7 +79,8 @@ export class ViajeComponent implements OnInit {
        private scrollContainer: ElementRef;
 
        @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
-
+       isChecked:boolean;
+       testModel:string;
        public origin: any ; // its a example aleatory position
        public destination: any; // its a example aleatory position
        constructor(
@@ -86,6 +102,7 @@ export class ViajeComponent implements OnInit {
 
        ngOnInit() {
         debugger;
+       
         var token = localStorage.getItem('cliente');
         
         var resp = this.PersonaS.obtenerRol(token,data => {
@@ -202,7 +219,51 @@ export class ViajeComponent implements OnInit {
            });
          }
        }
-
+      //  private myCheck(i, bool){
+      //     debugger;
+      //     if(i == 'CA' && bool == false){
+      //     this.aireAcondicionado = "Con Aire Acondicionado";
+      //     this.CAbool = true;
+      //     }if(i == 'CA' && bool == true){
+      //     this.aireAcondicionado = "";
+      //     this.CAbool = false;
+      //     }
+      //     if(i == 'SAC' && bool == false){
+      //     this.SinAireAcondicionado = "Sin Aire Acondicionado";
+      //     this.SACbool = true;
+      //     }if(i == 'SAC' && bool == true){
+      //     this.SinAireAcondicionado = "";
+      //     this.SACbool = false;
+      //     }
+      //     if(i == '3P' && bool == false){
+      //     this.tresPuertas = "3 puertas";
+      //     this.tresPbool = true;
+      //     }if(i == '3P' && bool == true){
+      //     this.tresPuertas = "";
+      //     this.tresPbool = false;
+      //     }
+      //     if(i == '5P' && bool == false){
+      //     this.cincoPuertas = "5 puertas";
+      //     this.cincoPbool = true;
+      //     }if(i == '5P' && bool == true){
+      //     this.cincoPuertas = "";
+      //     this.cincoPbool = false;
+      //     }
+      //     if(i == 'CAM' && bool == false){
+      //     this.camioneta = "Camioneta";
+      //     this.CAMbool = true;
+      //     }if(i == 'CAM' && bool == true){
+      //     this.camioneta = "";
+      //     this.CAMbool = false;
+      //     }
+      //     if(i == 'AU' && bool == false){
+      //     this.auto = "Auto";
+      //     this.AUbool = true;
+      //     }if(i == 'AU' && bool == true){
+      //     this.auto = "";
+      //     this.AUbool = false;
+      //     }
+      //  }
        private getMapCusotmStyles() {
          // Write your Google Map Custom Style Code Here.
        }
@@ -210,12 +271,29 @@ export class ViajeComponent implements OnInit {
        private validarCampos() {
 
        }
-       pedirViaje() {
+       pedirViaje(CAbool,tresPbool, cincoPbool,SACbool, CAMbool,AUbool) {
            // this.validarCampos();
+           debugger;
+           
            this.objViaje.lat_o = this.origenLat;
            this.objViaje.lng_o = this.origenLng;
            this.objViaje.lat_d = this.destinoLat;
            this.objViaje.lng_d = this.destinoLng;
+
+           if(CAbool == true)
+           this.aireAcondicionado = "Con Aire Acondicionado";
+           if(cincoPbool == true)
+           this.cincoPuertas = "5 Puertas";
+           if(tresPbool == true)
+           this.tresPuertas = "3 Puertas";
+           if(CAMbool == true)
+           this.camioneta = "Camioneta";
+           if(AUbool == true)
+           this.auto = "Auto";
+           if(SACbool == true)
+           this.SinAireAcondicionado = "Sin Aire Acondicionado";
+
+
            if(this.metodoPago == "1"){
             this.objViaje.tipo_pago = "Efectivo";            
            }else if(this.metodoPago == "2"){
@@ -224,7 +302,25 @@ export class ViajeComponent implements OnInit {
             this.objViaje.tipo_pago = "Credito";                        
            }
            this.objViaje.fechayhora = this.fechaViaje;
-           this.objViaje.prestaciones = this.prestaciones;
+           if(this.aireAcondicionado == undefined){
+            this.aireAcondicionado = "";
+           }
+           if(this.SinAireAcondicionado == undefined){
+            this.SinAireAcondicionado = "";
+           }
+           if(this.auto == undefined){
+            this.auto = "";
+           }
+           if(this.camioneta == undefined){
+            this.camioneta = "";
+           }
+           if(this.tresPuertas == undefined){
+            this.tresPuertas = "";
+           }
+           if(this.cincoPuertas == undefined){
+            this.cincoPuertas = "";
+           }
+           this.objViaje.prestaciones = this.aireAcondicionado+" "+this.SinAireAcondicionado+" "+this.auto+" "+this.camioneta+" "+this.tresPuertas+" "+this.cincoPuertas;
            this.objViaje.estado = "Solicitado";
            this.objViaje.token = localStorage.getItem('cliente');
 

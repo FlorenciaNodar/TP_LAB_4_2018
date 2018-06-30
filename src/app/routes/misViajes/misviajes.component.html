@@ -65,12 +65,13 @@
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td><button class="mb-1 btn btn-info btn-sm" type="button">Cargar pago</button>
-                    <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Modificar Estado</button></td>
+                        <button class="mb-1 btn btn-info btn-sm" *ngIf="viaje.estado == 'Aprobado' "  type="button" (click)="sweetalertDemo5(viaje)">Cambiar Estado</button>                                                    
+                    </td>
                 </tr>
                 
                 </tbody>
              </table>
-             <table class="table" *ngIf="encargado">
+             <table class="table" *ngIf="encargado || administrador">
                 <thead>
                    <tr>
                       <th>Usuario</th>
@@ -94,11 +95,30 @@
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td><strong><h4>{{viaje.remisero}}</h4></strong></td>
-                      <td><button class="mb-1 btn btn-info btn-sm" type="button">Cargar Remisero</button>
+                      <td><button class="mb-1 btn btn-info btn-sm" type="button" (click)="classicModal.show()">Cargar Remisero</button>
+                        <button class="mb-1 btn btn-info btn-sm"  *ngIf="viaje.estado == 'Solicitado'"  type="button" (click)="sweetalertDemo5(viaje)">Cambiar Estado</button>                            
+                        <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button></td>
+                        
                 </tr>
                 
                 </tbody>
              </table>
+
+             <div class="modal fade" bsModal #classicModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Cargar Remisero</h4>
+                            <button type="button" class="close" aria-label="Close" (click)="classicModal.hide()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </div>
+                    </div>
+                </div>
+            </div>
            
             </div>  
             

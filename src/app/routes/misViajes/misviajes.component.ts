@@ -24,6 +24,7 @@ export class MisViajesComponent implements OnInit {
   cliente: boolean;
   remisero: boolean;
   encargado: boolean;
+  administrador: boolean;
   fecha:string;
   
        constructor(private PersonaS: PersonaService) {
@@ -58,8 +59,31 @@ export class MisViajesComponent implements OnInit {
           });
        });
         }
-        if(this.rol == "Encargado" || this.rol == "Administrador"){
+        if(this.rol == "Encargado" ){
           this.encargado = true;
+         
+            
+            
+          var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
+            data.forEach(element => {
+  
+            this.unarray1.push(element);
+            this.listViajes = this.unarray;
+            this.unarray1.forEach(element => {
+              if(element.costo == null){
+                  element.costo = "A confirmar por el remisero";
+              }
+            });
+            this.unarray.push(element);
+  
+            console.log(  this.unarray);
+            });
+         });
+        }
+        if(this.rol == "Administrador" ){
+          this.administrador = true;
+         
+            
             
           var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
             data.forEach(element => {
@@ -131,6 +155,35 @@ export class MisViajesComponent implements OnInit {
       });
       
       }
+
+      sweetalertDemo5(viaje) {
+        debugger;
+        swal({
+          title: 'Modificar Estado',
+          text: "¿Seguro que desea aprobar el viaje?",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          CancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar!'
+        }).then((result) => {
+          if (result.value) {
+            var respuesta=  this.PersonaS.EditarViaje(viaje.id,this.rol , mensaje => { 
+              swal(
+                'Modificado!',
+                mensaje,
+                'success'
+              )         
+              console.log(mensaje);      
+  
+            });
+            window.location.reload();
+            
+            
+          }
+        });
+        
+        }
 
       download(){
         debugger;

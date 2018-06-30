@@ -55,6 +55,15 @@ export class PersonaService {
       
     
     }
+
+    EditarViaje(id:any,rol:any, callback: (mensaje: string) => void){
+      debugger;
+      this.AP.EditarViaje("EditarViaje/",id, rol,mensaje => { 
+      callback(mensaje);
+      
+    });
+    
+    }
     EliminarUsuario(id:any, callback: (mensaje: string) => void)
     {
       debugger;

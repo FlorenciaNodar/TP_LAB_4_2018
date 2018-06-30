@@ -61,6 +61,16 @@ export class ArchivoPersonaService {
     }); 
   }
 
+  EditarViaje(Ruta:string,id:any,rol:any, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.EditarViaje(path + Ruta ,id, rol,data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+
+
   EliminarUsuario(Ruta:string,id:any, callback: (mensaje: string) => void) 
   { 
     debugger;

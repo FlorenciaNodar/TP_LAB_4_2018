@@ -34,34 +34,35 @@
                                                     <fieldset>
                                                              <div class="form-group row">
                                                                     <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>                                                                    
-                                                                            <div class="checkbox c-checkbox">
+                                                                    
+                                                                    <div class="checkbox c-checkbox">
                                                                             <label>
-                                                                            <input type="checkbox" id="myCheck"  value="1" />
+                                                                            <input type="checkbox" id="myCheckkk" [(ngModel)]="CAbool"  [ngModelOptions]="{standalone: true}"  value="1"  />
                                                                             <span class="fa fa-check"></span>Con aire acondicionado</label>
                                                                             </div>
                                                                             <div class="checkbox c-checkbox">
                                                                             <label>
-                                                                            <input type="checkbox" id="myCheck2"  value="2" />
+                                                                            <input type="checkbox" id="myCheck2"  value="2" [(ngModel)]="tresPbool"       [ngModelOptions]="{standalone: true}" />
                                                                             <span class="fa fa-check"></span>3 puertas</label>
                                                                             </div>
                                                                             <div class="checkbox c-checkbox">
                                                                             <label>
-                                                                                <input type="checkbox" id="myCheck3"  value="3" />
+                                                                                <input type="checkbox" id="myCheck3"  value="3" [(ngModel)]="cincoPbool" [ngModelOptions]="{standalone: true}"/>
                                                                                 <span class="fa fa-check"></span>5 puertas</label>
                                                                             </div>
                                                                             <div class="checkbox c-checkbox">
                                                                                 <label>
-                                                                                    <input type="checkbox" id="myCheck4"  value="4" />
+                                                                                    <input type="checkbox" id="myCheck4"  value="4" [(ngModel)]="AUbool" [ngModelOptions]="{standalone: true}" />
                                                                                     <span class="fa fa-check"></span>Auto</label>
                                                                             </div>
                                                                             <div class="checkbox c-checkbox">
                                                                                     <label>
-                                                                                        <input type="checkbox" id="myCheck5"  value="5" />
+                                                                                        <input type="checkbox" id="myCheck5"  value="5" [(ngModel)]="CAMbool"[ngModelOptions]="{standalone: true}"/>
                                                                                         <span class="fa fa-check"></span>Camioneta</label>
                                                                                 </div>
                                                                                 <div class="checkbox c-checkbox">
                                                                                         <label>
-                                                                                            <input type="checkbox" id="myCheck5"  value="5" />
+                                                                                            <input type="checkbox" id="myCheck6"  value="6" [(ngModel)]="SACbool"[ngModelOptions]="{standalone: true}" />
                                                                                             <span class="fa fa-check"></span>Sin aire acondicionado</label>
                                                                                     </div>
                                                             </div>
@@ -69,8 +70,8 @@
                                                             <label class="col-lg-2 col-form-label text-lg-right">Prestaciones:</label>
                                                             <div class="col-lg-10">
                                                                 <input [(ngModel)]="prestaciones" class="form-control" type="text"  [ngModelOptions]="{standalone: true}" placeholder="Prestaciones" required/>
-                                                            </div>
-                                                        </div> -->
+                                                            </div>  -->
+                                                        <!-- </div> -->
                                                     </fieldset>
                                                     <fieldset>
                                                             <div class="form-group row">
@@ -124,7 +125,7 @@
                             
                                                 </div>
                                                 <div class="card-footer text-center">
-                                                    <button class="btn btn-info" (click)="pedirViaje()">Aceptar</button>
+                                                    <button class="btn btn-info" (click)="pedirViaje(CAbool,tresPbool, cincoPbool,SACbool, CAMbool,AUbool)">Aceptar</button>
                                                 </div>
                                             </div>
                   </form>

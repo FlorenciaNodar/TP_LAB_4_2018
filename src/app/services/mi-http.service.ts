@@ -127,7 +127,30 @@ export class MiHttpService {
       .map(res => res)  
       .subscribe(callback, 
         error => {
-          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+          swal('Advertencia!', 'Ocurrio un error al borrar','error' );          
+        });
+  }
+
+  EditarViaje(url:string,id:any,rol:any, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
+   if(rol == "Remisero")
+   {
+    data.append('estado',"Realizado");    
+   }
+   if(rol == "Administrador" || rol == "Encargado")
+   {
+    data.append('estado',"Aprobado");    
+   }
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al modificar','error' );          
         });
   }
   BorrarUsuario(url:string,id:any, callback: (r: Response) => void)
