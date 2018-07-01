@@ -347,6 +347,8 @@ export class ViajeComponent implements OnInit {
              this.metodoPago = "";
               this.fechaViaje="";
               this.prestaciones="";
+              this.estimatedCosto="";
+              this.estimatedKm="";
             });
           }
            
