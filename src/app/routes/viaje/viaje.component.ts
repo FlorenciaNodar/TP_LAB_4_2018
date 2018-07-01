@@ -44,6 +44,10 @@ export class ViajeComponent implements OnInit {
     public iconurl: string;
     public mapCustomStyles: any;
     public estimatedTime: any;
+    public estimatedKm: any;
+    public estimatedKma: any;
+    public estimatedCosto: any;
+    
     public estimatedDistance: any;
     public startDate: any;
     public fechaViaje: any;
@@ -175,7 +179,7 @@ export class ViajeComponent implements OnInit {
                  // Update the directions
                  this.vc.updateDirections();
                  this.zoom = 12;
-                 // this.getDistanceAndDuration();
+               //  this.getDistanceAndDuration();
                  if (this.vc.destination !== undefined ) {
                     this.origenLat = this.vc.origin.latitude;
                     this.origenLng = this.vc.origin.longitude;
@@ -183,18 +187,20 @@ export class ViajeComponent implements OnInit {
                     this.destinoLng = this.vc.destination.longitude;
                  }
 
-                 // this.estimatedTime = localStorage.getItem('duracion');
-                 // this.estimatedTime = '1000 km';
+                 this.estimatedTime = localStorage.getItem('duracion');
+                 this.estimatedKma = Math.floor((Math.random() * 100) + 1);
+                 this.estimatedKm = this.estimatedKma+"km";
+                 this.estimatedCosto = this.estimatedKma * 16;
                });
 
             });
 
        }
 
-       getDistanceAndDuration() {
-         this.estimatedTime = this.vc.estimatedTime;
-         this.estimatedDistance = this.vc.estimatedDistance;
-       }
+      //  getDistanceAndDuration() {
+      //    this.estimatedTime = this.vc.estimatedTime;
+      //    this.estimatedDistance = this.vc.estimatedDistance;
+      //  }
 
        scrollToBottom(): void {
          jQuery('html, body').animate({ scrollTop: jQuery(document).height() }, 3000);
