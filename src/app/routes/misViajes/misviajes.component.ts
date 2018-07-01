@@ -16,7 +16,6 @@ import { element } from 'protractor';
   styleUrls: ['./misviajes.component.scss']
 })
 export class MisViajesComponent implements OnInit {
-
     private listViajes: any;
     private unarray =[];
     private unarray1 =[];
@@ -25,8 +24,14 @@ export class MisViajesComponent implements OnInit {
   remisero: boolean;
   encargado: boolean;
   administrador: boolean;
-  fecha:string;
-  
+  roles1:any;
+  roles2:any;
+  roles3:any;
+  roles4:any;
+  remiseriastring: any;
+  preg7:any;
+ token = localStorage.getItem('cliente');
+
        constructor(private PersonaS: PersonaService) {
         
        }
@@ -34,16 +39,15 @@ export class MisViajesComponent implements OnInit {
        ngOnInit() {
 
         debugger;
-        var token = localStorage.getItem('cliente');
         
-        var resp = this.PersonaS.obtenerRol(token,data => {
+        var resp = this.PersonaS.obtenerRol(this.token,data => {
           
         this.rol = data.rol
 
         if(this.rol == "Cliente"){
           this.cliente = true;   
           
-          var respuesta=  this.PersonaS.TraeViajePorUsuario(token , data => { 
+          var respuesta=  this.PersonaS.TraeViajePorUsuario(this.token , data => { 
           data.forEach(element => {
 
           this.unarray1.push(element);
@@ -103,7 +107,7 @@ export class MisViajesComponent implements OnInit {
         }
         if(this.rol == "Remisero"){
           this.remisero = true;
-          var respuesta=  this.PersonaS.TraerViajesPorRemisero(token,data => { 
+          var respuesta=  this.PersonaS.TraerViajesPorRemisero(this.token,data => { 
             data.forEach(element => {
   
             this.unarray1.push(element);
@@ -224,9 +228,85 @@ export class MisViajesComponent implements OnInit {
         }
         return str;
       }
+    
+      cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4){
+        var hoy = new Date();
+        var dia = hoy.getDate(); 
+        var mes = hoy.getMonth() + 1;
+        var anio= hoy.getFullYear();
+        var fecha_actual = String(dia+"/"+mes +"/"+anio);
+        debugger;
         
-   
-         //this.classicModal.show();
+        if(this.roles1 == "1")
+        var preg1 = "SI";
+        if(this.roles1 == "2")
+        var preg1= "NO";
+        if(this.roles1 == "3")
+        var preg1= "TAL VEZ";
+
+        if(this.roles2 == "1")
+        var preg2 = "BIEN";
+        if(this.roles2 == "2")
+        var preg2= "MAL";
+        if(this.roles2 == "3")
+        var preg2= "MASO";
+
+        if(this.roles3 == "1")
+        var preg3 = "BUENA";
+        if(this.roles3 == "2")
+        var preg3= "MALA";
+        if(this.roles3 == "3")
+        var preg3= "ALGUNOS BUENA";
+        if(this.roles3 == "4")
+        var preg3= "ALGUNOS MALA";
+
+        if(this.roles4 == "1")
+        var preg4 = "SI";
+        if(this.roles4 == "2")
+        var preg4= "NO";
+
+        if(check1 == true)
+        var checkstring1= "Familia"; 
+        else
+        var checkstring1= "";    
+        if(check2 == true)
+        var checkstring2= "Amigos";
+        else
+        var checkstring2= "";  
+        if(check3 == true)
+        var checkstring3= "Compañeros";
+        else
+        var checkstring3= "";
+        if(check4 == true)
+        var checkstring4= "A nadie";
+        else
+        var checkstring4= "";
+        var preg5 =  this.remiseriastring;
+
+        var preg6 =  checkstring1 +" "+ checkstring2 +" "+ checkstring3 +" "+ checkstring4;
+        
+        if(preg1 == "" || preg1 == undefined || preg2 == "" || preg2 == undefined || preg3 == "" || preg3 == undefined|| preg4 == "" || preg4 == undefined|| preg5 == "" || preg5 == undefined|| preg6 == "" || preg6== undefined|| this.preg7 == "" || this.preg7 == undefined){
+          swal('ADVERTENCIA!',"Debe completar todos los campos",'error');
+          
+        }else{
+       var respuesta=  this.PersonaS.CargarEncuesta(preg1,preg2,preg3,preg4,preg5,preg6,this.preg7,this.token, fecha_actual,mensaje => { 
+          swal('OK!',mensaje,'success');
+          
+          console.log(mensaje);
+        });
+        }
+ 
+      }
+
+     change(radio1){
+       if(radio1 == "1")
+       this.preg7 =  "Una o más veces a la semana";
+       if(radio1 == "2")
+       this.preg7 =  "Dos o tres veces al mes";
+       if(radio1 == "3")
+       this.preg7 =  "Una vez al mes";
+     }
+        
   }
       
     

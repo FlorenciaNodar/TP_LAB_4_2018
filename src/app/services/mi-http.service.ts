@@ -114,6 +114,30 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
+ 
+  CargarEncuesta(url:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,fecha:any, callback: (r: Response) => void)
+  {
+    debugger;
+   
+  let data = new URLSearchParams();
+   data.append('usuario', user );
+   data.append('fecha', fecha);
+   data.append('preg1', preg1);
+   data.append('preg2', preg2);
+   data.append('preg3', preg3) ;
+   data.append('preg4', preg4) ;
+   data.append('preg5', preg5) ;
+   data.append('preg6', preg6) ;
+   data.append('preg7', preg7) ;
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al cargar','error' );          
+        });
+  }
 
   BorrarViaje(url:string,id:any, callback: (r: Response) => void)
   {

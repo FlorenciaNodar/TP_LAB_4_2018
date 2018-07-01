@@ -44,7 +44,16 @@ export class PersonaService {
       
     
     }
-
+    CargarEncuesta(preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any, fecha:any,callback: (mensaje: string) => void)
+    {
+      debugger;
+        this.AP.CargarEncuesta("CargarEncuesta/",preg1,preg2,preg3,preg4,preg5,preg6,preg7,user,fecha, mensaje => { 
+        callback(mensaje);
+        
+      });
+      
+    
+    }
     BorrarViaje(id:any, callback: (mensaje: string) => void)
     {
       debugger;

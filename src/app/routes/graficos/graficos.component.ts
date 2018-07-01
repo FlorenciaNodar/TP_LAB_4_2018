@@ -9,9 +9,11 @@ import { PersonaService } from '../../services/persona.service';
     styleUrls: ['./graficos.component.scss']
 })
 export class GraficosComponent implements OnInit {
-    unarray: any;
-    listViajes: any;
-    private unarray1 =[];
+
+    private listViajes: any;
+    private unarray =[];
+    private unarray1 =[];   
+     private cantidad1= 0;
     
     rol:string;
     encargado: boolean;
@@ -32,17 +34,34 @@ export class GraficosComponent implements OnInit {
       
     }
   });
-    }
+  var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
+    data.forEach(element => {
+
+    this.unarray1.push(element);
+    this.listViajes = this.unarray;
+    this.unarray1.forEach(element => {
+      if(element.costo == null){
+          element.costo = "A confirmar por el remisero";
+      }
+    });
+    this.unarray.push(element);
+    debugger;
+    //this.cantidad1 = this.unarray.length;
+});
+ });    }
   
     lineData = {
         labels: ['Remiseros', 'Clientes', 'Encargados'],
         datasets: [
             {
                 label: 'My First dataset',
-                data: [this.rFactor()]
+                data: []
             }, {
                 label: 'My Second dataset',
-                data: [this.rFactor2()]
+                data: []
+            }, {
+                label: 'My Thrist dataset',
+                data: []
             }]
     };
 
@@ -61,6 +80,13 @@ export class GraficosComponent implements OnInit {
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(35,183,229,1)'
+        }, {
+            backgroundColor: 'rgba(35,183,229,0.2)',
+            borderColor: 'rgba(35,183,229,1)',
+            pointBackgroundColor: 'rgba(35,183,229,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(35,183,229,1)'
         }];
 
     lineOptions = {
@@ -68,15 +94,14 @@ export class GraficosComponent implements OnInit {
         responsive: true
     };
 
-
     // Bar chart
     // -----------------------------------
 
     barData = {
-        labels: ['Remiseros', 'Encargados', 'Clientes'],
+        labels: ['Remiseros', 'Encargados'],
         datasets: [
             {
-                data: [this.rFactor(), this.rFactor2(), this.rFactor3()]
+                data: [this.cantidad1, this.cantidad1]
             }]
     };
 
@@ -97,16 +122,12 @@ export class GraficosComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
     };
+
     rFactor() {
         
-        var respuesta=  this.PersonaS.TraeUsuariosClientes(data => { 
-            data.forEach(element => {
-               this.unarray1.push(element);
-         });
-        });
-         debugger;
-         console.log(this.unarray1);
-         return this.unarray1.length.toString();
+    
+        //var cantidad = this.traerClientes();
+         return cantidad;         
          
     };
     rFactor2() {
@@ -124,7 +145,7 @@ export class GraficosComponent implements OnInit {
             
         //     });
         //  });
-         return 20;
+         return 2;
          
     };
     rFactor3() {
@@ -144,6 +165,41 @@ export class GraficosComponent implements OnInit {
         //  });
          return 20;
          
+    };
+
+    donutData = [{
+        'color': '#39C558',
+        'data': 60,
+        'label': 'Coffee'
+    },
+        {
+            'color': '#00b4ff',
+            'data': 90,
+            'label': 'CSS'
+        },
+        {
+            'color': '#FFBE41',
+            'data': 50,
+            'label': 'LESS'
+        },
+        {
+            'color': '#ff3e43',
+            'data': 80,
+            'label': 'Jade'
+        },
+        {
+            'color': '#937fc7',
+            'data': 116,
+            'label': 'AngularJS'
+        }
+    ];
+    donutOptions = {
+        series: {
+            pie: {
+                show: true,
+                innerRadius: 0.5 // This makes the donut shape
+            }
+        }
     };
 
 }

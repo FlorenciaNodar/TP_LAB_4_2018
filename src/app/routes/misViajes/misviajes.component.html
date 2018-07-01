@@ -7,6 +7,8 @@
         <button style="text-align: right" (click)="download()" >
                 Exportar: <img  src="../assets/img/user/LogoExcel.jpg">
             </button>
+            <button *ngIf="cliente" style="text-align: right" (click)="classicModal.show()" >Cargar encuesta: <img  src="../assets/img/user/encuesta.png"></button>
+            
       <div class="card card-default">
          <div class="card-header"></div>
          <div class="card-body">
@@ -36,7 +38,8 @@
                         <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                         <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                         <td><button class="mb-1 btn btn-info btn-sm" type="button">Editar</button>
-                     <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button></td>
+                     <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button>
+                  </td>
                   </tr>
                   
                   </tbody>
@@ -95,7 +98,7 @@
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td><strong><h4>{{viaje.remisero}}</h4></strong></td>
-                      <td><button class="mb-1 btn btn-info btn-sm" type="button" (click)="classicModal.show()">Cargar Remisero</button>
+                     <td> <!-- <button class="mb-1 btn btn-info btn-sm" type="button" (click)="classicModal.show()">Cargar Remisero</button> -->
                         <button class="mb-1 btn btn-info btn-sm"  *ngIf="viaje.estado == 'Solicitado'"  type="button" (click)="sweetalertDemo5(viaje)">Cambiar Estado</button>                            
                         <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button></td>
                         
@@ -105,18 +108,117 @@
              </table>
 
              <div class="modal fade" bsModal #classicModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Cargar Remisero</h4>
+                            <h4 class="modal-title">Cargar Encuesta</h4>
                             <button type="button" class="close" aria-label="Close" (click)="classicModal.hide()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                        </div>
+                                        
+                            <div class="form-group" >
+                                <label class="text-muted mb-1 col-lg-12">¿Volverías a elegirnos?</label>
+                                <div class="col-lg-12">
+                                    <select [(ngModel)]="roles1" placeholder="--Seleccione una opción--"   [ngModelOptions]="{standalone: true}" class="form-control" required >
+                                        <option value="1">SÍ</option>
+                                        <option value="2">NO</option>
+                                        <option value="3">TAL VEZ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                
+                                    <label class="text-muted mb-1 col-lg-12">¿Cómo conoció la remisería?
+                                        </label>
+                                    <div class="col-lg-12">
+                                            <input class="form-control border-right-0" type="text" name="account_email" autocomplete="off"  [(ngModel)]="remiseriastring" required="" />                                            
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                        <label class="text-muted mb-1 col-lg-12">¿Con qué frecuencia utiliza nuestro servicio?</label>
+                                        <div class="col-lg-12">
+                                                
+                                        <div class="c-radio">
+                                        <label>
+                                        <input type="radio" id="myCheckkk" [(ngModel)]="radio1"  [ngModelOptions]="{standalone: true}"  value="1" (change)="change(radio1)"  />
+                                        <span class="fa fa-check"></span>Una o más veces a la semana</label>
+                                        </div>
+                                        <div class="c-radio">
+                                        <label>
+                                        <input type="radio" id="myCheck2"  value="2" [(ngModel)]="radio2"       [ngModelOptions]="{standalone: true}" (change)="change(radio2)"/>
+                                        <span class="fa fa-check"></span>Dos o tres veces al mes</label>
+                                        </div>
+                                        <div class="c-radio">
+                                        <label>
+                                            <input type="radio" id="myCheck3"  value="3" [(ngModel)]="radio3" [ngModelOptions]="{standalone: true}" (change)="change(radio3)"/>
+                                            <span class="fa fa-check"></span>Una vez al mes</label>
+                                        </div>
+                                    </div>
+                                    
+                             </div>
+                             <div class="form-group row">
+                                    <label class="text-muted mb-1 col-lg-12">¿A quién recomendarías nuestros servicios?</label>
+                                    <div class="col-lg-12">
+                                            
+                                    <div class="checkbox c-checkbox">
+                                            <label>
+                                            <input type="checkbox" id="myCheckkk" [(ngModel)]="check1"  [ngModelOptions]="{standalone: true}"  value="1"  />
+                                            <span class="fa fa-check"></span>Familia</label>
+                                            </div>
+                                            <div class="checkbox c-checkbox">
+                                            <label>
+                                            <input type="checkbox" id="myCheck2"  value="2" [(ngModel)]="check2"       [ngModelOptions]="{standalone: true}" />
+                                            <span class="fa fa-check"></span>Amigos</label>
+                                            </div>
+                                            <div class="checkbox c-checkbox">
+                                            <label>
+                                                <input type="checkbox" id="myCheck3"  value="3" [(ngModel)]="check3" [ngModelOptions]="{standalone: true}"/>
+                                                <span class="fa fa-check"></span>Compañeros</label>
+                                            </div>
+                                            <div class="checkbox c-checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="myCheck4"  value="4" [(ngModel)]="check4" [ngModelOptions]="{standalone: true}" />
+                                                    <span class="fa fa-check"></span>A nadie</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="text-muted mb-1 col-lg-12">¿Cómo te sentís en los viajes?</label>
+                                        <div class="col-lg-12">
+                                            <select [(ngModel)]="roles2" placeholder="--Seleccione una opción--"  [ngModelOptions]="{standalone: true}" class="form-control" required >
+                                                <option value="1">BIEN</option>
+                                                <option value="2">MAL</option>
+                                                <option value="3">MASO MENOS</option>
+                                            </select>
+                                        </div>
+                                    </div>    
+                                    <div class="form-group" >
+                                        <label class="text-muted mb-1 col-lg-12">¿Cómo son las actitudes de nuestros empleados?</label>
+                                        <div class="col-lg-12">
+                                            <select [(ngModel)]="roles3" placeholder="--Seleccione una opción--"  [ngModelOptions]="{standalone: true}" class="form-control" required >
+                                                <option value="1">BUENA</option>
+                                                <option value="2">MALA</option>
+                                                <option value="3">ALGUNOS BUENA</option>
+                                                <option value="4">ALGUNOS MALA</option>
+                                            </select>
+                                        </div>
+                                    </div>   
+                                    <div class="form-group" >
+                                        <label class="text-muted mb-1 col-lg-12">¿Estás conforme con el costo del servicio?</label>
+                                        <div class="col-lg-12">
+                                            <select [(ngModel)]="roles4" placeholder="--Seleccione una opción--"  [ngModelOptions]="{standalone: true}" class="form-control" required >
+                                                <option value="1">SI</option>
+                                                <option value="2">NO</option>
+                                            </select>
+                                        </div>
+                                    </div>     
+                            </div>
+                            <button class="mb-1 btn btn-info btn-sm"  type="button" (click)="cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4);classicModal.hide()">Enviar</button>
+                            
                     </div>
+                    
                 </div>
             </div>
            

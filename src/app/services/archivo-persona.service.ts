@@ -51,7 +51,14 @@ export class ArchivoPersonaService {
       callback(mensaje);
     }); 
   }
-
+  CargarEncuesta(Ruta:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,fecha:any, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.CargarEncuesta(path + Ruta ,preg1,preg2,preg3,preg4,preg5,preg6,preg7,user,fecha, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
   BorrarViaje(Ruta:string,id:any, callback: (mensaje: string) => void) 
   { 
     debugger;

@@ -11,17 +11,52 @@
 </div>
 
 <div class="row" *ngIf= "encargado">
-        <div class="col-xl-6 col-lg-6">
+        <!-- <div class="col-xl-6 col-lg-6">
         <h4>Line Chart</h4>
         <div>
         <canvas baseChart [chartType]="'line'" [options]="lineOptions" [datasets]="lineData.datasets" [colors]="lineColors" [labels]="lineData.labels" [legend]="false" height="120"></canvas>
         </div>
-        </div>
+        </div> -->
+     
+            <div class="card-footer text-center">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="radial-bar radial-bar-warning radial-bar-35 radial-bar-sm" data-label="35%"></div>
+                        <p>
+                            <small>Conversions</small>
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="radial-bar radial-bar-info radial-bar-45 radial-bar-sm" data-label="45%"></div>
+                        <p>
+                            <small>Recurrent</small>
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="radial-bar radial-bar-success radial-bar-20 radial-bar-sm" data-label="20%"></div>
+                        <p>
+                            <small>Uniques</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <!-- <div class="col-lg-6">
+            <div class="card card-default" id="cardChart6">
+               <div class="card-header">
+                  <div class="card-title">Donut</div>
+               </div>
+               <div class="card-wrapper">
+                  <div class="card-body">
+                     <div flot [dataset]="donutData" [options]="donutOptions" height="300"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
         <div class="col-xl-6 col-lg-6">
         <h4>Bar Chart</h4>
         <div>
             <canvas baseChart [chartType]="'horizontalBar'" [options]="barOptions" [datasets]="barData.datasets" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="120"></canvas>
-        </div>
-        </div>
+        </div> -->
+        <!-- </div> -->
 </div>
      
