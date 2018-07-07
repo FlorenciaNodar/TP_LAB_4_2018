@@ -114,6 +114,30 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
+
+  EditarViajePorId(url:string,unUser:Viaje, id:any,callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
+   data.append('usuario',unUser.token);
+   data.append('pago', unUser.tipo_pago);
+   data.append('dia', unUser.fechayhora);
+   data.append('origenlat', unUser.lat_o);
+   data.append('origenlong', unUser.lng_o) ;
+   data.append('destinolat', unUser.lat_d) ;
+   data.append('destinolong', unUser.lng_d) ;
+   data.append('prestaciones', unUser.prestaciones) ;
+   data.append('estado', unUser.estado) ;
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
  
   CargarEncuesta(url:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,fecha:any, callback: (r: Response) => void)
   {
@@ -253,6 +277,21 @@ export class MiHttpService {
     debugger;
   let data = new URLSearchParams();
    data.append('remisero',usuario);
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
+  TraerViajePorId(url:string,id:any, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
    debugger;
        this.http
       .post(url,data)

@@ -127,7 +127,7 @@ export class GraficosComponent implements OnInit {
         
     
         //var cantidad = this.traerClientes();
-         return cantidad;         
+        // return cantidad;         
          
     };
     rFactor2() {

@@ -7,7 +7,7 @@ import { DirectionsMapDirective } from '../../google-map.directive';
 import {PersonaService} from '../../services/persona.service';
 import {} from '@types/googlemaps';
 import swal from'sweetalert2';
-import { concat } from 'rxjs/internal/operators/concat';
+import { ActivatedRoute } from '@angular/router';
 
 
 declare var google: any;
@@ -35,6 +35,7 @@ export class Viaje {
   providers : [ GoogleMapsAPIWrapper ]
 })
 export class ViajeComponent implements OnInit {
+  unarray: any[];
 
     public latitude: number;
     public longitude: number;
@@ -47,7 +48,6 @@ export class ViajeComponent implements OnInit {
     public estimatedKm: any;
     public estimatedKma: any;
     public estimatedCosto: any;
-    
     public estimatedDistance: any;
     public startDate: any;
     public fechaViaje: any;
@@ -58,56 +58,75 @@ export class ViajeComponent implements OnInit {
     private destinoLat: any;
     private destinoLng: any;
     private objViaje: Viaje;
+    private CAbool:boolean;
+    private aireAcondicionado: string;
+    private SACbool: boolean;
+    private SinAireAcondicionado: string;
+    private tresPbool:boolean;
+    private tresPuertas: string;
+    private cincoPbool:boolean;
+    private cincoPuertas: string;
+    private AUbool:boolean;
+    private auto: string;
+    private CAMbool:boolean;
+    private camioneta: string;
+    private rol: string;
+    private cliente:boolean;
+    isChecked:boolean;
+    testModel:string;
+    public captchaView: any;
+    public captchaRespuesta: any;
+    public captchaError: boolean;
+    public idDelViaje: any;
+    public origin: any ; // its a example aleatory position
+    public destination: any; // its a example aleatory position
 
-  private CAbool:false;
-  private aireAcondicionado: string;
-  private SACbool: false;
-  private SinAireAcondicionado: string;
-  private tresPbool:false;
-  private tresPuertas: string;
-  private cincoPbool:false;
-  private cincoPuertas: string;
-  private AUbool:false;
-  private auto: string;
-  private CAMbool:false;
-  private camioneta: string;
+    @ViewChild('pickupInput') pickupInputElementRef: ElementRef;
+
+    @ViewChild('pickupOutput') pickupOutputElementRef: ElementRef;
+
+    @ViewChild('scrollMe')
+    private scrollContainer: ElementRef;
+
+    @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
+    cargarViaje: any;
 
 
-  private rol: string;
-  private cliente:boolean;
-       @ViewChild('pickupInput') pickupInputElementRef: ElementRef;
 
-       @ViewChild('pickupOutput') pickupOutputElementRef: ElementRef;
+    constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
+    private gmapsApi: GoogleMapsAPIWrapper,
+    private _elementRef: ElementRef,
+    private PersonaS: PersonaService ,
+    private route: ActivatedRoute ) {
 
-       @ViewChild('scrollMe')
-       private scrollContainer: ElementRef;
+    this.route.params.subscribe( params => this.idDelViaje= params.id); 
 
-       @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
-       isChecked:boolean;
-       testModel:string;
-       public captchaView: any;
-       public captchaRespuesta: any;
-       public captchaError: boolean;
-       public origin: any ; // its a example aleatory position
-       public destination: any; // its a example aleatory position
-       constructor(
-         private mapsAPILoader: MapsAPILoader,
-         private ngZone: NgZone,
-         private gmapsApi: GoogleMapsAPIWrapper,
-         private _elementRef: ElementRef,
-        private PersonaS: PersonaService  ) {
-           const date = new Date();
-           const year = date.getFullYear();
-           const month = date.getMonth();
-           const day = date.getDay();
-
-           this.startDate = new Date(year, month, day);
-              // create search FormControl
-         this.destinationInput = new FormControl();
-         this.destinationOutput = new FormControl();
-       }
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDay();
+    debugger;
+    this.startDate = new Date(year, month, day);
+    this.destinationInput = new FormControl();
+    this.destinationOutput = new FormControl();
+    }
 
        ngOnInit() {
+       
+         if(this.idDelViaje == undefined){
+          this.SACbool = false;
+          this.tresPbool = false;
+          this.CAMbool = false;
+          this.AUbool = false;
+          this.CAbool = false;
+          this.cincoPbool = false;
+          this.cargarViaje = "Cargar"
+         }else{
+           this.traerViajePorId();
+          this.cargarViaje = "Modificar"          
+         }
         debugger;
         this.cargarCaptcha();
         var token = localStorage.getItem('cliente');
@@ -120,8 +139,8 @@ export class ViajeComponent implements OnInit {
           this.cliente = true;   
           
         }
-      });
-           this.objViaje = new Viaje();
+        });
+        this.objViaje = new Viaje();
          // set google maps defaults
          this.zoom = 4;
          this.latitude = -34.603722;
@@ -200,10 +219,6 @@ export class ViajeComponent implements OnInit {
 
        }
 
-      //  getDistanceAndDuration() {
-      //    this.estimatedTime = this.vc.estimatedTime;
-      //    this.estimatedDistance = this.vc.estimatedDistance;
-      //  }
 
        scrollToBottom(): void {
          jQuery('html, body').animate({ scrollTop: jQuery(document).height() }, 3000);
@@ -238,16 +253,16 @@ export class ViajeComponent implements OnInit {
        }
        pedirViaje(CAbool,tresPbool, cincoPbool,SACbool, CAMbool,AUbool) {
            // this.validarCampos();
-           debugger;
+          
            
-        if (true === this.captchaError) {
-          return false;
-      }
+            if (true === this.captchaError) {
+              return false;
+            }
 
-      if (!this.validarCaptcha()) {
-          this.captchaError = true;
-          return false;
-      }
+            if (!this.validarCaptcha()) {
+              this.captchaError = true;
+              return false;
+            }
            this.objViaje.lat_o = this.origenLat;
            this.objViaje.lng_o = this.origenLng;
            this.objViaje.lat_d = this.destinoLat;
@@ -303,25 +318,45 @@ export class ViajeComponent implements OnInit {
             swal('ADVERTENCIA!','Debe cargar todos los campos','error');
             
           }else{
-             var respuesta=  this.PersonaS.CargarViaje(this.objViaje , mensaje => { 
-              swal('OK!',mensaje,'success');
+            if(this.idDelViaje != undefined){
               
-              console.log(mensaje);
-              this.origenLat="";
-               this.origenLng="";
-               this.destinoLat="";
-              this.destinoLng="";
-             this.metodoPago = "";
-              this.fechaViaje="";
-              this.prestaciones="";
-              this.estimatedCosto="";
-              this.estimatedKm="";
-            });
+              var respuesta=  this.PersonaS.EditarViajePorId(this.objViaje, this.idDelViaje , mensaje => { 
+                swal('OK!',mensaje,'success');
+                
+                console.log(mensaje);
+                this.origenLat="";
+                 this.origenLng="";
+                 this.destinoLat="";
+                this.destinoLng="";
+               this.metodoPago = "";
+                this.fechaViaje="";
+                this.prestaciones="";
+                this.estimatedCosto="";
+                this.estimatedKm="";
+              });
+            }else{
+                           
+               var respuesta=  this.PersonaS.CargarViaje(this.objViaje , mensaje => { 
+                swal('OK!',mensaje,'success');
+                
+                console.log(mensaje);
+                this.origenLat="";
+                 this.origenLng="";
+                 this.destinoLat="";
+                this.destinoLng="";
+               this.metodoPago = "";
+                this.fechaViaje="";
+                this.prestaciones="";
+                this.estimatedCosto="";
+                this.estimatedKm="";
+              });
+            }
           }
+         
            
        }
 
-       cargarCaptcha() {
+        cargarCaptcha() {
         const CADENA = 'abcdefghijqlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let numero: any;
         let stringCaptcha: any;
@@ -333,14 +368,51 @@ export class ViajeComponent implements OnInit {
             stringCaptcha += CADENA[numero];
         }
         this.captchaView = stringCaptcha;
-    }
+        }
 
-    validarCaptcha() {
+        validarCaptcha() {
         if (this.captchaView !== this.captchaRespuesta) {
             return false;
         }
         return true;
-    }
+        }
+
+
+        traerViajePorId()
+        {
+          var respuesta=  this.PersonaS.TraerViajePorId(this.idDelViaje,data => { 
+           
+            if(data[0].pago== "Efectivo")
+            this.metodoPago = "1" ;
+            if(data[0].pago== "Debito")
+            this.metodoPago = "2" ;
+            if(data[0].pago== "Credito")
+            this.metodoPago = "3" ;
+            this.fechaViaje = data[0].dia;
+
+            var str = data[0].prestaciones;
+            if(str.indexOf('Con Aire Acondicionado') != -1){
+              this.CAbool=true;
+            }
+            if(str.indexOf('5 Puertas') != -1){
+              this.cincoPbool=true;
+            }
+            if(str.indexOf('3 Puertas') != -1){
+              this.tresPbool=true;
+            }
+            if(str.indexOf('Sin Aire Acondicionado') != -1){
+              this.SACbool=true;
+            }
+            if(str.indexOf('Camioneta') != -1){
+              this.CAMbool=true;
+            }
+            if(str.indexOf('Auto') != -1){
+              this.AUbool=true;
+            }
+            
+            debugger;
+          });
+        }
 
       
 }

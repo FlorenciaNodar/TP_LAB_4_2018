@@ -32,7 +32,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MisViajesComponent } from './routes/misViajes/misviajes.component';
 import { UsuariosComponent } from './routes/usuarios/usuarios.component';
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
@@ -61,6 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
         RecaptchaModule.forRoot(),
         SharedModule.forRoot(),
         RoutesModule,
+        FileUploadModule,
         BrowserModule,
         Ng2ChartsModule,
         AgmCoreModule.forRoot({

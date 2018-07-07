@@ -21,13 +21,13 @@
         <form  class="form-horizontal" #formViajes="ngForm" ngNativeValidate>
                                             <div class="card card-default">
                                                 <div class="card-body">
-                                                    <fieldset class="b0">Solicitar Viaje
+                                                    <fieldset class="b0">{{cargarViaje}} Viaje
                                                     </fieldset>
                                                     <fieldset>
                                                             <div class="form-group row">
                                                                 <label class="col-lg-2 col-form-label text-lg-right">Día y Hora</label>
                                                                 <div class="col-lg-6">
-                                                                    <input [(ngModel)]="fechaViaje" class="form-control" type="datetime-local" min="startDate" [ngModelOptions]="{standalone: true}"  required />
+                                                                    <input [(ngModel)]="fechaViaje" class="form-control" type="datetime" min="startDate" [ngModelOptions]="{standalone: true}"  required />
                                                                 </div>
                                                             </div>
                                                         </fieldset>

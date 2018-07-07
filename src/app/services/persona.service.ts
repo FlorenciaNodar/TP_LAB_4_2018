@@ -44,6 +44,17 @@ export class PersonaService {
       
     
     }
+
+    EditarViajePorId(unUser:Viaje, id:any, callback: (mensaje: string) => void)
+    {
+      debugger;
+        this.AP.EditarViajePorId("EditarViajePorId/",unUser,id, mensaje => { 
+        callback(mensaje);
+        
+      });
+      
+    
+    }
     CargarEncuesta(preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any, fecha:any,callback: (mensaje: string) => void)
     {
       debugger;
@@ -72,6 +83,7 @@ export class PersonaService {
       
     });
   }
+
   
     EditarViajeRemisero(id:any,remisero:any, callback: (mensaje: string) => void){
       debugger;
@@ -123,6 +135,15 @@ export class PersonaService {
       
     
     }
+
+    
+  TraerViajePorId(id:any, callback: (data: any) => void){
+    debugger;
+    this.AP.TraerViajePorId("TraerViajePorId/",id,data => { 
+    callback(data);
+    
+  });
+}
 
 
     

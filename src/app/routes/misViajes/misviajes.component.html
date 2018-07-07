@@ -38,8 +38,8 @@
                         <td>{{viaje.pago}}</td>
                         <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                         <td><strong><h4>{{viaje.costo}}</h4></strong></td>
-                        <td><button class="mb-1 btn btn-info btn-sm" type="button" (click)="modificar(viaje)">Editar</button>
-                     <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo6(viaje)" type="button">Cancelar Viaje</button>
+                        <td><button class="mb-1 btn btn-info btn-sm" type="button"  *ngIf="viaje.estado != 'Cancelado' " (click)="modificar(viaje)">Editar</button>
+                     <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo6(viaje)" *ngIf="viaje.estado != 'Cancelado' " type="button">Cancelar Viaje</button>
                   </td>
                   </tr>
                   
@@ -117,6 +117,7 @@
       
       </div>
    </div>
+  
    <div class="col-lg-2" *ngIf="seAbrioRemisero" >
         <div class="card card-default">
                 
@@ -261,7 +262,10 @@
                                         <option value="2">NO</option>
                                     </select>
                                 </div>
-                            </div>     
+                            </div>   
+                            <label for="file2" class="file-upload">
+                                    <input id="file2" type="file" ng2FileSelect [uploader]="uploader" />
+                                </label>  
                     </div>
                     <button class="mb-1 btn btn-info btn-sm"  type="button" (click)="cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4);classicModal.hide()">Enviar</button>
                     

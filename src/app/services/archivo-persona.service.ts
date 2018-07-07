@@ -51,6 +51,16 @@ export class ArchivoPersonaService {
       callback(mensaje);
     }); 
   }
+  
+  
+  public EditarViajePorId(Ruta:string,unUser:Viaje, id:any,callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.EditarViajePorId(path + Ruta ,unUser, id, data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
   CargarEncuesta(Ruta:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,fecha:any, callback: (mensaje: string) => void) 
   { 
     debugger;
@@ -76,6 +86,8 @@ export class ArchivoPersonaService {
       callback(mensaje);
     }); 
   }
+
+ 
 
   EditarViajeRemisero(Ruta:string,id:any,remisero:any, callback: (mensaje: string) => void) 
   { 
@@ -119,6 +131,15 @@ export class ArchivoPersonaService {
   { 
     debugger;
    var rta =  this.mihttp.TraerViajesPorRemisero(path + Ruta ,usuario, data => { 
+    var datos = data.json();
+    callback(datos);
+    }); 
+  }
+
+  TraerViajePorId(Ruta:string,id:any, callback: (data: any) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.TraerViajePorId(path + Ruta ,id,data => { 
     var datos = data.json();
     callback(datos);
     }); 

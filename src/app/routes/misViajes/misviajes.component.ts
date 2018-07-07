@@ -9,6 +9,8 @@ import {PersonaService} from '../../services/persona.service';
 import { debug } from 'util';
 import swal from'sweetalert2';
 import { element } from 'protractor';
+import { FileUploader } from 'ng2-file-upload';
+import { Router } from '@angular/router';
 
 declare var google: any;
 declare var jQuery: any;
@@ -94,26 +96,14 @@ private auto: string;
 private CAMbool:false;
 private camioneta: string;
 
-
-     @ViewChild('pickupInput') pickupInputElementRef: ElementRef;
-
-     @ViewChild('pickupOutput') pickupOutputElementRef: ElementRef;
-
-     @ViewChild('scrollMe')
-     private scrollContainer: ElementRef;
-
-     @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
      isChecked:boolean;
      testModel:string;
-     public origin: any ; // its a example aleatory position
-     public destination: any; // its a example aleatory position
  token = localStorage.getItem('cliente');
-
-       constructor( private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone,
-        private gmapsApi: GoogleMapsAPIWrapper,
-        private _elementRef: ElementRef,
-       private PersonaS: PersonaService ) {
+ public uploader: FileUploader = new FileUploader({ url: 'https://evening-anchorage-3159.herokuapp.com/api/' });
+ 
+       constructor( 
+       private PersonaS: PersonaService,
+      private router:Router ) {
         
        }
 
@@ -134,31 +124,8 @@ private camioneta: string;
          this.seAbrio = false;
         this.objViaje = new Viaje();
         // set google maps defaults
-        this.zoom = 4;
-        this.latitude = -34.603722;
-        this.longitude = -58.381592;
 
-        this.iconurl = '../image/map-icon.png';
 
-       // this.mapCustomStyles = this.getMapCusotmStyles();
-     
-
-        // set current position
-        this.setCurrentPosition();
-        // load Places Autocomplete
-        this.mapsAPILoader.load().then(() => {
-            const autocompleteInput = new google.maps.places.Autocomplete(this.pickupInputElementRef.nativeElement, {
-                    types: ['address']
-           });
-
-            const autocompleteOutput = new google.maps.places.Autocomplete(this.pickupOutputElementRef.nativeElement, {
-                       types: ['address']
-           });
-
-           debugger;
-           this.setupPlaceChangedListener(autocompleteInput, 'ORG');
-           this.setupPlaceChangedListener(autocompleteOutput, 'DES');
-        });
         debugger;
         
         var resp = this.PersonaS.obtenerRol(this.token,data => {
@@ -254,87 +221,7 @@ private camioneta: string;
       }
 
       
-      setupPlaceChangedListener(autocomplete: any, mode: any ) {
-        debugger;
-        autocomplete.addListener('place_changed', () => {
-              this.ngZone.run(() => {
-                // get the place result
-                const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-                // verify result
-                if (place.geometry === undefined) {
-                  return;
-                }
-                if (mode === 'ORG') {
-                    this.vc.origin = { longitude: place.geometry.location.lng(), latitude: place.geometry.location.lat() };
-                    this.vc.originPlaceId = place.place_id;
-                } else {
-                    this.vc.destination = {
-                        longitude: place.geometry.location.lng(),
-                        latitude: place.geometry.location.lat()
-                    }; // its a example aleatory position
-                    this.vc.destinationPlaceId = place.place_id;
-                }
-
-                if (this.vc.directionsDisplay === undefined) {
-                       this.mapsAPILoader.load().then(() => {
-                        this.vc.directionsDisplay = new google.maps.DirectionsRenderer;
-                    });
-              }
-
-                // Update the directions
-                this.vc.updateDirections();
-                this.zoom = 12;
-              //  this.getDistanceAndDuration();
-                if (this.vc.destination !== undefined ) {
-                   this.origenLat = this.vc.origin.latitude;
-                   this.origenLng = this.vc.origin.longitude;
-                   this.destinoLat = this.vc.destination.latitude;
-                   this.destinoLng = this.vc.destination.longitude;
-                }
-
-                this.estimatedTime = localStorage.getItem('duracion');
-                this.estimatedKma = Math.floor((Math.random() * 100) + 1);
-                this.estimatedKm = this.estimatedKma+"km";
-                this.estimatedCosto = this.estimatedKma * 16;
-              });
-
-           });
-
-      }
-
-     //  getDistanceAndDuration() {
-     //    this.estimatedTime = this.vc.estimatedTime;
-     //    this.estimatedDistance = this.vc.estimatedDistance;
-     //  }
-
-      scrollToBottom(): void {
-        jQuery('html, body').animate({ scrollTop: jQuery(document).height() }, 3000);
-      }
-      private setPickUpLocation( place: any ) {
-        // verify result
-              if (place.geometry === undefined || place.geometry === null) {
-                return;
-              }
-              // set latitude, longitude and zoom
-              this.latitude = place.geometry.location.lat();
-              this.longitude = place.geometry.location.lng();
-              this.zoom = 12;
-      }
-
-      private setCurrentPosition() {
-        if ('geolocation' in navigator) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            this.latitude = position.coords.latitude;
-            this.longitude = position.coords.longitude;
-            this.zoom = 12;
-          });
-        }
-      }
- 
-      private getMapCusotmStyles() {
-        // Write your Google Map Custom Style Code Here.
-      }
-
+  
       private validarCampos() {
 
       }
@@ -467,6 +354,9 @@ private camioneta: string;
       }
     
       cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4){
+
+       var hola = this.uploader;
+        debugger;
         var hoy = new Date();
         var dia = hoy.getDate(); 
         var mes = hoy.getMonth() + 1;
@@ -545,99 +435,11 @@ private camioneta: string;
      }
 
      modificar(viaje){
-       this.seAbrio = true;
-       this.metodoPago1 = 1;
-      // fechaViaje.id = viaje.id;
-      //  this.fechaViaje = viaje.dia;
-      //   // prestaciones = viaje.prestaciones;
-      //   // nuevo.lat_d = viaje.destinoLat;
-      //   // nuevo.lat_o  = viaje.origenLat;
-      //   // nuevo.lng_d = viaje.destinoLng;
-      //   // nuevo.lng_o = viaje.origenLng;
-      //   this.metodoPago1 = viaje.pago;
 
-console.log(viaje);
-console.log(JSON.parse(viaje));
-     this.fechaViaje = JSON.stringify(viaje.dia);
-        // this.metodoPago1 = nuevo.tipo_pago;
-     debugger;
-      }
-     modificarViaje(CAbool,tresPbool, cincoPbool,SACbool, CAMbool,AUbool) {
-      // this.validarCampos();
+      this.router.navigate(["/viaje/editar",viaje.id]);
       debugger;
-      
-      this.objViaje.lat_o = this.origenLat;
-      this.objViaje.lng_o = this.origenLng;
-      this.objViaje.lat_d = this.destinoLat;
-      this.objViaje.lng_d = this.destinoLng;
-
-      if(CAbool == true)
-      this.aireAcondicionado = "Con Aire Acondicionado";
-      if(cincoPbool == true)
-      this.cincoPuertas = "5 Puertas";
-      if(tresPbool == true)
-      this.tresPuertas = "3 Puertas";
-      if(CAMbool == true)
-      this.camioneta = "Camioneta";
-      if(AUbool == true)
-      this.auto = "Auto";
-      if(SACbool == true)
-      this.SinAireAcondicionado = "Sin Aire Acondicionado";
-
-
-      if(this.metodoPago == "1"){
-       this.objViaje.tipo_pago = "Efectivo";            
-      }else if(this.metodoPago == "2"){
-       this.objViaje.tipo_pago = "Debito";                        
-      }else{
-       this.objViaje.tipo_pago = "Credito";                        
       }
-      this.objViaje.fechayhora = this.fechaViaje;
-      if(this.aireAcondicionado == undefined){
-       this.aireAcondicionado = "";
-      }
-      if(this.SinAireAcondicionado == undefined){
-       this.SinAireAcondicionado = "";
-      }
-      if(this.auto == undefined){
-       this.auto = "";
-      }
-      if(this.camioneta == undefined){
-       this.camioneta = "";
-      }
-      if(this.tresPuertas == undefined){
-       this.tresPuertas = "";
-      }
-      if(this.cincoPuertas == undefined){
-       this.cincoPuertas = "";
-      }
-      this.objViaje.prestaciones = this.aireAcondicionado+" "+this.SinAireAcondicionado+" "+this.auto+" "+this.camioneta+" "+this.tresPuertas+" "+this.cincoPuertas;
-      this.objViaje.estado = "Solicitado";
-      this.objViaje.token = localStorage.getItem('cliente');
-
-       console.log(this.objViaje);
-       if(this.objViaje.fechayhora == "" || this.objViaje.prestaciones == "" || this.objViaje.tipo_pago == "" || this.objViaje.fechayhora == undefined|| this.objViaje.lng_d == undefined || this.objViaje.lat_d == undefined  || this.objViaje.prestaciones == undefined|| this.objViaje.tipo_pago == undefined)
-     {
-       swal('ADVERTENCIA!','Debe cargar todos los campos','error');
-       
-     }else{
-        var respuesta=  this.PersonaS.CargarViaje(this.objViaje , mensaje => { 
-         swal('OK!',mensaje,'success');
-         
-         console.log(mensaje);
-         this.origenLat="";
-          this.origenLng="";
-          this.destinoLat="";
-         this.destinoLng="";
-        this.metodoPago = "";
-         this.fechaViaje="";
-         this.prestaciones="";
-         this.estimatedCosto="";
-         this.estimatedKm="";
-       });
-     }
-      
-  }
+   
 
   modificarRemisero(viaje)
   {

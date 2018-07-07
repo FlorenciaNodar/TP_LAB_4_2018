@@ -17,6 +17,7 @@ export const routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },            
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
             { path: 'viaje', component: ViajeComponent },            
+            { path: 'viaje/editar/:id', component: ViajeComponent },            
             { path: 'graficos', component: GraficosComponent },            
             { path: 'misViajes', component: MisViajesComponent },
             { path: 'usuarios', component: UsuariosComponent },
