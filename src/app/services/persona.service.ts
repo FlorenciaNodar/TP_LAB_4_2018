@@ -71,6 +71,23 @@ export class PersonaService {
       callback(mensaje);
       
     });
+  }
+  
+    EditarViajeRemisero(id:any,remisero:any, callback: (mensaje: string) => void){
+      debugger;
+      this.AP.EditarViajeRemisero("EditarViajeRemisero/",id, remisero,mensaje => { 
+      callback(mensaje);
+      
+    });
+    
+    }
+
+    EditarViajeCosto(id:any,plata:any, callback: (mensaje: string) => void){
+      debugger;
+      this.AP.EditarViajeCosto("EditarViajeCosto/",id, plata,mensaje => { 
+      callback(mensaje);
+      
+    });
     
     }
     EliminarUsuario(id:any, callback: (mensaje: string) => void)
@@ -133,9 +150,18 @@ export class PersonaService {
   });
   }
 
+  
+
   TraeUsuariosClientes(callback: (data: any) => void){
     debugger;
     this.AP.TraeUsuariosClientes("TraerUsuariosCliente/", data => { 
+    callback(data);
+    
+  });
+  }
+  TraeUsuariosRemiseros(callback: (data: any) => void){
+    debugger;
+    this.AP.TraeUsuariosRemiseros("TraerUsuariosRemisero/",data => { 
     callback(data);
     
   });

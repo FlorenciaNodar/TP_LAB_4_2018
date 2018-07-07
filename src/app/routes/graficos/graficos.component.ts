@@ -101,7 +101,7 @@ export class GraficosComponent implements OnInit {
         labels: ['Remiseros', 'Encargados'],
         datasets: [
             {
-                data: [this.cantidad1, this.cantidad1]
+                data: []
             }]
     };
 

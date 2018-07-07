@@ -124,9 +124,23 @@
                                                 </agm-map>
                             
                                                 </div>
+                                                
+                                               
                                                 <div class="card-footer text-center">
+                                                        <label for="captchaView">Captcha:</label>
+                                                        <input id="captchaView" [(ngModel)]="captchaView" name="captchaView" disabled>
+                                                        <input id="captchaRespuesta" [(ngModel)]="captchaRespuesta" name="captchaRespuesta" required>
+                                                        <button type="button" class="btn btn-default btn-auth" (click)="cargarCaptcha()" >reCaptcha</button>
+                                                        
+                                                        <div class="alert alert-warning" role="alert" *ngIf="captchaError" (click)="cargarCaptcha()">
+                                                                El captcha es incorrecto o no lo ingresó.
+                                                            </div>
+                                                        </div>
+                                                            <div class="card-footer text-center">
+                                                                    
                                                     <button class="btn btn-info" (click)="pedirViaje(CAbool,tresPbool, cincoPbool,SACbool, CAMbool,AUbool)">Aceptar</button>
                                                 </div>
+                                            
                                             </div>
                   </form>
         </div>

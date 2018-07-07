@@ -168,6 +168,10 @@ export class MiHttpService {
    {
     data.append('estado',"Aprobado");    
    }
+   if(rol == "Cliente")
+   {
+    data.append('estado',"Cancelado");    
+   }
    debugger;
        this.http
       .post(url,data)
@@ -177,6 +181,42 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al modificar','error' );          
         });
   }
+
+  EditarViajeRemisero(url:string,id:any,remisero:any, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
+ 
+    data.append('remisero',remisero);    
+   
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al modificar','error' );          
+        });
+  }
+
+  EditarViajeCosto  (url:string,id:any,plata:any, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   data.append('id',id);
+ 
+    data.append('costo',plata);    
+   
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al modificar','error' );          
+        });
+  }  
   BorrarUsuario(url:string,id:any, callback: (r: Response) => void)
   {
     debugger;
@@ -264,6 +304,19 @@ export class MiHttpService {
   }
 
   TraeUsuariosClientes(url:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
+  TraeUsuariosRemiseros(url:string,callback: (r: Response) => void)
   {
     debugger;
   let data = new URLSearchParams();

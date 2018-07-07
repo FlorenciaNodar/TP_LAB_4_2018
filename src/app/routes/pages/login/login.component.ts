@@ -98,6 +98,8 @@ export class LoginComponent implements OnInit {
                               debugger;
                             sessionStorage.clear();
                             sessionStorage.setItem("token",token);
+                            sessionStorage.setItem("cliente",this.f.username.value);
+                            localStorage.setItem("token",token);
                             localStorage.setItem("cliente",this.f.username.value);
                             this.router.navigate([this.returnUrl]);
                           }

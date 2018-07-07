@@ -77,6 +77,25 @@ export class ArchivoPersonaService {
     }); 
   }
 
+  EditarViajeRemisero(Ruta:string,id:any,remisero:any, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.EditarViajeRemisero(path + Ruta ,id, remisero,data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+
+  EditarViajeCosto(Ruta:string,id:any,plata:any, callback: (mensaje: string) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.EditarViajeCosto(path + Ruta ,id, plata,data => { 
+      var mensaje = JSON.parse(data.text()).mensaje;
+      callback(mensaje);
+    }); 
+  }
+
+
 
   EliminarUsuario(Ruta:string,id:any, callback: (mensaje: string) => void) 
   { 
@@ -129,6 +148,13 @@ export class ArchivoPersonaService {
   }
 
 
+  public TraeUsuariosRemiseros(Ruta:string, callback: (data: any) => void){
+    debugger;
+    var rta =  this.mihttp.TraeUsuariosRemiseros(path + Ruta, data => { 
+     var datos =data.json();
+     callback(datos);
+     }); 
+  }
   public TraerUsuarios(Ruta:string, callback: (data: any) => void){
     debugger;
     var rta =  this.mihttp.TraerUsuarios(path + Ruta, data => { 

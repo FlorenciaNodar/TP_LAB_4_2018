@@ -85,6 +85,9 @@ export class ViajeComponent implements OnInit {
        @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
        isChecked:boolean;
        testModel:string;
+       public captchaView: any;
+       public captchaRespuesta: any;
+       public captchaError: boolean;
        public origin: any ; // its a example aleatory position
        public destination: any; // its a example aleatory position
        constructor(
@@ -106,7 +109,7 @@ export class ViajeComponent implements OnInit {
 
        ngOnInit() {
         debugger;
-       
+        this.cargarCaptcha();
         var token = localStorage.getItem('cliente');
         
         var resp = this.PersonaS.obtenerRol(token,data => {
@@ -225,51 +228,7 @@ export class ViajeComponent implements OnInit {
            });
          }
        }
-      //  private myCheck(i, bool){
-      //     debugger;
-      //     if(i == 'CA' && bool == false){
-      //     this.aireAcondicionado = "Con Aire Acondicionado";
-      //     this.CAbool = true;
-      //     }if(i == 'CA' && bool == true){
-      //     this.aireAcondicionado = "";
-      //     this.CAbool = false;
-      //     }
-      //     if(i == 'SAC' && bool == false){
-      //     this.SinAireAcondicionado = "Sin Aire Acondicionado";
-      //     this.SACbool = true;
-      //     }if(i == 'SAC' && bool == true){
-      //     this.SinAireAcondicionado = "";
-      //     this.SACbool = false;
-      //     }
-      //     if(i == '3P' && bool == false){
-      //     this.tresPuertas = "3 puertas";
-      //     this.tresPbool = true;
-      //     }if(i == '3P' && bool == true){
-      //     this.tresPuertas = "";
-      //     this.tresPbool = false;
-      //     }
-      //     if(i == '5P' && bool == false){
-      //     this.cincoPuertas = "5 puertas";
-      //     this.cincoPbool = true;
-      //     }if(i == '5P' && bool == true){
-      //     this.cincoPuertas = "";
-      //     this.cincoPbool = false;
-      //     }
-      //     if(i == 'CAM' && bool == false){
-      //     this.camioneta = "Camioneta";
-      //     this.CAMbool = true;
-      //     }if(i == 'CAM' && bool == true){
-      //     this.camioneta = "";
-      //     this.CAMbool = false;
-      //     }
-      //     if(i == 'AU' && bool == false){
-      //     this.auto = "Auto";
-      //     this.AUbool = true;
-      //     }if(i == 'AU' && bool == true){
-      //     this.auto = "";
-      //     this.AUbool = false;
-      //     }
-      //  }
+  
        private getMapCusotmStyles() {
          // Write your Google Map Custom Style Code Here.
        }
@@ -281,6 +240,14 @@ export class ViajeComponent implements OnInit {
            // this.validarCampos();
            debugger;
            
+        if (true === this.captchaError) {
+          return false;
+      }
+
+      if (!this.validarCaptcha()) {
+          this.captchaError = true;
+          return false;
+      }
            this.objViaje.lat_o = this.origenLat;
            this.objViaje.lng_o = this.origenLng;
            this.objViaje.lat_d = this.destinoLat;
@@ -352,23 +319,28 @@ export class ViajeComponent implements OnInit {
             });
           }
            
-        //    this.PersonaS.CargarViaje( this.objViaje 
-        //    .then( data => {
-        //         console.log(data);
-        //        /*
-        //          hacer la logica para que si no existe el mail.
-        //          Vaya a registrarase.
-        //        */
-        //       //  if ( data.token ) {
-        //       //       localStorage.setItem('token', data.token);
-        //       //       this.router.navigateByUrl('/bienvenida');
-        //       //  }
-        //    })
-        // //    .catch( e => {
-        //        console.log(e);
-        //    } );
-           // console.log(this.objViaje);
        }
+
+       cargarCaptcha() {
+        const CADENA = 'abcdefghijqlmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let numero: any;
+        let stringCaptcha: any;
+
+        this.captchaError = false;
+        stringCaptcha = '';
+        for (let i = 0; i < 6; i++) {
+            numero = Math.floor(Math.random() * (CADENA.length - 1));
+            stringCaptcha += CADENA[numero];
+        }
+        this.captchaView = stringCaptcha;
+    }
+
+    validarCaptcha() {
+        if (this.captchaView !== this.captchaRespuesta) {
+            return false;
+        }
+        return true;
+    }
 
       
 }
