@@ -130,7 +130,8 @@
                                                         <label for="captchaView">Captcha:</label>
                                                         <input id="captchaView" [(ngModel)]="captchaView" name="captchaView" disabled>
                                                         <input id="captchaRespuesta" [(ngModel)]="captchaRespuesta" name="captchaRespuesta" required>
-                                                        <button type="button" class="btn btn-default btn-auth" (click)="cargarCaptcha()" >reCaptcha</button>
+                                                        <button type="button" class="btn btn-default btn-auth" (click)="cargarCaptcha()" ><span class="fa fa-refresh"></span>
+                                                            </button>
                                                         
                                                         <div class="alert alert-warning" role="alert" *ngIf="captchaError" (click)="cargarCaptcha()">
                                                                 El captcha es incorrecto o no lo ingresó.
