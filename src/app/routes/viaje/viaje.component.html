@@ -23,7 +23,16 @@
                                                 <div class="card-body">
                                                     <fieldset class="b0">{{cargarViaje}} Viaje
                                                     </fieldset>
-                                                    <fieldset>
+
+                                                    <fieldset *ngIf="cargarViaje == 'Cargar'">
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-2 col-form-label text-lg-right">Día y Hora</label>
+                                                                <div class="col-lg-6">
+                                                                    <input [(ngModel)]="fechaViaje" class="form-control" type="datetime-local" min="startDate" [ngModelOptions]="{standalone: true}"  required />
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset *ngIf="cargarViaje != 'Cargar'">
                                                             <div class="form-group row">
                                                                 <label class="col-lg-2 col-form-label text-lg-right">Día y Hora</label>
                                                                 <div class="col-lg-6">
@@ -77,7 +86,7 @@
                                                             <div class="form-group row">
                                                                 <label class="col-lg-2 col-form-label text-lg-right">Origen:</label>
                                                                 <div class="col-lg-10">
-                                                                        <input  placeholder="Origen" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [formControl]="destinationInput" required>
+                                                                        <input  placeholder="Origen" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [(ngModel)]="destinationInput0" [formControl]="destinationInput" required>
                                                                     </div>
                                                             </div>
                                                         </fieldset>
@@ -87,7 +96,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-2 col-form-label text-lg-right">Destino:</label>
                                                                         <div class="col-lg-10">
-                                                                                <input placeholder="Destino" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupOutput [formControl]="destinationOutput" required>
+                                                                                <input placeholder="Destino" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" [(ngModel)]="destinationOutput0" #pickupOutput [formControl]="destinationOutput" required>
                                                                             </div>
                                                                     </div>
                                                                 </fieldset>

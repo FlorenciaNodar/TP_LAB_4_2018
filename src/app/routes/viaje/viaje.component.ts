@@ -8,6 +8,7 @@ import {PersonaService} from '../../services/persona.service';
 import {} from '@types/googlemaps';
 import swal from'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 
 declare var google: any;
@@ -35,6 +36,14 @@ export class Viaje {
   providers : [ GoogleMapsAPIWrapper ]
 })
 export class ViajeComponent implements OnInit {
+  destinoLongitudViaje: any;
+  destinoLatitudViaje: any;
+  origenLatitudViaje1: any;
+  listDirections: any;
+  destinationInput0: any;
+  data = [];
+  origenLatitudViaje: any;
+  origenLongitudViaje: any;
   unarray: any[];
 
     public latitude: number;
@@ -99,7 +108,7 @@ export class ViajeComponent implements OnInit {
     private gmapsApi: GoogleMapsAPIWrapper,
     private _elementRef: ElementRef,
     private PersonaS: PersonaService ,
-    private route: ActivatedRoute ) {
+    private route: ActivatedRoute, private http: HttpClient ) {
 
     this.route.params.subscribe( params => this.idDelViaje= params.id); 
 
@@ -111,6 +120,8 @@ export class ViajeComponent implements OnInit {
     this.startDate = new Date(year, month, day);
     this.destinationInput = new FormControl();
     this.destinationOutput = new FormControl();
+
+    
     }
 
        ngOnInit() {
@@ -410,9 +421,41 @@ export class ViajeComponent implements OnInit {
               this.AUbool=true;
             }
             
-            debugger;
+            this.origenLatitudViaje = data[0].origenlat;
+            this.origenLongitudViaje =data[0].origenlong;
+            this.destinoLatitudViaje =data[0].destinolat;
+            this.destinoLongitudViaje =data[0].destinolong;
+
+            this.getDataOrigen().subscribe(data => {
+              this.data.push(data);
+              this.data.forEach(element => {
+              this.destinationInput0 =  element.results[0].formatted_address;
+              });
+
+          });
+          this.getDataDestino().subscribe(data => {
+            this.data.push(data);
+            this.data.forEach(element => {
+              this.destinationOutput0 =  element.results[0].formatted_address;
+            });
+
+        });
+
+          
           });
         }
 
+        getDataOrigen(){
+          return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.origenLatitudViaje+','+this.origenLongitudViaje+'&key=AIzaSyDyFfo561pm54EAGnMs72i7LyudqeHicXI')
+          .map(response => response);
+        }
+        
+        getDataDestino(){
+          return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+this.destinoLatitudViaje+','+this.destinoLongitudViaje+'&key=AIzaSyDyFfo561pm54EAGnMs72i7LyudqeHicXI')
+          .map(response => response);
+        }
+      
+        
+    
       
 }
