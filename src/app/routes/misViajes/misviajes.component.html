@@ -102,7 +102,7 @@
                       <td><strong><h4>{{viaje.remisero}}</h4></strong></td>
                      <td> <button class="mb-1 btn btn-info btn-sm" type="button" (click)="modificarRemisero(viaje)">Cargar Remisero</button>
                         <button class="mb-1 btn btn-info btn-sm"  *ngIf="viaje.estado == 'Solicitado'"  type="button" (click)="sweetalertDemo5(viaje)">Cambiar Estado</button>                            
-                        <button class="mb-1 btn btn-info btn-sm"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button></td>
+                        <button class="mb-1 btn btn-info btn-sm"  *ngIf="rol == 'Administrador'"  (click)="sweetalertDemo4(viaje)" type="button">Eliminar</button></td>
                         
                 </tr>
                 

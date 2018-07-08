@@ -69,18 +69,20 @@ import swal from'sweetalert2';
       
     }
 
-    var respuesta=  this.PersonaS.TraerUsuarios(data => { 
-      data.forEach(element => {
-
-      this.unarray.push(element);
-
-      console.log(  this.unarray);
-      });
-   });
+    this.traerUsu();
   });
 }
 
+traerUsu(){
+  var respuesta=  this.PersonaS.TraerUsuarios(data => { 
+    data.forEach(element => {
 
+    this.unarray.push(element);
+
+    console.log(  this.unarray);
+    });
+ });
+}
 
     resolvedCaptcha(result){
       this.result = true;
@@ -111,7 +113,18 @@ import swal from'sweetalert2';
                   this.unUsuario.Clave=this.password;
                   this.unUsuario.Usuario=this.correo;
                   
-                  this.unUsuario.Rol=this.rol;
+                  if(this.roles == "1"){
+                    this.unUsuario.Rol="Administrador";
+                    
+                  }
+                  if(this.roles == "2"){
+                    this.unUsuario.Rol="Remisero";
+                    
+                  }
+                  if(this.roles == "3"){
+                    this.unUsuario.Rol="Encargado";
+                    
+                  }
                   
               var respuesta=  this.PersonaS.RegistrarEncargadoRemisero(this.unUsuario, mensaje => { 
                 swal('OK!',mensaje,'success');
@@ -124,6 +137,10 @@ import swal from'sweetalert2';
       this.password="";
       this.correo="";
       this.rol="";
+      this.unarray=[];
+      this.traerUsu();
+      
+
    }
 
    cambiar()
@@ -158,8 +175,8 @@ import swal from'sweetalert2';
           console.log(mensaje);      
 
         });
-        window.location.reload();
-        
+        this.unarray =[];
+        this.traerUsu();
       }
     });
     
