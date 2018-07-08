@@ -163,6 +163,16 @@ export class PersonaService {
   });
   }
 
+  
+  TraerEncuestaPreg4 (callback: (data: any) => void){
+    debugger;
+    this.AP.TraerEncuestaPreg4("TraerEncuestaPreg4/", data => { 
+      debugger;
+    callback(data);
+    
+  });
+  }
+
   TraerUsuarios(callback: (data: any) => void){
     debugger;
     this.AP.TraerUsuarios("TraerUsuarios/", data => { 
@@ -183,6 +193,14 @@ export class PersonaService {
   TraeUsuariosRemiseros(callback: (data: any) => void){
     debugger;
     this.AP.TraeUsuariosRemiseros("TraerUsuariosRemisero/",data => { 
+    callback(data);
+    
+  });
+  }
+
+  traerUsuariosEncargados(callback: (data: any) => void){
+    debugger;
+    this.AP.traerUsuariosEncargados("traerUsuariosEncargados/",data => { 
     callback(data);
     
   });

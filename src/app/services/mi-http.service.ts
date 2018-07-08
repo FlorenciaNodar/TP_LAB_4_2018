@@ -272,6 +272,20 @@ export class MiHttpService {
         });
   }
 
+  TraerEncuestaPreg4(url:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
   TraerViajesPorRemisero(url:string,usuario:string, callback: (r: Response) => void)
   {
     debugger;
@@ -356,6 +370,19 @@ export class MiHttpService {
   }
 
   TraeUsuariosRemiseros(url:string,callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
+  traerUsuariosEncargados(url:string,callback: (r: Response) => void)
   {
     debugger;
   let data = new URLSearchParams();

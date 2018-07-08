@@ -127,6 +127,18 @@ export class ArchivoPersonaService {
     }); 
   }
 
+  
+
+  public TraerEncuestaPreg4(Ruta:string, callback: (data: any) => void) 
+  { 
+    debugger;
+   var rta =  this.mihttp.TraerEncuestaPreg4(path + Ruta , data => { 
+    var datos = data.json();
+    debugger;
+    
+    callback(datos);
+    }); 
+  }
   TraeViajePorRemisero(Ruta:string,usuario:string, callback: (data: any) => void) 
   { 
     debugger;
@@ -176,6 +188,15 @@ export class ArchivoPersonaService {
      callback(datos);
      }); 
   }
+  public traerUsuariosEncargados(Ruta:string, callback: (data: any) => void){
+    debugger;
+    var rta =  this.mihttp.traerUsuariosEncargados(path + Ruta, data => { 
+     var datos =data.json();
+     callback(datos);
+     }); 
+  }
+
+  
   public TraerUsuarios(Ruta:string, callback: (data: any) => void){
     debugger;
     var rta =  this.mihttp.TraerUsuarios(path + Ruta, data => { 

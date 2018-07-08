@@ -11,59 +11,44 @@
 </div>
 
 <div class="row" *ngIf= "encargado">
-        <!-- <div class="col-xl-6 col-lg-6">
-        <h4>Line Chart</h4>
-        <div>
-        <canvas baseChart [chartType]="'line'" [options]="lineOptions" [datasets]="lineData.datasets" [colors]="lineColors" [labels]="lineData.labels" [legend]="false" height="120"></canvas>
-        </div>
-        </div> -->
-        <div class="col-xl-6 col-lg-6 col-xs-6">
-            <h4>Cantidad de Clientes y Remiseros</h4>
+    
+        <div class="col-xl-12 col-lg-12 col-xs-12">
+            <h3 style="text-align:center">Cantidad de Usuarios del sistema</h3>
             <div>
                <canvas baseChart [chartType]="'pie'" [options]="pieOptions" [datasets]="[{
-                data: [total, totalRemiseros]}]" [colors]="pieColors" [labels]="pieData.labels" [legend]="false" height="80"></canvas>
+                data: [total, totalRemiseros, totalEncargados]}]" [colors]="pieColors" [labels]="pieData.labels" [legend]="false" height="80"></canvas>
             </div>
          </div>
      
-            <!-- <div class="card-footer text-center">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="radial-bar radial-bar-warning radial-bar-35 radial-bar-sm" data-label="35%"></div>
-                        <p>
-                            <small>Conversions</small>
-                        </p>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="radial-bar radial-bar-info radial-bar-45 radial-bar-sm" data-label="45%"></div>
-                        <p>
-                            <small>Recurrent</small>
-                        </p>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="radial-bar radial-bar-success radial-bar-20 radial-bar-sm" data-label="20%"></div>
-                        <p>
-                            <small>Uniques</small>
-                        </p>
-                    </div>
-                </div>
-            </div> -->
-        <!-- <div class="col-lg-6">
-            <div class="card card-default" id="cardChart6">
-               <div class="card-header">
-                  <div class="card-title">Donut</div>
-               </div>
-               <div class="card-wrapper">
-                  <div class="card-body">
-                     <div flot [dataset]="donutData" [options]="donutOptions" height="300"></div>
-                  </div>
-               </div>
+        <div class="col-xl-6 col-lg-6 col-xs-6">
+        <h4 style="margin-top: 50px">Resultados más destacados de la encuesta: </h4>
+        <div>
+                <p style="text-align: center">¿Estás conforme con el costo del servicio?</p>
+                <canvas baseChart [chartType]="'horizontalBar'" [options]="barOptions" [datasets]="[{
+                    
+                data: [totalPreg4Si, totalPreg4No]}]" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="80"></canvas>
+        </div> 
+    </div> 
+
+    <div class="col-xl-6 col-lg-6 col-xs-6">
+            <h4 style="margin-top: 50px"> </h4> 
+            <div>
+                    
+            <p style="text-align: center">¿Volverías a elegirnos?</p>
+               <canvas baseChart [chartType]="'doughnut'" [options]="doughnutOptions" [datasets]="[{
+                
+            data: [totalPreg1Si, totalPreg1No,totalPreg1Talvez]}]"  [colors]="doughnutColors" [labels]="doughnutData.labels" [legend]="false" height="80"></canvas>
             </div>
          </div>
-        <div class="col-xl-6 col-lg-6">
-        <h4>Bar Chart</h4>
-        <div>
-            <canvas baseChart [chartType]="'horizontalBar'" [options]="barOptions" [datasets]="barData.datasets" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="120"></canvas>
-        </div> -->
-        <!-- </div> -->
+         <div class="col-xl-12 col-lg-12 col-xs-12">
+                <h4> </h4> 
+                <div>
+                        
+                <p style="text-align: center">¿Con qué frecuencia utiliza nuestro servicio?</p>
+                   <canvas baseChart [chartType]="'pie'" [options]="pieOptions2"  [datasets]="[{
+                    
+                data: [preg7uno, preg7dos,preg7tres]}]"  [colors]="pieColors2" [labels]="pieData2.labels2" [legend]="false" height="80"></canvas>
+                </div>
+             </div>
 </div>
      
