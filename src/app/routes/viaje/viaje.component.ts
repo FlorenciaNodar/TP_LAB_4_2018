@@ -36,6 +36,7 @@ export class Viaje {
   providers : [ GoogleMapsAPIWrapper ]
 })
 export class ViajeComponent implements OnInit {
+  destinationOutput0: any;
   destinoLongitudViaje: any;
   destinoLatitudViaje: any;
   origenLatitudViaje1: any;

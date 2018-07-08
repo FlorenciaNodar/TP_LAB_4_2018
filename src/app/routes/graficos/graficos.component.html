@@ -17,8 +17,15 @@
         <canvas baseChart [chartType]="'line'" [options]="lineOptions" [datasets]="lineData.datasets" [colors]="lineColors" [labels]="lineData.labels" [legend]="false" height="120"></canvas>
         </div>
         </div> -->
+        <div class="col-xl-6 col-lg-6 col-xs-6">
+            <h4>Cantidad de Clientes y Remiseros</h4>
+            <div>
+               <canvas baseChart [chartType]="'pie'" [options]="pieOptions" [datasets]="[{
+                data: [total, totalRemiseros]}]" [colors]="pieColors" [labels]="pieData.labels" [legend]="false" height="80"></canvas>
+            </div>
+         </div>
      
-            <div class="card-footer text-center">
+            <!-- <div class="card-footer text-center">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="radial-bar radial-bar-warning radial-bar-35 radial-bar-sm" data-label="35%"></div>
@@ -39,7 +46,7 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         <!-- <div class="col-lg-6">
             <div class="card card-default" id="cardChart6">
                <div class="card-header">
