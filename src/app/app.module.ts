@@ -30,7 +30,7 @@ import { DirectionsMapDirective } from './google-map.directive';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MisViajesComponent } from './routes/misViajes/misviajes.component';
+import { MisViajesComponent, FullTextSearchPipe } from './routes/misViajes/misviajes.component';
 import { UsuariosComponent } from './routes/usuarios/usuarios.component';
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -47,7 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
         GraficosComponent,
         DirectionsMapDirective,
         MisViajesComponent,
-        UsuariosComponent
+        UsuariosComponent,
+        FullTextSearchPipe
         
     ],
     imports: [

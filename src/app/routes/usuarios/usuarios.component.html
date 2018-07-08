@@ -87,6 +87,8 @@
     <div class="card-header"></div>
     <div class="card-body">
     <div class="table-responsive">
+            <p><input type="text" *ngIf="encargado" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
+            
         <table class="table" *ngIf="encargado">
             <thead>
                 <tr>
@@ -99,12 +101,12 @@
             </thead>
             <tbody >
                 
-                <tr  *ngFor="let user of unarray" class="table-secondary">
+                <tr  *ngFor="let user of unarray| fullTextSearch:test:'usuario'" class="table-secondary">
                 <td>{{user.usuario}}</td>
                 <td>{{user.clave}}</td>
                 <td>{{user.rol}}</td>
                 
-                <td  ><button class="mb-1 btn btn-info btn-sm" (click)="sweetalertDemo4(user)" type="button">Eliminar</button></td>
+                <td  ><button class="mb-1 btn btn-danger btn-sm" (click)="sweetalertDemo4(user)" type="button"tooltip="Eliminar"><span class="fa fa-trash-o"></span></button></td>
             </tr>
             
             </tbody>

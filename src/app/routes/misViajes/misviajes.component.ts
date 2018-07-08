@@ -1,4 +1,21 @@
 
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'fullTextSearch',
+  pure: false
+})
+export class FullTextSearchPipe implements PipeTransform {
+
+  constructor() { }
+
+  transform(value: any, query: string, field: string): any {
+      return query ? value.reduce((prev, next) => {
+        if (next[field].includes(query)) { prev.push(next); }
+        return prev;
+      }, []) : value;
+    }
+}
 import { Component, NgModule, NgZone, OnInit, ViewChild, ElementRef, Directive, Input  } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
