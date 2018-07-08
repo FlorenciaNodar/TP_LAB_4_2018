@@ -24,7 +24,7 @@
         <h4 style="margin-top: 50px">Resultados más destacados de la encuesta: </h4>
         <div>
                 <p style="text-align: center">¿Estás conforme con el costo del servicio?</p>
-                <canvas baseChart [chartType]="'horizontalBar'" [options]="barOptions" [datasets]="[{
+                <canvas baseChart [chartType]="'bar'" [options]="barOptions" [datasets]="[{
                     
                 data: [totalPreg4Si, totalPreg4No]}]" [colors]="barColors" [labels]="barData.labels" [legend]="false" height="80"></canvas>
         </div> 
