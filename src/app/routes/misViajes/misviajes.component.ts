@@ -31,7 +31,9 @@ import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { SafeUrl } from '@angular/platform-browser';
-
+import * as jspdf from 'jspdf';  
+import html2canvas from 'html2canvas';  
+  
 declare var google: any;
 declare var jQuery: any;
 
@@ -377,7 +379,23 @@ private camioneta: string;
         a.download = "Listado de Viajes.csv";
         a.click();
       }
-
+      public captureScreen()  
+      {  
+        var data = document.getElementById('contentToConvert');  
+        html2canvas(data).then(canvas => {  
+          // Few necessary setting options  
+          var imgWidth = 208;   
+          var pageHeight = 295;    
+          var imgHeight = canvas.height * imgWidth / canvas.width;  
+          var heightLeft = imgHeight;  
+      
+          const contentDataURL = canvas.toDataURL('image/png')  
+          let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+          var position = 0;  
+          pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+          pdf.save('Listado de Viajes.pdf'); // Generated PDF   
+        });  
+      }  
       ConvertToCSV(objArray) {
         var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
         var str = '';

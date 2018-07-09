@@ -6,11 +6,15 @@
     </div>
     <div class="row">
 <div class="col-lg-10">
-        <button style="text-align: right" (click)="download()" >
-                Exportar: <img  src="../assets/img/user/LogoExcel.jpg">
-            </button>
             
-            <button *ngIf="cliente" style="text-align: right" (click)="classicModal.show()" >Cargar encuesta: <img  src="../assets/img/user/encuesta.png"></button>
+               <button class="mb-1 btn btn-danger btn-sm"(click)="captureScreen()" type="button">
+                   <span><i class="fa fa-file-pdf-o                        "></i>
+               </span></button>
+               <button class="mb-1 btn btn-success btn-sm"(click)="download()" type="button">
+                    <span><i class="fa fa-file-excel-o                        "></i>
+                </span></button>
+          
+            <button class="mb-1 btn btn-sm"*ngIf="cliente" style="text-align: right" (click)="classicModal.show()" >Cargar encuesta: <i class="fa fa-file-text               "></i></button>
             
       <div class="card card-default">
          <div class="card-header"></div>
@@ -19,7 +23,7 @@
             <div class="table-responsive">
                     <p><input type="text" *ngIf="cliente" [(ngModel)]="test" placeholder="Filtrar por estado..."></p>
                     
-               <table class="table" *ngIf="cliente">
+               <table id="contentToConvert" class="table" *ngIf="cliente">
                     
                   <thead>
                      <tr>
@@ -54,7 +58,7 @@
                
                <p><input type="text" *ngIf="remisero" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
                
-               <table class="table" *ngIf="remisero">
+               <table id="contentToConvert" class="table" *ngIf="remisero">
                     
                 <thead>
                    <tr>
@@ -89,7 +93,7 @@
              
              <p><input type="text"  *ngIf="encargado || administrador" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
              
-             <table class="table" *ngIf="encargado || administrador">
+             <table id="contentToConvert" class="table" *ngIf="encargado || administrador">
                     
                 <thead>
                    <tr>
