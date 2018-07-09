@@ -139,7 +139,7 @@ export class MiHttpService {
         });
   }
  
-  CargarEncuesta(url:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,fecha:any, callback: (r: Response) => void)
+  CargarEncuesta(url:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,image:any,image2:any,image3:any,fecha:any, callback: (r: Response) => void)
   {
     debugger;
    
@@ -153,6 +153,9 @@ export class MiHttpService {
    data.append('preg5', preg5) ;
    data.append('preg6', preg6) ;
    data.append('preg7', preg7) ;
+   data.append('img', image) ;
+   data.append('img2', image2) ;
+   data.append('img3', image3) ;
    debugger;
        this.http
       .post(url,data)
@@ -271,6 +274,21 @@ export class MiHttpService {
           swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
         });
   }
+
+  TraerEncuestas(url:string, callback: (r: Response) => void)
+  {
+    debugger;
+  let data = new URLSearchParams();
+   debugger;
+       this.http
+      .post(url,data)
+      .map(res => res)  
+      .subscribe(callback, 
+        error => {
+          swal('Advertencia!', 'Ocurrio un error al registrarse','error' );          
+        });
+  }
+
 
   TraerEncuestaPreg4(url:string, callback: (r: Response) => void)
   {

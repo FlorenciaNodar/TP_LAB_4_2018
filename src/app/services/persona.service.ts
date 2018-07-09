@@ -55,10 +55,10 @@ export class PersonaService {
       
     
     }
-    CargarEncuesta(preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any, fecha:any,callback: (mensaje: string) => void)
+    CargarEncuesta(preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,image:any,image2:any,image3:any, fecha:any,callback: (mensaje: string) => void)
     {
       debugger;
-        this.AP.CargarEncuesta("CargarEncuesta/",preg1,preg2,preg3,preg4,preg5,preg6,preg7,user,fecha, mensaje => { 
+        this.AP.CargarEncuesta("CargarEncuesta/",preg1,preg2,preg3,preg4,preg5,preg6,preg7,user,image,image2,image3,fecha, mensaje => { 
         callback(mensaje);
         
       });
@@ -118,6 +118,17 @@ export class PersonaService {
     {
       debugger;
         this.AP.TraeViaje("TraeViajesPorUsuario/",usuario, data => { 
+        callback(data);
+        
+      });
+      
+    
+    }
+
+    TraerEncuestas( callback: (data: any) => void)
+    {
+      debugger;
+        this.AP.TraerEncuestas("TraerEncuestas/", data => { 
         callback(data);
         
       });

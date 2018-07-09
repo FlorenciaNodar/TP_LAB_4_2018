@@ -28,6 +28,9 @@ import swal from'sweetalert2';
 import { element } from 'protractor';
 import { FileUploader } from 'ng2-file-upload';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 
 declare var google: any;
 declare var jQuery: any;
@@ -55,6 +58,10 @@ export class Viaje {
   
 })
 export class MisViajesComponent implements OnInit {
+  unarray4=[];
+  selectedFile3: any;
+  selectedFile2: any;
+  selectedFile: any;
   public idViajeSeleccionado: any;
   p: number = 1;
   
@@ -75,7 +82,25 @@ export class MisViajesComponent implements OnInit {
   roles3:any;
   roles4:any;
   private objViaje: Viaje;
+  dragging: boolean = false;
+  loaded: boolean = false;
+  imageLoaded: boolean = false;
+  imageSrc: string = '';
+  imageSrc2: string = '';
+  imageSrc3: string = '';
+  inputAfectado: string = '';
+
+  fotoSubida;
+  fotoSubida2;
+  fotoSubida3;
+
+
   
+  activeColor: string = 'green';
+  baseColor: string = '#ccc';
+  overlayColor: string = 'rgba(255,255,255,0.5)';
+
+
   remiseriastring: any;
   preg7:any;
   public latitude: number;
@@ -116,10 +141,12 @@ private camioneta: string;
 
      isChecked:boolean;
      testModel:string;
- token = localStorage.getItem('cliente');
- public uploader: FileUploader = new FileUploader({ url: 'https://evening-anchorage-3159.herokuapp.com/api/' });
+     
+      fotoTraida: SafeUrl;
+     
+     token = localStorage.getItem('cliente');
  
-       constructor( 
+       constructor( private _sanitizer: DomSanitizer,
        private PersonaS: PersonaService,
       private router:Router ) {
         
@@ -127,13 +154,22 @@ private camioneta: string;
 
        ngOnInit() {
 
+        var respuesta1=  this.PersonaS.TraerEncuestas(data => { 
+          data.forEach(element => {
+            debugger;
+                this.unarray4.push(element);
+            
+                for(var i=0; i<this.unarray4.length; i++){
+                  this.fotoTraida = this._sanitizer.bypassSecurityTrustUrl(this.unarray4[i].img);
+                }
+                });
+          
+        });
 
         var respuesta=  this.PersonaS.TraeUsuariosRemiseros(mensaje => { 
           mensaje.forEach(element => {
             
                       this.remises.push(element);
-            
-                      console.log(  this.remises);
                       });    
     
         });
@@ -165,7 +201,6 @@ private camioneta: string;
           });
           this.unarray.push(element);
 
-          console.log(  this.unarray);
           });
        });
         }
@@ -185,8 +220,6 @@ private camioneta: string;
               }
             });
             this.unarray.push(element);
-  
-            console.log(  this.unarray);
             });
          });
         }
@@ -207,7 +240,6 @@ private camioneta: string;
             });
             this.unarray.push(element);
   
-            console.log(  this.unarray);
             });
          });
         }
@@ -225,7 +257,6 @@ private camioneta: string;
             });
             this.unarray.push(element);
   
-            console.log(  this.unarray);
             });
          });
         }
@@ -244,6 +275,9 @@ private camioneta: string;
 
       }
       
+      public get placeholder() {
+        return this.fotoTraida;
+      }
     sweetalertDemo4(viaje) {
       debugger;
       swal({
@@ -262,7 +296,7 @@ private camioneta: string;
               mensaje,
               'success'
             )            
-            console.log(mensaje);      
+              
 
           });
           window.location.reload();
@@ -290,7 +324,6 @@ private camioneta: string;
                 mensaje,
                 'success'
               )         
-              console.log(mensaje);      
   
             });
             window.location.reload();
@@ -320,7 +353,6 @@ private camioneta: string;
                 mensaje,
                 'success'
               )         
-              console.log(mensaje);      
   
             });
             window.location.reload();
@@ -370,10 +402,19 @@ private camioneta: string;
         }
         return str;
       }
+      onFileSelected(event){
+        debugger;
+        this.selectedFile = event.target.files[0].name;
+      }
+      onFileSelected2(event){
+        this.selectedFile2 = event.target.files[0];
+      }
+      onFileSelected3(event){
+        this.selectedFile3 = event.target.files[0];
+      }
     
       cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4){
 
-       var hola = this.uploader;
         debugger;
         var hoy = new Date();
         var dia = hoy.getDate(); 
@@ -430,14 +471,13 @@ private camioneta: string;
 
         var preg6 =  checkstring1 +" "+ checkstring2 +" "+ checkstring3 +" "+ checkstring4;
         
-        if(preg1 == "" || preg1 == undefined || preg2 == "" || preg2 == undefined || preg3 == "" || preg3 == undefined|| preg4 == "" || preg4 == undefined|| preg5 == "" || preg5 == undefined|| preg6 == "" || preg6== undefined|| this.preg7 == "" || this.preg7 == undefined){
+        if(preg1 == "" || preg1 == undefined || preg2 == "" || preg2 == undefined  ||this.imageSrc3 == "" || this.imageSrc3 == undefined  ||this.imageSrc2 == "" || this.imageSrc2 == undefined ||this.imageSrc == "" || this.imageSrc == undefined ||  preg3 == "" || preg3 == undefined|| preg4 == "" || preg4 == undefined|| preg5 == "" || preg5 == undefined|| preg6 == "" || preg6== undefined|| this.preg7 == "" || this.preg7 == undefined){
           swal('ADVERTENCIA!',"Debe completar todos los campos",'error');
           
         }else{
-       var respuesta=  this.PersonaS.CargarEncuesta(preg1,preg2,preg3,preg4,preg5,preg6,this.preg7,this.token, fecha_actual,mensaje => { 
+       var respuesta=  this.PersonaS.CargarEncuesta(preg1,preg2,preg3,preg4,preg5,preg6,this.preg7,this.token,this.imageSrc,this.imageSrc2,this.imageSrc3, fecha_actual,mensaje => { 
           swal('OK!',mensaje,'success');
           
-          console.log(mensaje);
         });
         }
  
@@ -551,7 +591,6 @@ private camioneta: string;
         });
         this.unarray.push(element);
 
-        console.log(  this.unarray);
         });
      });
   }
@@ -572,12 +611,95 @@ private camioneta: string;
         });
         this.unarray.push(element);
 
-        console.log(  this.unarray);
         });
      });
   }
 
-        
+  handleDragEnter() {
+    this.dragging = true;
+  }
+
+  handleDragLeave() {
+    this.dragging = false;
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    this.dragging = false;
+    this.handleInputChange(e);
+  }
+
+  handleImageLoad() {
+    this.imageLoaded = true;
+  }
+  handleInputChange(e) {
+    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+
+    var pattern = /image-*/;
+    var reader = new FileReader();
+
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+
+    this.loaded = false;
+    this.inputAfectado = e.srcElement.id;
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsDataURL(file);
+  }        
+
+  _handleReaderLoaded(e) {
+    var reader = e.target;
+
+    switch (parseInt(this.inputAfectado.substring(this.inputAfectado.length - 1, this.inputAfectado.length))) {
+      case 1:
+        this.fotoSubida = (<HTMLInputElement>document.getElementById('file1')).files[0];
+        if (!this.ValidarFoto(this.fotoSubida)) {
+          alert("Cambie la imagen 1, solo se permiten imagenes de tamanio inferior a 1 MB");
+          this.fotoSubida = undefined;
+          return;
+        } else {
+          this.imageSrc = reader.result;
+        }
+        break;
+      case 2:
+        this.fotoSubida2 = (<HTMLInputElement>document.getElementById('file2')).files[0];
+        if (!this.ValidarFoto(this.fotoSubida2)) {
+          alert("Cambie la imagen 2, solo se permiten imagenes de tamanio inferior a 1 MB");
+          this.fotoSubida2 = undefined;
+          return;
+        } else {
+          this.imageSrc2 = reader.result;
+        }
+
+        break;
+      case 3:
+        this.fotoSubida3 = (<HTMLInputElement>document.getElementById('file3')).files[0];
+        debugger;
+        if (!this.ValidarFoto(this.fotoSubida3)) {
+          alert("Cambie la imagen 3, solo se permiten imagenes de tamanio inferior a 1 MB");
+          this.fotoSubida3 = undefined;
+          return;
+        } else {
+          this.imageSrc3 = reader.result;
+          debugger;
+        }
+
+        break;
+    }
+    this.loaded = true;
+  }
+
+  ValidarFoto(foto) {
+    if (foto != undefined) {
+      if (foto.size > (1024 * 1024)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   }
       
     

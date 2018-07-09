@@ -2,18 +2,20 @@
         <div>Mis viajes
             <small>Administra tus viajes</small>
         </div>
+        
     </div>
     <div class="row">
 <div class="col-lg-10">
         <button style="text-align: right" (click)="download()" >
                 Exportar: <img  src="../assets/img/user/LogoExcel.jpg">
             </button>
+            
             <button *ngIf="cliente" style="text-align: right" (click)="classicModal.show()" >Cargar encuesta: <img  src="../assets/img/user/encuesta.png"></button>
             
       <div class="card card-default">
          <div class="card-header"></div>
          <div class="card-body">
-              
+                
             <div class="table-responsive">
                     <p><input type="text" *ngIf="cliente" [(ngModel)]="test" placeholder="Filtrar por estado..."></p>
                     
@@ -278,9 +280,31 @@
                                     </select>
                                 </div>
                             </div>   
-                            <label for="file2" class="file-upload">
-                                    <input id="file2" type="file" ng2FileSelect [uploader]="uploader" />
-                                </label>  
+                            <label class="uploader" ondragover="return false;" [class.loaded]="loaded" [style.outlineColor]="dragging ? activeColor :
+                            baseColor" (dragenter)="handleDragEnter()" (dragleave)="handleDragLeave()" (drop)="handleDrop($event)">
+                            <i class="icon icon-upload" [style.color]="dragging 
+                               ? ((imageSrc.length > 0) ? overlayColor : activeColor)
+                               : ((imageSrc.length > 0) ? overlayColor : baseColor)"></i>
+                            <img [src]="imageSrc3" width="100" height="100" (load)="handleImageLoad()" [class.loaded]="imageLoaded" />
+                            <input  type="file" id="file3"  accept="image/*" (change)="handleInputChange($event)">
+                            </label>
+                            <label class="uploader" ondragover="return false;" [class.loaded]="loaded" [style.outlineColor]="dragging ? activeColor :
+                            baseColor" (dragenter)="handleDragEnter()" (dragleave)="handleDragLeave()" (drop)="handleDrop($event)">
+                            <i class="icon icon-upload" [style.color]="dragging 
+                               ? ((imageSrc.length > 0) ? overlayColor : activeColor)
+                               : ((imageSrc.length > 0) ? overlayColor : baseColor)"></i>
+                            <img [src]="imageSrc2" width="100" height="100" (load)="handleImageLoad()" [class.loaded]="imageLoaded" />
+                            <input  type="file" id="file2"  accept="image/*" (change)="handleInputChange($event)">
+                            </label>
+                            <label class="uploader" ondragover="return false;" [class.loaded]="loaded" [style.outlineColor]="dragging ? activeColor :
+                            baseColor" (dragenter)="handleDragEnter()" (dragleave)="handleDragLeave()" (drop)="handleDrop($event)">
+                            <i class="icon icon-upload" [style.color]="dragging 
+                               ? ((imageSrc.length > 0) ? overlayColor : activeColor)
+                               : ((imageSrc.length > 0) ? overlayColor : baseColor)"></i>
+                            <img width="100" height="100" [src]="imageSrc" (load)="handleImageLoad()" [class.loaded]="imageLoaded" />
+                            <input  type="file" id="file1"  accept="image/*" (change)="handleInputChange($event)">
+                            </label>
+                           
                     </div>
                     <button class="mb-1 btn btn-info btn-sm"  type="button" (click)="cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4);classicModal.hide()">Enviar</button>
                     
