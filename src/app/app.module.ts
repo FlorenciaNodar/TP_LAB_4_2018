@@ -33,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MisViajesComponent, FullTextSearchPipe } from './routes/misViajes/misviajes.component';
 import { UsuariosComponent } from './routes/usuarios/usuarios.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
@@ -65,6 +66,7 @@ export function createTranslateLoader(http: HttpClient) {
         FileUploadModule,
         BrowserModule,
         Ng2ChartsModule,
+        NgxPaginationModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDyFfo561pm54EAGnMs72i7LyudqeHicXI',
             libraries: ['places']

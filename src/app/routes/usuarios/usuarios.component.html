@@ -101,13 +101,14 @@
             </thead>
             <tbody >
                 
-                <tr  *ngFor="let user of unarray| fullTextSearch:test:'usuario'" class="table-secondary">
+                <tr  *ngFor="let user of unarray| fullTextSearch:test:'usuario'| paginate: { itemsPerPage: 5, currentPage: p }" class="table-secondary">
                 <td>{{user.usuario}}</td>
                 <td>{{user.clave}}</td>
                 <td>{{user.rol}}</td>
                 
                 <td  ><button class="mb-1 btn btn-danger btn-sm" (click)="sweetalertDemo4(user)" type="button"tooltip="Eliminar"><span class="fa fa-trash-o"></span></button></td>
             </tr>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
             
             </tbody>
         </table>  

@@ -33,7 +33,7 @@
                   </thead>
                   <tbody >
                        
-                     <tr  *ngFor="let viaje of unarray| fullTextSearch:test:'estado'" class="table-secondary">
+                     <tr  *ngFor="let viaje of unarray| fullTextSearch:test:'estado'| paginate: { itemsPerPage: 5, currentPage: p }" class="table-secondary">
                         <td>{{viaje.usuario}}</td>
                         <td>{{viaje.prestaciones}}</td>
                         <td>{{viaje.dia}}</td>
@@ -47,7 +47,9 @@
                   </tr>
                   
                   </tbody>
+                  
                </table>
+               
                <p><input type="text" *ngIf="remisero" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
                
                <table class="table" *ngIf="remisero">
@@ -66,7 +68,7 @@
                 </thead>
                 <tbody >
                      
-                   <tr  *ngFor="let viaje of unarray | fullTextSearch:test:'usuario'" class="table-secondary">
+                   <tr  *ngFor="let viaje of unarray | fullTextSearch:test:'usuario'| paginate: { itemsPerPage: 5, currentPage: p }" class="table-secondary">
                       <td>{{viaje.usuario}}</td>
                       <td>{{viaje.prestaciones}}</td>
                       <td>{{viaje.dia}}</td>
@@ -80,7 +82,9 @@
                 </tr>
                 
                 </tbody>
+                
              </table>
+             
              <p><input type="text"  *ngIf="encargado || administrador" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
              
              <table class="table" *ngIf="encargado || administrador">
@@ -100,7 +104,7 @@
                 </thead>
                 <tbody >
                         
-                   <tr  *ngFor="let viaje of unarray | fullTextSearch:test:'usuario'" class="table-secondary">
+                   <tr  *ngFor="let viaje of unarray | fullTextSearch:test:'usuario'| paginate: { itemsPerPage: 5, currentPage: p }" class="table-secondary">
                       <td>{{viaje.usuario}}</td>
                       <td>{{viaje.prestaciones}}</td>
                       <td>{{viaje.dia}}</td>
@@ -115,7 +119,10 @@
                 </tr>
                 
                 </tbody>
+                
              </table>
+             <pagination-controls (pageChange)="p = $event"></pagination-controls>
+             
 
            
            

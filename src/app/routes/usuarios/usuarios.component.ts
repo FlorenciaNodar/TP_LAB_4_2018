@@ -31,6 +31,7 @@ import swal from'sweetalert2';
     administrador:boolean;
     uno: boolean;
     private unarray =[];
+    p: number = 1;
     
     constructor(fb: FormBuilder, private PersonaS: PersonaService){
       let password = new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9]{6,10}$')]));

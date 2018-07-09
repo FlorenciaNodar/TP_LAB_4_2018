@@ -56,6 +56,7 @@ export class Viaje {
 })
 export class MisViajesComponent implements OnInit {
   public idViajeSeleccionado: any;
+  p: number = 1;
   
     private listViajes: any;
     private unarray =[];
