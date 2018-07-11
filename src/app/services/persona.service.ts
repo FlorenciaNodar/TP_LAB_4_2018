@@ -10,7 +10,7 @@ export class PersonaService {
 
   GenerarToken(username:string,password:string, callback: (token: string) => void)
   {
-   debugger;
+       
       this.AP.APIPostJWT("ingreso/",username,password, token => { 
       callback(token);
     });
@@ -19,7 +19,7 @@ export class PersonaService {
 
   Registrar(unUser:Usuario, callback: (mensaje: string) => void)
   {
-    debugger;
+        
       this.AP.APIRegistrar("Usuario/",unUser, mensaje => { 
       callback(mensaje);
     });
@@ -27,7 +27,7 @@ export class PersonaService {
 
  RegistrarEncargadoRemisero(unUser:Usuario, callback: (mensaje: string) => void)
  {
-   debugger;
+       
      this.AP.ApiRegistrarEncargadoRemisero("Usuario/",unUser, mensaje => { 
      callback(mensaje);
    });
@@ -36,7 +36,7 @@ export class PersonaService {
  
     CargarViaje(unUser:Viaje, callback: (mensaje: string) => void)
     {
-      debugger;
+          
         this.AP.CargarViaje("CargarViaje/",unUser, mensaje => { 
         callback(mensaje);
         
@@ -47,7 +47,7 @@ export class PersonaService {
 
     EditarViajePorId(unUser:Viaje, id:any, callback: (mensaje: string) => void)
     {
-      debugger;
+          
         this.AP.EditarViajePorId("EditarViajePorId/",unUser,id, mensaje => { 
         callback(mensaje);
         
@@ -57,7 +57,7 @@ export class PersonaService {
     }
     CargarEncuesta(preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,image:any,image2:any,image3:any, fecha:any,callback: (mensaje: string) => void)
     {
-      debugger;
+          
         this.AP.CargarEncuesta("CargarEncuesta/",preg1,preg2,preg3,preg4,preg5,preg6,preg7,user,image,image2,image3,fecha, mensaje => { 
         callback(mensaje);
         
@@ -67,7 +67,7 @@ export class PersonaService {
     }
     BorrarViaje(id:any, callback: (mensaje: string) => void)
     {
-      debugger;
+          
         this.AP.BorrarViaje("BorrarViaje/",id, mensaje => { 
         callback(mensaje);
         
@@ -77,7 +77,7 @@ export class PersonaService {
     }
 
     EditarViaje(id:any,rol:any, callback: (mensaje: string) => void){
-      debugger;
+          
       this.AP.EditarViaje("EditarViaje/",id, rol,mensaje => { 
       callback(mensaje);
       
@@ -86,7 +86,7 @@ export class PersonaService {
 
   
     EditarViajeRemisero(id:any,remisero:any, callback: (mensaje: string) => void){
-      debugger;
+          
       this.AP.EditarViajeRemisero("EditarViajeRemisero/",id, remisero,mensaje => { 
       callback(mensaje);
       
@@ -95,7 +95,7 @@ export class PersonaService {
     }
 
     EditarViajeCosto(id:any,plata:any, callback: (mensaje: string) => void){
-      debugger;
+          
       this.AP.EditarViajeCosto("EditarViajeCosto/",id, plata,mensaje => { 
       callback(mensaje);
       
@@ -104,7 +104,7 @@ export class PersonaService {
     }
     EliminarUsuario(id:any, callback: (mensaje: string) => void)
     {
-      debugger;
+          
         this.AP.EliminarUsuario("EliminarUnUsuario/",id, mensaje => { 
         callback(mensaje);
         
@@ -116,7 +116,7 @@ export class PersonaService {
 
     TraeViajePorUsuario(usuario:string, callback: (data: any) => void)
     {
-      debugger;
+          
         this.AP.TraeViaje("TraeViajesPorUsuario/",usuario, data => { 
         callback(data);
         
@@ -127,7 +127,7 @@ export class PersonaService {
 
     TraerEncuestas( callback: (data: any) => void)
     {
-      debugger;
+          
         this.AP.TraerEncuestas("TraerEncuestas/", data => { 
         callback(data);
         
@@ -138,7 +138,7 @@ export class PersonaService {
 
     TraerViajesPorRemisero(usuario:string, callback: (data: any) => void)
     {
-      debugger;
+          
         this.AP.TraeViajePorRemisero("TraeViajesPorRemisero/",usuario, data => { 
         callback(data);
         
@@ -149,7 +149,7 @@ export class PersonaService {
 
     
   TraerViajePorId(id:any, callback: (data: any) => void){
-    debugger;
+        
     this.AP.TraerViajePorId("TraerViajePorId/",id,data => { 
     callback(data);
     
@@ -159,7 +159,7 @@ export class PersonaService {
 
     
   obtenerRol(usuario:string, callback: (data: any) => void){
-    debugger;
+        
     this.AP.obtenerRol("obtenerRol/",usuario, data => { 
     callback(data);
     
@@ -167,7 +167,7 @@ export class PersonaService {
   }
 
   TraerTodosLosViajes (callback: (data: any) => void){
-    debugger;
+        
     this.AP.TraerTodosLosViajes("ViajesTodos/", data => { 
     callback(data);
     
@@ -176,16 +176,16 @@ export class PersonaService {
 
   
   TraerEncuestaPreg4 (callback: (data: any) => void){
-    debugger;
+        
     this.AP.TraerEncuestaPreg4("TraerEncuestaPreg4/", data => { 
-      debugger;
+          
     callback(data);
     
   });
   }
 
   TraerUsuarios(callback: (data: any) => void){
-    debugger;
+        
     this.AP.TraerUsuarios("TraerUsuarios/", data => { 
     callback(data);
     
@@ -195,14 +195,14 @@ export class PersonaService {
   
 
   TraeUsuariosClientes(callback: (data: any) => void){
-    debugger;
+        
     this.AP.TraeUsuariosClientes("TraerUsuariosCliente/", data => { 
     callback(data);
     
   });
   }
   TraeUsuariosRemiseros(callback: (data: any) => void){
-    debugger;
+        
     this.AP.TraeUsuariosRemiseros("TraerUsuariosRemisero/",data => { 
     callback(data);
     
@@ -210,7 +210,7 @@ export class PersonaService {
   }
 
   traerUsuariosEncargados(callback: (data: any) => void){
-    debugger;
+        
     this.AP.traerUsuariosEncargados("traerUsuariosEncargados/",data => { 
     callback(data);
     

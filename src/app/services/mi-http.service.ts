@@ -20,7 +20,7 @@ export class MiHttpService {
 
   postjwt(url:string,username:string,password:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('usuario',username);
    data.append('clave', password);
@@ -57,14 +57,14 @@ export class MiHttpService {
 
   PostRegistrar(url:string,unUser:Usuario, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('usuario',unUser.Usuario);
    data.append('clave', unUser.Clave);
    data.append('nombre', unUser.Nombre);
    data.append('tipo', "Cliente");
    data.append('email', unUser.Email) ;
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -76,14 +76,14 @@ export class MiHttpService {
 
   PostRegistrarEncargadoRemisero(url:string,unUser:Usuario, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('usuario',unUser.Usuario);
    data.append('clave', unUser.Clave);
    data.append('nombre', unUser.Nombre);
    data.append('tipo', unUser.Rol);
    data.append('email', unUser.Email) ;
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -94,7 +94,7 @@ export class MiHttpService {
   }
   CargarViaje(url:string,unUser:Viaje, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('usuario',unUser.token);
    data.append('pago', unUser.tipo_pago);
@@ -105,7 +105,7 @@ export class MiHttpService {
    data.append('destinolong', unUser.lng_d) ;
    data.append('prestaciones', unUser.prestaciones) ;
    data.append('estado', unUser.estado) ;
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -117,7 +117,7 @@ export class MiHttpService {
 
   EditarViajePorId(url:string,unUser:Viaje, id:any,callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
    data.append('usuario',unUser.token);
@@ -129,7 +129,7 @@ export class MiHttpService {
    data.append('destinolong', unUser.lng_d) ;
    data.append('prestaciones', unUser.prestaciones) ;
    data.append('estado', unUser.estado) ;
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -141,7 +141,7 @@ export class MiHttpService {
  
   CargarEncuesta(url:string,preg1:any,preg2:any,preg3:any,preg4:any,preg5:any,preg6:any,preg7:any,user:any,image:any,image2:any,image3:any,fecha:any, callback: (r: Response) => void)
   {
-    debugger;
+        
    
   let data = new URLSearchParams();
    data.append('usuario', user );
@@ -156,7 +156,7 @@ export class MiHttpService {
    data.append('img', image) ;
    data.append('img2', image2) ;
    data.append('img3', image3) ;
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -168,11 +168,11 @@ export class MiHttpService {
 
   BorrarViaje(url:string,id:any, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
   
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -184,7 +184,7 @@ export class MiHttpService {
 
   EditarViaje(url:string,id:any,rol:any, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
    if(rol == "Remisero")
@@ -199,7 +199,7 @@ export class MiHttpService {
    {
     data.append('estado',"Cancelado");    
    }
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -211,13 +211,13 @@ export class MiHttpService {
 
   EditarViajeRemisero(url:string,id:any,remisero:any, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
  
     data.append('remisero',remisero);    
    
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -229,13 +229,13 @@ export class MiHttpService {
 
   EditarViajeCosto  (url:string,id:any,plata:any, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
  
     data.append('costo',plata);    
    
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -246,11 +246,11 @@ export class MiHttpService {
   }  
   BorrarUsuario(url:string,id:any, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
   
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -262,10 +262,10 @@ export class MiHttpService {
 
   TraerViajesPorUsuarios(url:string,usuario:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('usuario',usuario);
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -277,9 +277,9 @@ export class MiHttpService {
 
   TraerEncuestas(url:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -292,9 +292,9 @@ export class MiHttpService {
 
   TraerEncuestaPreg4(url:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -306,10 +306,10 @@ export class MiHttpService {
 
   TraerViajesPorRemisero(url:string,usuario:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('remisero',usuario);
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -321,10 +321,10 @@ export class MiHttpService {
 
   TraerViajePorId(url:string,id:any, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('id',id);
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -336,10 +336,10 @@ export class MiHttpService {
 
   obtenerRol(url:string,usuario:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
    data.append('usuario',usuario);
-   debugger;
+       
        this.http
       .post(url,data)
       .map(res => res)  
@@ -351,7 +351,7 @@ export class MiHttpService {
 
   TraerTodosLosViajes(url:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
        this.http
       .post(url,data)
@@ -363,7 +363,7 @@ export class MiHttpService {
   }
   TraerUsuarios(url:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
        this.http
       .post(url,data)
@@ -376,7 +376,7 @@ export class MiHttpService {
 
   TraeUsuariosClientes(url:string, callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
        this.http
       .post(url,data)
@@ -389,7 +389,7 @@ export class MiHttpService {
 
   TraeUsuariosRemiseros(url:string,callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
        this.http
       .post(url,data)
@@ -402,7 +402,7 @@ export class MiHttpService {
 
   traerUsuariosEncargados(url:string,callback: (r: Response) => void)
   {
-    debugger;
+        
   let data = new URLSearchParams();
        this.http
       .post(url,data)

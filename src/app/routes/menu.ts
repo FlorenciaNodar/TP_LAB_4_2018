@@ -14,6 +14,7 @@ const Viaje = {
 const Graficos = {
     text: 'Graficos',
     link: '/graficos',
+    
     icon: 'icon-graph'
 };
 

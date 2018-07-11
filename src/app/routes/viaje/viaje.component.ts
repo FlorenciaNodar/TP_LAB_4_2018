@@ -9,6 +9,7 @@ import {} from '@types/googlemaps';
 import swal from'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 declare var google: any;
@@ -101,7 +102,10 @@ export class ViajeComponent implements OnInit {
     @ViewChild(DirectionsMapDirective) vc: DirectionsMapDirective;
     cargarViaje: any;
 
-
+    listo:boolean;
+    administrador:boolean;
+    remisero:boolean;
+    encargado:boolean;
 
     constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -109,7 +113,7 @@ export class ViajeComponent implements OnInit {
     private gmapsApi: GoogleMapsAPIWrapper,
     private _elementRef: ElementRef,
     private PersonaS: PersonaService ,
-    private route: ActivatedRoute, private http: HttpClient ) {
+    private route: ActivatedRoute, private http: HttpClient,private spinner: NgxSpinnerService ) {
 
     this.route.params.subscribe( params => this.idDelViaje= params.id); 
 
@@ -117,7 +121,7 @@ export class ViajeComponent implements OnInit {
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDay();
-    debugger;
+          
     this.startDate = new Date(year, month, day);
     this.destinationInput = new FormControl();
     this.destinationOutput = new FormControl();
@@ -127,6 +131,8 @@ export class ViajeComponent implements OnInit {
 
        ngOnInit() {
        
+        this.listo = false;
+        
          if(this.idDelViaje == undefined){
           this.SACbool = false;
           this.tresPbool = false;
@@ -139,7 +145,7 @@ export class ViajeComponent implements OnInit {
            this.traerViajePorId();
           this.cargarViaje = "Modificar"          
          }
-        debugger;
+              
         this.cargarCaptcha();
         var token = localStorage.getItem('cliente');
         
@@ -149,19 +155,39 @@ export class ViajeComponent implements OnInit {
 
         if(this.rol == "Cliente" || this.rol =="Encargado" ||  this.rol == "Administrador"){
           this.cliente = true;   
+          this.listo = true;
+        }
+        if(this.rol == "Remisero")
+        {
+          this.remisero = true;   
+          this.listo = true;
           
         }
         });
         this.objViaje = new Viaje();
-         // set google maps defaults
-         this.zoom = 4;
-         this.latitude = -34.603722;
-         this.longitude = -58.381592;
-
-         this.iconurl = '../image/map-icon.png';
-
+  
         // this.mapCustomStyles = this.getMapCusotmStyles();
-      
+         
+        if(this.listo = true){
+          this.spinner.show();
+          
+          setTimeout(() => {
+            /** spinner ends after 5 seconds */
+            this.spinner.hide();
+            this.listo = false;
+            
+        }, 8000);
+        }
+       }
+
+       mapa(){
+             
+       // set google maps defaults
+       this.zoom = 4;
+       this.latitude = -34.603722;
+       this.longitude = -58.381592;
+
+       this.iconurl = '../image/map-icon.png';
 
          // set current position
          this.setCurrentPosition();
@@ -175,16 +201,14 @@ export class ViajeComponent implements OnInit {
                         types: ['address']
             });
 
-            debugger;
+                  
             this.setupPlaceChangedListener(autocompleteInput, 'ORG');
             this.setupPlaceChangedListener(autocompleteOutput, 'DES');
          });
        }
 
-       
-
        setupPlaceChangedListener(autocomplete: any, mode: any ) {
-         debugger;
+               
          autocomplete.addListener('place_changed', () => {
                this.ngZone.run(() => {
                  // get the place result
@@ -324,7 +348,6 @@ export class ViajeComponent implements OnInit {
            this.objViaje.estado = "Solicitado";
            this.objViaje.token = localStorage.getItem('cliente');
 
-            console.log(this.objViaje);
             if(this.objViaje.fechayhora == "" || this.objViaje.prestaciones == "" || this.objViaje.tipo_pago == "" || this.objViaje.fechayhora == undefined|| this.objViaje.lng_d == undefined || this.objViaje.lat_d == undefined  || this.objViaje.prestaciones == undefined|| this.objViaje.tipo_pago == undefined)
           {
             swal('ADVERTENCIA!','Debe cargar todos los campos','error');
@@ -335,7 +358,6 @@ export class ViajeComponent implements OnInit {
               var respuesta=  this.PersonaS.EditarViajePorId(this.objViaje, this.idDelViaje , mensaje => { 
                 swal('OK!',mensaje,'success');
                 
-                console.log(mensaje);
                 this.origenLat="";
                  this.origenLng="";
                  this.destinoLat="";
@@ -351,7 +373,6 @@ export class ViajeComponent implements OnInit {
                var respuesta=  this.PersonaS.CargarViaje(this.objViaje , mensaje => { 
                 swal('OK!',mensaje,'success');
                 
-                console.log(mensaje);
                 this.origenLat="";
                  this.origenLng="";
                  this.destinoLat="";

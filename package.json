@@ -85,6 +85,7 @@
     "ngx-infinite-scroll": "0.8.4",
     "ngx-pagination": "^3.1.1",
     "ngx-select-ex": "3.5.4",
+    "ngx-spinner": "^6.0.0",
     "popper.js": "1.14.3",
     "radial-progress-chart": "0.0.4",
     "rxjs": "6.0.0",

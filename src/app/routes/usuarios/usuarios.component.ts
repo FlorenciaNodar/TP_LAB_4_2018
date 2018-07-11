@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
 import { PersonaService } from '../../services/persona.service';
 import swal from'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -29,11 +30,13 @@ import swal from'sweetalert2';
     rol:string;
     roles:string;
     administrador:boolean;
+    remisero:boolean;
+    cliente:boolean;
     uno: boolean;
     private unarray =[];
     p: number = 1;
-    
-    constructor(fb: FormBuilder, private PersonaS: PersonaService){
+    listo:boolean;
+    constructor(fb: FormBuilder, private PersonaS: PersonaService,private spinner: NgxSpinnerService){
       let password = new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9]{6,10}$')]));
       let certainPassword = new FormControl('', [Validators.required, CustomValidators.equalTo(password)]);
 
@@ -55,6 +58,8 @@ import swal from'sweetalert2';
     }
 
     ngOnInit() {
+      this.listo = false;
+      
     var token = localStorage.getItem('cliente');
     
     var resp = this.PersonaS.obtenerRol(token,data => {
@@ -63,14 +68,38 @@ import swal from'sweetalert2';
 
     if(this.rol =="Encargado" || this.rol == "Administrador"){
       this.encargado = true;   
+      this.listo = true;
       
     }
     if(this.rol =="Administrador"){
       this.administrador = true;   
+      this.listo = true;
+      
+    }
+    if(this.rol =="Remisero"){
+      this.remisero = true;   
+      this.listo = true;
+      
+    }
+    if(this.rol =="Cliente"){
+      this.cliente = true;   
+      this.listo = true;
       
     }
 
     this.traerUsu();
+
+       
+    if(this.listo = true){
+      this.spinner.show();
+      
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+        this.listo = false;
+        
+    }, 8000);
+    }
   });
 }
 
@@ -80,7 +109,6 @@ traerUsu(){
 
     this.unarray.push(element);
 
-    console.log(  this.unarray);
     });
  });
 }
@@ -108,7 +136,7 @@ traerUsu(){
           }
       else
         {
-                  debugger;
+                        
                   this.unUsuario.Email=this.correo;
                   this.unUsuario.Nombre=this.nombre;
                   this.unUsuario.Clave=this.password;
@@ -156,7 +184,7 @@ traerUsu(){
 
          
    sweetalertDemo4(user) {
-    debugger;
+          
     swal({
       title: 'Eliminar',
       text: "¿Seguro que desea eliminar el viaje?",
@@ -172,8 +200,7 @@ traerUsu(){
             'Eliminado!',
             mensaje,
             'success'
-          )            
-          console.log(mensaje);      
+          )                
 
         });
         this.unarray =[];

@@ -4,26 +4,35 @@
         </div>
         
     </div>
+ 
     <div class="row">
-<div class="col-lg-10">
+            <ngx-spinner
+            bdColor="rgba(179,239,229,0.8)"
+            size="medium"
+            color="#171515"
+            loadingText="Cargando..."
+            type="ball-pulse-sync">
+          </ngx-spinner>
+<div class="col-lg-10" *ngIf="cliente  && !listo|| remisero  && !listo || encargado  && !listo || administrador  && !listo">
             
-               <button class="mb-1 btn btn-danger btn-sm"(click)="captureScreen()" type="button">
-                   <span><i class="fa fa-file-pdf-o                        "></i>
+               <button class="mb-1 btn btn-danger btn-sm"(click)="captureScreen()" tooltip="PDF" type="button">
+                   <span><i class="fa fa-file-pdf-o"></i>
                </span></button>
-               <button class="mb-1 btn btn-success btn-sm"(click)="download()" type="button">
-                    <span><i class="fa fa-file-excel-o                        "></i>
+               <button class="mb-1 btn btn-success btn-sm"(click)="download()" tooltip="Excel" type="button">
+                    <span><i class="fa fa-file-excel-o"></i>
                 </span></button>
           
-            <button class="mb-1 btn btn-sm"*ngIf="cliente" style="text-align: right" (click)="classicModal.show()" >Cargar encuesta: <i class="fa fa-file-text               "></i></button>
+            <!-- <button class="mb-1 btn btn-sm"*ngIf="cliente" style="text-align: right" (click)="classicModal.show()" >Cargar encuesta: <i class="fa fa-file-text"></i> <div class="px-2 mr-2 float-right badge badge-success">!</div></button> -->
+           
             
       <div class="card card-default">
          <div class="card-header"></div>
          <div class="card-body">
                 
             <div class="table-responsive">
-                    <p><input type="text" *ngIf="cliente" [(ngModel)]="test" placeholder="Filtrar por estado..."></p>
+                    <p><input type="text" *ngIf="cliente  && !listo" [(ngModel)]="test" placeholder="Filtrar por estado..."></p>
                     
-               <table id="contentToConvert" class="table" *ngIf="cliente">
+               <table id="contentToConvert" class="table" *ngIf="cliente  && !listo">
                     
                   <thead>
                      <tr>
@@ -34,6 +43,7 @@
                         <th>Estado</th>
                         <th>Costo</th>
                         <th>Acciones</th>
+                        <th>Encuesta</th>
                       
                      </tr>
                   </thead>
@@ -49,16 +59,31 @@
                         <td><button class="mb-1 btn btn-info btn-sm" type="button"  *ngIf="viaje.estado != 'Cancelado' " (click)="modificar(viaje)" tooltip="Editar"><span class="fa fa-pencil"></span></button>
                           
                             <button class="mb-1 btn btn-danger btn-sm"  (click)="sweetalertDemo6(viaje)" *ngIf="viaje.estado != 'Cancelado' " type="button" tooltip="Cancelar viaje"><span class="fa fa-times"></span></button>
-                  </td>
+                            <!-- <button class="mb-1 btn btn-sm"  (click)="classicModal.show()" *ngIf="viaje.estado != 'Realizado' " type="button" tooltip="Cargar encuesta"><span class="fa fa-file-text"></span><span class="px-2 mr-2 float-right badge badge-success">!</span></button> -->
+                                                     
+                        </td>
+                        <td>
+                            <div  *ngIf="viaje.estado != 'Realizado' ">No habilitado</div>   
+                             <div class="align-self-start mr-2"  *ngIf="viaje.estado == 'Realizado' " >
+                            <span class="fa-stack">
+                               <em class="fa fa-circle fa-stack-2x text-warning"></em>
+                               <em class="fa fa-exclamation fa-stack-1x fa-inverse text-white"></em>
+                            </span>
+                         </div>
+                        <div class="media-body text-truncate"  *ngIf="viaje.estado == 'Realizado' " >
+                            <p class="mb-1"><a class="text-warning m-0"  (click)="classicModal.show()">Cargar</a>
+                            </p>
+                         </div>  
+                         </td>
                   </tr>
                   
                   </tbody>
                   
                </table>
                
-               <p><input type="text" *ngIf="remisero" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
+               <p><input type="text" *ngIf="remisero  && !listo" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
                
-               <table id="contentToConvert" class="table" *ngIf="remisero">
+               <table id="contentToConvert" class="table" *ngIf="remisero  && !listo">
                     
                 <thead>
                    <tr>
@@ -91,9 +116,9 @@
                 
              </table>
              
-             <p><input type="text"  *ngIf="encargado || administrador" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
+             <p><input type="text"  *ngIf="encargado  && !listo || administrador  && !listo" [(ngModel)]="test" placeholder="Filtrar por usuario..."></p>
              
-             <table id="contentToConvert" class="table" *ngIf="encargado || administrador">
+             <table id="contentToConvert" class="table" *ngIf="encargado  && !listo || administrador && !listo">
                     
                 <thead>
                    <tr>

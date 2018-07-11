@@ -1,16 +1,25 @@
-
-      <div class="text-center mb-4"  *ngIf= "!encargado">
+<div class="content-heading" >
+        <div>Usuarios
+            <small>Alta,Baja,Modificación</small>
+        </div>
+    </div>
+    
+<ngx-spinner
+bdColor="rgba(179,239,229,0.8)"
+size="medium"
+color="#171515"
+loadingText="Cargando..."
+type="ball-pulse-sync">
+</ngx-spinner>
+     
+     <div class="text-center mb-4"  *ngIf= "cliente && !listo || remisero && !listo">
         <img class="img-fluid" src="assets/img/candado.png" alt="Candado" />
         <p class="lead m0">No posee permisos</p>
         <p>no posee los permisos necesarios para ingresar a esta secci&oacute;n.</p>
     </div>
-<div class="content-heading" *ngIf= "encargado" >
-    <div>Usuarios
-        <small>Alta,Baja,Modificación</small>
-    </div>
-</div>
 
-<div class="row" *ngIf= "encargado">
+
+<div class="row" *ngIf= "encargado && !listo">
       
 <div class="col-lg-6">
                 
@@ -108,9 +117,10 @@
                 
                 <td  ><button class="mb-1 btn btn-danger btn-sm" (click)="sweetalertDemo4(user)" type="button"tooltip="Eliminar"><span class="fa fa-trash-o"></span></button></td>
             </tr>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
             
             </tbody>
+           <div class="row"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+            
         </table>  
     </div>
 </div>

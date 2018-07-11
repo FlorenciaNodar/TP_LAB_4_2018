@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { ColorsService } from '../../shared/colors/colors.service';
 import { PersonaService } from '../../services/persona.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
     selector: 'app-graficos',
     templateUrl: './graficos.component.html',
@@ -156,25 +158,53 @@ export class GraficosComponent implements OnInit {
     
     rol:string;
     encargado: boolean;
-    constructor(public colors: ColorsService, private PersonaS: PersonaService) { 
+    otros:boolean;
+    listo: boolean;
+    constructor(public colors: ColorsService, private PersonaS: PersonaService, private spinner:NgxSpinnerService) { 
   
     }
   
     ngOnInit() {  
-
-    var token = localStorage.getItem('cliente');
-
-    var resp = this.PersonaS.obtenerRol(token,data => {
-
-    this.rol = data.rol
-
-    if( this.rol =="Encargado" || this.rol == "Administrador"){
-    this.encargado = true;   
+        this.listo = false;
+        this.buscarRol();
+        
+            if(!this.listo){
+                
+                this.spinner.show();
+                
+                setTimeout(() => {
+                
+                 this.spinner.hide(); 
+                 this.listo = false;
+            }, 8000);
+        
+            }
+            
+        
+          
+ 
 
     }
-    });
-    }
 
+    buscarRol(){
+        
+        var token = localStorage.getItem('cliente');
+        
+            var resp = this.PersonaS.obtenerRol(token,data => {
+        
+            this.rol = data.rol
+        
+            if( this.rol =="Encargado" || this.rol == "Administrador"){
+            this.encargado = true;   
+            this.listo = true;
+            }
+            if(this.rol == "Cliente" || this.rol == "Remisero"){
+                this.otros = true;   
+                this.listo = true;
+            }
+            }); 
+    
+    }
     totalClientes(){
         
         
@@ -203,7 +233,7 @@ export class GraficosComponent implements OnInit {
         this.PersonaS.TraerEncuestaPreg4(data => { 
             this.listSi = data;
             for(var i=0; i<this.listSi.length; i++){
-                debugger;
+                    
                 if(this.listSi[i].preg4 == "SI" && dato == "SI"){
                     this.count++;
                     this.totalPreg4Si = this.count;                    
@@ -220,7 +250,7 @@ export class GraficosComponent implements OnInit {
         this.PersonaS.TraerEncuestaPreg4(data => { 
             this.listSi = data;
             for(var i=0; i<this.listSi.length; i++){
-                debugger;
+                    
                 if(this.listSi[i].preg1 == "SI" && dato == "SI"){
                     this.countPreg1++;
                     this.totalPreg1Si = this.countPreg1;                    
@@ -241,7 +271,7 @@ export class GraficosComponent implements OnInit {
         this.PersonaS.TraerEncuestaPreg4(data => { 
             this.listSi = data;
             for(var i=0; i<this.listSi.length; i++){
-                debugger;
+                    
                 if(this.listSi[i].preg7 == "Una vez al mes" && dato == "UNA"){
                     this.countPreg7++;
                     this.preg7uno = this.countPreg7;                    

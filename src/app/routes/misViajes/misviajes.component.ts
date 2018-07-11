@@ -33,7 +33,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { SafeUrl } from '@angular/platform-browser';
 import * as jspdf from 'jspdf';  
 import html2canvas from 'html2canvas';  
-  
+import { NgxSpinnerService } from 'ngx-spinner';
 declare var google: any;
 declare var jQuery: any;
 
@@ -142,6 +142,7 @@ private CAMbool:false;
 private camioneta: string;
 
      isChecked:boolean;
+     listo:boolean;
      testModel:string;
      
       fotoTraida: SafeUrl;
@@ -149,16 +150,19 @@ private camioneta: string;
      token = localStorage.getItem('cliente');
  
        constructor( private _sanitizer: DomSanitizer,
-       private PersonaS: PersonaService,
+       private PersonaS: PersonaService,private spinner: NgxSpinnerService,       
       private router:Router ) {
         
        }
 
        ngOnInit() {
+        this.listo = false;
 
+       
+       
         var respuesta1=  this.PersonaS.TraerEncuestas(data => { 
           data.forEach(element => {
-            debugger;
+                  
                 this.unarray4.push(element);
             
                 for(var i=0; i<this.unarray4.length; i++){
@@ -182,14 +186,15 @@ private camioneta: string;
         // set google maps defaults
 
 
-        debugger;
+              
         
         var resp = this.PersonaS.obtenerRol(this.token,data => {
           
         this.rol = data.rol
 
         if(this.rol == "Cliente"){
-          this.cliente = true;   
+          this.cliente = true;  
+          this.listo = true; 
           
           var respuesta=  this.PersonaS.TraeViajePorUsuario(this.token , data => { 
           data.forEach(element => {
@@ -208,7 +213,8 @@ private camioneta: string;
         }
         if(this.rol == "Encargado" ){
           this.encargado = true;
-         
+          this.listo = true; 
+          
             
             
           var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
@@ -227,7 +233,8 @@ private camioneta: string;
         }
         if(this.rol == "Administrador" ){
           this.administrador = true;
-         
+          this.listo = true; 
+          
             
             
           var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
@@ -247,6 +254,8 @@ private camioneta: string;
         }
         if(this.rol == "Remisero"){
           this.remisero = true;
+          this.listo = true; 
+          
           var respuesta=  this.PersonaS.TraerViajesPorRemisero(this.token,data => { 
             data.forEach(element => {
   
@@ -267,7 +276,16 @@ private camioneta: string;
         });
 
      
-        
+        if(this.listo = true){
+          this.spinner.show();
+          
+          setTimeout(() => {
+            /** spinner ends after 5 seconds */
+            this.spinner.hide();
+            this.listo = false;
+            
+        }, 5000);
+        }
       
       }
 
@@ -281,7 +299,7 @@ private camioneta: string;
         return this.fotoTraida;
       }
     sweetalertDemo4(viaje) {
-      debugger;
+            
       swal({
         title: 'Eliminar',
         text: "¿Seguro que desea eliminar el viaje?",
@@ -298,10 +316,11 @@ private camioneta: string;
               mensaje,
               'success'
             )            
-              
+            this.unarray=[];
+                        this.ngOnInit();            
+
 
           });
-          window.location.reload();
           
         }
       });
@@ -309,7 +328,7 @@ private camioneta: string;
       }
 
       sweetalertDemo5(viaje) {
-        debugger;
+              
         swal({
           title: 'Modificar Estado',
           text: "¿Seguro que desea aprobar el viaje?",
@@ -325,11 +344,12 @@ private camioneta: string;
                 'Modificado!',
                 mensaje,
                 'success'
-              )         
-  
+              )        
+              this.unarray=[];
+              
+              this.ngOnInit();            
+              
             });
-            window.location.reload();
-            
             
           }
         });
@@ -338,7 +358,7 @@ private camioneta: string;
 
         
       sweetalertDemo6(viaje) {
-        debugger;
+              
         swal({
           title: 'Modificar Estado',
           text: "¿Seguro que desea cancelar el viaje?",
@@ -355,9 +375,11 @@ private camioneta: string;
                 mensaje,
                 'success'
               )         
-  
+              this.unarray=[];
+              
+              this.ngOnInit();            
+
             });
-            window.location.reload();
             
             
           }
@@ -366,7 +388,7 @@ private camioneta: string;
         }
 
       download(){
-        debugger;
+              
         var csvData = this.ConvertToCSV(this.unarray);
         var a = document.createElement("a");
         a.setAttribute('style', 'display:none;');
@@ -421,7 +443,7 @@ private camioneta: string;
         return str;
       }
       onFileSelected(event){
-        debugger;
+              
         this.selectedFile = event.target.files[0].name;
       }
       onFileSelected2(event){
@@ -433,13 +455,13 @@ private camioneta: string;
     
       cargarEncuesta(radio1,radio2,radio3, check1, check2, check3,check4){
 
-        debugger;
+              
         var hoy = new Date();
         var dia = hoy.getDate(); 
         var mes = hoy.getMonth() + 1;
         var anio= hoy.getFullYear();
         var fecha_actual = String(dia+"/"+mes +"/"+anio);
-        debugger;
+              
         
         if(this.roles1 == "1")
         var preg1 = "SI";
@@ -513,13 +535,13 @@ private camioneta: string;
      modificar(viaje){
 
       this.router.navigate(["/viaje/editar",viaje.id]);
-      debugger;
+            
       }
    
 
   modificarRemisero(viaje)
   {
-    debugger;
+          
     this.idViajeSeleccionado = viaje.id;
 
     this.seAbrioRemisero = true;
@@ -549,7 +571,7 @@ private camioneta: string;
     
   }
   modificarRemis(remisero){
-    debugger;
+          
     // this.remisero = 
      var respuesta=  this.PersonaS.EditarViajeRemisero(this.idViajeSeleccionado, remisero, data => { 
       swal(
@@ -694,14 +716,14 @@ private camioneta: string;
         break;
       case 3:
         this.fotoSubida3 = (<HTMLInputElement>document.getElementById('file3')).files[0];
-        debugger;
+              
         if (!this.ValidarFoto(this.fotoSubida3)) {
           alert("Cambie la imagen 3, solo se permiten imagenes de tamanio inferior a 1 MB");
           this.fotoSubida3 = undefined;
           return;
         } else {
           this.imageSrc3 = reader.result;
-          debugger;
+                
         }
 
         break;

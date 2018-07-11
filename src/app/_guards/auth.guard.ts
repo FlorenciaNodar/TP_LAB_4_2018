@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router, private PersonaS: PersonaService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        debugger;
         if (sessionStorage.getItem('cliente')) {
             // logged in so return true
             

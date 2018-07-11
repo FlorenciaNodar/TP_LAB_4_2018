@@ -34,6 +34,7 @@ import { MisViajesComponent, FullTextSearchPipe } from './routes/misViajes/misvi
 import { UsuariosComponent } from './routes/usuarios/usuarios.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // https://github.com/ocombe/ng2-translate/issues/218
 export function createTranslateLoader(http: HttpClient) {
@@ -63,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
         RecaptchaModule.forRoot(),
         SharedModule.forRoot(),
         RoutesModule,
+        NgxSpinnerModule,
         FileUploadModule,
         BrowserModule,
         Ng2ChartsModule,

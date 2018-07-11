@@ -1,18 +1,25 @@
 
-      <div class="text-center mb-4"  *ngIf= "!cliente">
+       
+<div class="content-heading" >
+        <div>Viajes
+            <small>Solicita tus viajes</small>
+        </div>
+    </div>
+    <ngx-spinner
+    bdColor="rgba(179,239,229,0.8)"
+    size="medium"
+    color="#171515"
+    loadingText="Cargando..."
+    type="ball-pulse-sync">
+    </ngx-spinner>    
+    <div class="text-center mb-4"  *ngIf= "remisero && !listo">
                 <img class="img-fluid" src="assets/img/candado.png" alt="Candado" />
                 <p class="lead m0">No posee permisos</p>
         <p>no posee los permisos necesarios para ingresar a esta secci&oacute;n.</p>
     </div>
     
-   
-<div class="content-heading"  *ngIf= "cliente">
-    <div>Viajes
-        <small>Solicita tus viajes</small>
-    </div>
-</div>
 
-<div class="row"  *ngIf= "cliente">
+<div class="row"   *ngIf= "cliente && !listo">
       
          <div class="col-lg-12">
                 
@@ -86,7 +93,7 @@
                                                             <div class="form-group row">
                                                                 <label class="col-lg-2 col-form-label text-lg-right">Origen:</label>
                                                                 <div class="col-lg-10">
-                                                                        <input  placeholder="Origen" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [(ngModel)]="destinationInput0" [formControl]="destinationInput" required>
+                                                                        <input  placeholder="Origen" (input)="mapa($event)" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [(ngModel)]="destinationInput0" [formControl]="destinationInput" required>
                                                                     </div>
                                                             </div>
                                                         </fieldset>
@@ -96,7 +103,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-2 col-form-label text-lg-right">Destino:</label>
                                                                         <div class="col-lg-10">
-                                                                                <input placeholder="Destino" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" [(ngModel)]="destinationOutput0" #pickupOutput [formControl]="destinationOutput" required>
+                                                                                <input placeholder="Destino"   (input)="mapa($event)"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" [(ngModel)]="destinationOutput0" #pickupOutput [formControl]="destinationOutput" required>
                                                                             </div>
                                                                     </div>
                                                                 </fieldset>

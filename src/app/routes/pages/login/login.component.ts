@@ -95,7 +95,6 @@ export class LoginComponent implements OnInit {
                     var respuesta=  this.PersonaS.GenerarToken(this.f.username.value,this.f.password.value, token => { 
                         if(token!=undefined)
                           {
-                              debugger;
                             sessionStorage.clear();
                             sessionStorage.setItem("token",token);
                             sessionStorage.setItem("cliente",this.f.username.value);

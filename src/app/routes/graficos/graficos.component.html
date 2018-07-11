@@ -1,16 +1,23 @@
-
-      <div class="text-center mb-4"  *ngIf= "!encargado">
+<div class="content-heading" >
+        <div>Gráficos
+            <small>Estadísticas</small>
+        </div>
+    </div>
+<ngx-spinner
+bdColor="rgba(179,239,229,0.8)"
+size="medium"
+color="#171515"
+loadingText="Cargando..."
+type="ball-pulse-sync">
+</ngx-spinner>
+      <div class="text-center mb-4"  *ngIf= "otros && !listo">
         <img class="img-fluid" src="assets/img/candado.png" alt="Candado" />
         <p class="lead m0">No posee permisos</p>
         <p>no posee los permisos necesarios para ingresar a esta secci&oacute;n.</p>
     </div>
-<div class="content-heading" *ngIf= "encargado">
-    <div>Gráficos
-        <small>Estadísticas</small>
-    </div>
-</div>
 
-<div class="row" *ngIf= "encargado">
+
+<div class="row" *ngIf= "encargado  && !listo">
     
         <div class="col-xl-12 col-lg-12 col-xs-12">
             <h3 style="text-align:center">Cantidad de Usuarios del sistema</h3>
