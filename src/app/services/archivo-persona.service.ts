@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {MiHttpService} from './mi-http.service';
 import { Usuario } from '../Clases/Usuario';
 import { Viaje } from '../routes/viaje/viaje.component';
-var path = "http://localhost:8080/index.php/";
-//var path = "http://nodarfinallaboratorio.epizy.com/api/";
+//var path = "http://localhost:8080/index.php/";
+var path = "http://nodarfinallaboratorio.epizy.com/api/";
 //var path = "http://localhost/api/index.php/";
 @Injectable()
 export class ArchivoPersonaService {

@@ -328,31 +328,36 @@ private camioneta: string;
       }
 
       sweetalertDemo5(viaje) {
+        debugger;
+        if(viaje.costo == null && this.rol == "Remisero" || viaje.costo == "" && this.rol == "Remisero" || viaje.costo == "A confirmar por el remisero"&& this.rol == "Remisero"){
+          swal('ADVERTENCIA!',"Para modificar estado debe completar el pago",'error');          
+        }else{
+          swal({
+            title: 'Modificar Estado',
+            text: "¿Seguro que desea aprobar el viaje?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            CancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar!'
+          }).then((result) => {
+            if (result.value) {
+              var respuesta=  this.PersonaS.EditarViaje(viaje.id,this.rol , mensaje => { 
+                swal(
+                  'Modificado!',
+                  mensaje,
+                  'success'
+                )        
+                this.unarray=[];
+                
+                this.ngOnInit();            
+                
+              });
               
-        swal({
-          title: 'Modificar Estado',
-          text: "¿Seguro que desea aprobar el viaje?",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          CancelButtonColor: '#d33',
-          confirmButtonText: 'Aceptar!'
-        }).then((result) => {
-          if (result.value) {
-            var respuesta=  this.PersonaS.EditarViaje(viaje.id,this.rol , mensaje => { 
-              swal(
-                'Modificado!',
-                mensaje,
-                'success'
-              )        
-              this.unarray=[];
-              
-              this.ngOnInit();            
-              
-            });
-            
-          }
-        });
+            }
+          });
+        }
+       
         
         }
 
@@ -553,20 +558,7 @@ private camioneta: string;
     this.seAbrioRemisero = false;
  
     this.unarray = [];
-      var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
-        data.forEach(element => {
-
-        this.unarray1.push(element);
-        this.listViajes = this.unarray;
-        this.unarray1.forEach(element => {
-          if(element.costo == null || element.costo == ""){
-              element.costo = "A confirmar por el remisero";
-          }
-        });
-        this.unarray.push(element);
-
-        });
-     });
+    this.ngOnInit();
     
     
   }
@@ -583,20 +575,8 @@ private camioneta: string;
 
     this.seAbrioRemisero = false;
     this.unarray = [];
-    var respuesta=  this.PersonaS.TraerTodosLosViajes(data => { 
-      data.forEach(element => {
-
-      this.unarray1.push(element);
-      this.listViajes = this.unarray;
-      this.unarray1.forEach(element => {
-        if(element.costo == null || element.costo == ""){
-            element.costo = "A confirmar por el remisero";
-        }
-      });
-      this.unarray.push(element);
-
-      });
-   });
+    this.ngOnInit();
+    
     
    
   }
@@ -619,40 +599,15 @@ private camioneta: string;
 
       this.seAbrioCosto = false;
       this.unarray = [];
-      var respuesta=  this.PersonaS.TraerViajesPorRemisero(this.token,data => { 
-        data.forEach(element => {
-
-        this.unarray1.push(element);
-        this.listViajes = this.unarray;
-        this.unarray1.forEach(element => {
-          if(element.costo == null|| element.costo == ""){
-              element.costo = "A confirmar por el remisero";
-          }
-        });
-        this.unarray.push(element);
-
-        });
-     });
+    this.ngOnInit();
   }
 
   cancelarCosto(){
     this.seAbrioCosto = false;
     
        this.unarray = [];
-       var respuesta=  this.PersonaS.TraerViajesPorRemisero(this.token,data => { 
-        data.forEach(element => {
-
-        this.unarray1.push(element);
-        this.listViajes = this.unarray;
-        this.unarray1.forEach(element => {
-          if(element.costo == null|| element.costo == ""){
-              element.costo = "A confirmar por el remisero";
-          }
-        });
-        this.unarray.push(element);
-
-        });
-     });
+       this.ngOnInit();
+       
   }
 
   handleDragEnter() {

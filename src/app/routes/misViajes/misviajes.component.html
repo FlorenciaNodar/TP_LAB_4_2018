@@ -56,9 +56,9 @@
                         <td>{{viaje.pago}}</td>
                         <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                         <td><strong><h4>{{viaje.costo}}</h4></strong></td>
-                        <td><button class="mb-1 btn btn-info btn-sm" type="button"  *ngIf="viaje.estado != 'Cancelado' " (click)="modificar(viaje)" tooltip="Editar"><span class="fa fa-pencil"></span></button>
+                        <td><button class="mb-1 btn btn-info btn-sm" type="button"  *ngIf="viaje.estado != 'Cancelado' && viaje.estado != 'Realizado' " (click)="modificar(viaje)" tooltip="Editar"><span class="fa fa-pencil"></span></button>
                           
-                            <button class="mb-1 btn btn-danger btn-sm"  (click)="sweetalertDemo6(viaje)" *ngIf="viaje.estado != 'Cancelado' " type="button" tooltip="Cancelar viaje"><span class="fa fa-times"></span></button>
+                            <button class="mb-1 btn btn-danger btn-sm"  (click)="sweetalertDemo6(viaje)" *ngIf="viaje.estado != 'Cancelado' && viaje.estado != 'Realizado'" type="button" tooltip="Cancelar viaje"><span class="fa fa-times"></span></button>
                             <!-- <button class="mb-1 btn btn-sm"  (click)="classicModal.show()" *ngIf="viaje.estado != 'Realizado' " type="button" tooltip="Cargar encuesta"><span class="fa fa-file-text"></span><span class="px-2 mr-2 float-right badge badge-success">!</span></button> -->
                                                      
                         </td>
@@ -107,7 +107,7 @@
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td>
-                          <button class="mb-1 btn btn-danger btn-sm" type="button" (click)="AgregarPago(viaje)" tooltip="Cargar pago"><span class="fa fa-money"></span></button>
+                          <button class="mb-1 btn btn-danger btn-sm" type="button" *ngIf="viaje.estado != 'Realizado' " (click)="AgregarPago(viaje)" tooltip="Cargar pago"><span class="fa fa-money"></span></button>
                         <button class="mb-1 btn btn-info btn-sm" *ngIf="viaje.estado == 'Aprobado' "  type="button" (click)="sweetalertDemo5(viaje)" tooltip="Cambiar estado"><span class="fa fa-flag"></span></button>                                                    
                     </td>
                 </tr>
@@ -143,7 +143,7 @@
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td><strong><h4>{{viaje.remisero}}</h4></strong></td>
-                     <td> <button class="mb-1 btn btn-warning btn-sm" type="button" (click)="modificarRemisero(viaje)"tooltip="Cargar remisero"><span class="fa fa-plus"></span></button>
+                     <td> <button class="mb-1 btn btn-warning btn-sm" type="button"  *ngIf="viaje.estado != 'Realizado'" (click)="modificarRemisero(viaje)"tooltip="Cargar remisero"><span class="fa fa-plus"></span></button>
                         <button class="mb-1 btn btn-info btn-sm"  *ngIf="viaje.estado == 'Solicitado'"  type="button" (click)="sweetalertDemo5(viaje)"tooltip="Cambiar estado"><span class="fa fa-flag"></span></button>                            
                         <button class="mb-1 btn btn-danger btn-sm"  *ngIf="rol == 'Administrador'"  (click)="sweetalertDemo4(viaje)" type="button"tooltip="Eliminar"><span class="fa fa-trash-o"></span></button></td>
                         
