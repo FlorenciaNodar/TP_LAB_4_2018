@@ -299,10 +299,27 @@ export class ViajeComponent implements OnInit {
               this.captchaError = true;
               return false;
             }
-           this.objViaje.lat_o = this.origenLat;
-           this.objViaje.lng_o = this.origenLng;
-           this.objViaje.lat_d = this.destinoLat;
-           this.objViaje.lng_d = this.destinoLng;
+            debugger;
+            if(this.vc.origin == undefined){
+              this.objViaje.lat_o = this.origenLatitudViaje;              
+            }else{
+              this.objViaje.lat_o = this.vc.origin.latitude;              
+            }
+            if( this.vc.origin == undefined){
+              this.objViaje.lng_o = this.origenLongitudViaje;
+            }else{
+              this.objViaje.lng_o = this.vc.origin.longitude;
+            }
+            if(this.vc.destination == undefined){
+              this.objViaje.lat_d = this.destinoLatitudViaje;
+            }else{
+              this.objViaje.lat_d = this.vc.destination.latitude;
+            }
+            if(this.vc.destination == undefined){
+              this.objViaje.lng_d = this.destinoLongitudViaje;
+            }else{
+              this.objViaje.lng_d =this.vc.destination.longitude;
+            }
 
            if(CAbool == true)
            this.aireAcondicionado = "Con Aire Acondicionado";
