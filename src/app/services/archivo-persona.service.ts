@@ -92,10 +92,10 @@ export class ArchivoPersonaService {
     }); 
   }
 
-  EditarViajeCosto(Ruta:string,id:any,plata:any, callback: (mensaje: string) => void) 
+  EditarViajeCosto(Ruta:string,id:any,cuota:any,plata:any, callback: (mensaje: string) => void) 
   { 
       
-   var rta =  this.mihttp.EditarViajeCosto(path + Ruta ,id, plata,data => { 
+   var rta =  this.mihttp.EditarViajeCosto(path + Ruta ,id, cuota,plata,data => { 
       var mensaje = JSON.parse(data.text()).mensaje;
       callback(mensaje);
     }); 

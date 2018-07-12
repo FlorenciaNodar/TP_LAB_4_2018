@@ -587,9 +587,9 @@ private camioneta: string;
     this.seAbrioCosto = true;
   }
 
-  modificarCosto(plata)
+  modificarCosto(cuota,plata)
   {
-    var respuesta=  this.PersonaS.EditarViajeCosto(this.idViajeSeleccionado, plata, data => { 
+    var respuesta=  this.PersonaS.EditarViajeCosto(this.idViajeSeleccionado,cuota, plata, data => { 
       swal(
         'Modificado!',
         data,

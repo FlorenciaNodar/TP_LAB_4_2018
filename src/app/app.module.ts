@@ -70,7 +70,7 @@ export function createTranslateLoader(http: HttpClient) {
         Ng2ChartsModule,
         NgxPaginationModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyC0YfweK_TvI_PQcdueI6l78EBmY0MCTCQ',
+            apiKey: 'AIzaSyDyFfo561pm54EAGnMs72i7LyudqeHicXI',
             libraries: ['places']
             
           }),

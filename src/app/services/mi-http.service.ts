@@ -227,13 +227,14 @@ export class MiHttpService {
         });
   }
 
-  EditarViajeCosto  (url:string,id:any,plata:any, callback: (r: Response) => void)
+  EditarViajeCosto  (url:string,id:any,cuota:any,plata:any, callback: (r: Response) => void)
   {
         
   let data = new URLSearchParams();
    data.append('id',id);
  
     data.append('costo',plata);    
+    data.append('cuotas',cuota);    
    
        
        this.http

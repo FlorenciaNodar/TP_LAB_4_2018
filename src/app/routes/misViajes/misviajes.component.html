@@ -41,6 +41,7 @@
                         <th>Día y Hora</th>
                         <th>Pago</th>
                         <th>Estado</th>
+                        <th>Cuotas</th>
                         <th>Costo</th>
                         <th>Acciones</th>
                         <th>Encuesta</th>
@@ -55,6 +56,7 @@
                         <td>{{viaje.dia}}</td>
                         <td>{{viaje.pago}}</td>
                         <td><strong><h4>{{viaje.estado}}</h4></strong></td>
+                        <td><strong><h4>{{viaje.cuotas}}</h4></strong></td>
                         <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                         <td><button class="mb-1 btn btn-info btn-sm" type="button"  *ngIf="viaje.estado != 'Cancelado' && viaje.estado != 'Realizado' " (click)="modificar(viaje)" tooltip="Editar"><span class="fa fa-pencil"></span></button>
                           
@@ -92,6 +94,7 @@
                       <th>Día y Hora</th>
                       <th>Pago</th>
                       <th>Estado</th>
+                      <th>Cuotas</th>
                       <th>Costo</th>
                       <th>Acciones</th>
                     
@@ -105,6 +108,7 @@
                       <td>{{viaje.dia}}</td>
                       <td>{{viaje.pago}}</td>
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
+                      <td><strong><h4>{{viaje.cuotas}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td>
                           <button class="mb-1 btn btn-danger btn-sm" type="button" *ngIf="viaje.estado != 'Realizado' " (click)="AgregarPago(viaje)" tooltip="Cargar pago"><span class="fa fa-money"></span></button>
@@ -127,6 +131,7 @@
                       <th>Día y Hora</th>
                       <th>Pago</th>
                       <th>Estado</th>
+                      <th>Cuotas</th>
                       <th>Costo</th>
                       <th>Remisero</th>
                       <th>Acciones</th>
@@ -141,6 +146,7 @@
                       <td>{{viaje.dia}}</td>
                       <td>{{viaje.pago}}</td>
                       <td><strong><h4>{{viaje.estado}}</h4></strong></td>
+                      <td><strong><h4>{{viaje.cuotas}}</h4></strong></td>
                       <td><strong><h4>{{viaje.costo}}</h4></strong></td>
                       <td><strong><h4>{{viaje.remisero}}</h4></strong></td>
                      <td> <button class="mb-1 btn btn-warning btn-sm" type="button"  *ngIf="viaje.estado != 'Realizado'" (click)="modificarRemisero(viaje)"tooltip="Cargar remisero"><span class="fa fa-plus"></span></button>
@@ -187,11 +193,16 @@
             
     <form  class="form-horizontal" >   
             
-        <label class="text-muted mb-1 col-lg-12">Costo</label>
         <div class="col-lg-12" >
-            <input class="form-control border-right-0" type="text" name="account_email" autocomplete="off"  [(ngModel)]="plata" required="" />                                            
+                <label class="text-muted mb-1 col-lg-12">Cuotas</label>
+                
+                <input class="form-control border-right-0" type="number" name="account_email" autocomplete="off"  [(ngModel)]="cuota" required="" />    
+                <label class="text-muted mb-1 col-lg-12">Costo</label>
+                
+            <input class="form-control border-right-0" type="text" name="account_email" autocomplete="off"  [(ngModel)]="plata" required="" />  
+                                            
             
-            <button class="mb-1 btn btn-info btn-sm"  type="button" (click)="modificarCosto(plata)">Agregar</button>
+            <button class="mb-1 btn btn-info btn-sm"  type="button" (click)="modificarCosto(cuota,plata)">Agregar</button>
             <button class="mb-1 btn btn-info btn-sm"  type="button" (click)="cancelarCosto()">Cancelar</button>
             
         </div>

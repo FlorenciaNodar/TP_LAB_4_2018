@@ -94,9 +94,9 @@ export class PersonaService {
     
     }
 
-    EditarViajeCosto(id:any,plata:any, callback: (mensaje: string) => void){
+    EditarViajeCosto(id:any,cuota:any,plata:any, callback: (mensaje: string) => void){
           
-      this.AP.EditarViajeCosto("EditarViajeCosto/",id, plata,mensaje => { 
+      this.AP.EditarViajeCosto("EditarViajeCosto/",id, cuota,plata,mensaje => { 
       callback(mensaje);
       
     });
